@@ -1,0 +1,12 @@
+---
+import "../../styles/global.css";
+import DefaultLayout from "../../layouts/Default.astro";
+import { HeaderSection } from "../../sections/Header";
+import { Footer } from "../../sections/Footer";
+import { getCollection } from 'astro:content';  
+---
+
+<DefaultLayout title="Project - HomeLabs">
+  <HeaderSection />
+  <Footer />
+</DefaultLayout>

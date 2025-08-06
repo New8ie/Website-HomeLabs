@@ -1,0 +1,36 @@
+---
+// Komponen tampilan untuk satu blog post
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: string;
+  author?: {
+    name: string;
+    title: string;
+    image?: string;
+  };
+}
+
+const { title, description, pubDate, category, author, children } = Astro.props;
+---
+
+<article class="prose prose-invert max-w-3xl mx-auto py-12 px-4">
+  <h1>{title}</h1>
+  <p class="text-sm text-gray-400 mb-4">
+    Dipublikasikan pada {new Date(pubDate).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' })} • Kategori: {category}
+  </p>
+  {author && (
+    <div class="flex items-center gap-4 mb-6">
+      {author.image && <img src={author.image} alt={author.name} class="w-10 h-10 rounded-full" />}
+      <div>
+        <p class="text-sm font-semibold">{author.name}</p>
+        <p class="text-xs text-gray-400">{author.title}</p>
+      </div>
+    </div>
+  )}
+
+  <div class="mt-6">
+    {children}
+  </div>
+</article>

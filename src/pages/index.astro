@@ -1,0 +1,43 @@
+---
+import "../styles/global.css";
+import DefaultLayout from "../layouts/Default.astro";
+import { HeaderSection } from "../sections/Header";
+import { Footer } from "../sections/Footer";
+
+---
+
+<DefaultLayout title="Project - HomeLabs">
+   <HeaderSection className="border border-zinc-700 rounded-xl mx-2 mt-2 shadow-lg" />
+
+  <section class="relative h-screen w-full">
+    <!-- Gambar Latar -->
+    <img 
+      src="/assets/images/orc-bg.jpg" 
+      alt="Home sweet Home"
+      class="absolute inset-0 w-full h-full object-cover z-0"
+    />
+
+    <!-- Overlay Gelap Transparan Tipis -->
+    <div class="absolute inset-0 bg-black/30 z-10" />
+
+    <!-- Konten Hero -->
+    <div class="relative z-20 flex flex-col items-center justify-end h-full pb-24 px-4 text-center">
+      <h1 class="text-4xl md:text-6xl font-cinzel font-extrabold text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]">
+        HomeLabs
+      </h1>
+      <p class="mt-4 max-w-2xl text-zinc-100 text-base md:text-lg leading-relaxed font-cinzel drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]">
+        Eksplorasi Teknologi, AI, Open-source, dan Dunia Digital dari kenyamanan <span class="italic">homelab</span>. Temukan inovasi, proyek, dan inspirasi baru setiap hari.
+      </p>
+      <div class="mt-8">
+        <a 
+          href="/blog"
+          class="px-6 py-2 bg-yellow-400 text-zinc-900 font-cinzel font-semibold rounded shadow-md hover:bg-yellow-300 transition"
+        >
+          Jelajahi Blog
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <Footer />
+</DefaultLayout>
