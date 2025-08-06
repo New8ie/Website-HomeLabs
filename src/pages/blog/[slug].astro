@@ -1,0 +1,28 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BlogPost from '../../components/BlogPost.astro';
+import DefaultLayout from "../../layouts/Default.astro";
+import { HeaderSection } from "../../sections/Header";
+import { Footer } from "../../sections/Footer";
+
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.slug }, // 👈 string, cocok untuk [slug].astro
+		props: post,
+	}));
+}
+
+type Props = CollectionEntry<'blog'>;
+
+const post = Astro.props;
+const { Content } = await render(post);
+---
+<DefaultLayout>
+  <HeaderSection />
+<BlogPost {...post.data}>
+  <Content />
+</BlogPost>
+<Footer/>
+</DefaultLayout>

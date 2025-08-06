@@ -1,5 +1,5 @@
 ---
-// Komponen tampilan untuk satu blog post
+
 export interface Props {
   title: string;
   description: string;
@@ -11,26 +11,49 @@ export interface Props {
     image?: string;
   };
 }
-
-const { title, description, pubDate, category, author, children } = Astro.props;
+const { title, description, pubDate, category, author } = Astro.props;
 ---
 
-<article class="prose prose-invert max-w-3xl mx-auto py-12 px-4">
-  <h1>{title}</h1>
-  <p class="text-sm text-gray-400 mb-4">
-    Dipublikasikan pada {new Date(pubDate).toLocaleDateString("id-ID", { year: 'numeric', month: 'long', day: 'numeric' })} • Kategori: {category}
-  </p>
+<article class="max-w-3xl mx-auto py-12 px-4 text-wowGold">
+  <header class="mb-8 border-b border-wowGold/30 pb-5">
+    <h1 class="text-4xl font-extrabold tracking-tight leading-tight text-wowGold drop-shadow-md font-inter">
+      {title}
+    </h1>
+    <p class="text-lg text-gray-300 mb-10 font-cinzel">{description}</p>
+    <p class="mt-2 text-sm text-gray-400 font-inter">
+      Dipublikasikan pada{" "}
+      <time datetime={pubDate.toISOString()}>
+        {new Date(pubDate).toLocaleDateString("id-ID", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </time>{" "}
+      • Kategori:{" "}
+      <span class="inline-block bg-wowGold/10 px-2 py-1 text-xs font-medium rounded">
+        {category}
+      </span>
+    </p>
+  </header>
+
   {author && (
-    <div class="flex items-center gap-4 mb-6">
-      {author.image && <img src={author.image} alt={author.name} class="w-10 h-10 rounded-full" />}
+    <div class="flex items-center gap-4 mb-10">
+      {author.image && (
+        <img
+          src={author.image}
+          alt={author.name}
+          class="w-12 h-12 rounded-full border-2 border-wowGold shadow-md"
+        />
+      )}
       <div>
-        <p class="text-sm font-semibold">{author.name}</p>
-        <p class="text-xs text-gray-400">{author.title}</p>
+        <p class="text-sm font-semibold text-wowGold font-inter">{author.name}</p>
+        <p class="text-xs text-gray-400 italic font-inter">{author.title}</p>
       </div>
     </div>
   )}
 
-  <div class="mt-6">
-    {children}
+  <!-- Slot konten utama artikel -->
+  <div class="prose prose-invert prose-lg text-gray-100 font-cinzel">
+    <slot />
   </div>
 </article>
