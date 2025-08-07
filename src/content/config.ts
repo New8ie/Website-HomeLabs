@@ -14,13 +14,7 @@ const blog = defineCollection({
   }),
 });
 
-const positions = defineCollection({
-  schema: z.object({
-    title: z.string(),
-    description: z.string(),
-    pubDate: z.date().optional(),
-  }),
-});
+
 
 const projects = defineCollection({
   schema: z.object({
@@ -32,6 +26,5 @@ const projects = defineCollection({
 
 export const collections = {
   blog,
-  positions,
   projects,
 };

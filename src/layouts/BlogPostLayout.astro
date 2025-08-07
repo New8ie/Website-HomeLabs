@@ -1,0 +1,73 @@
+---
+export interface Props {
+  title: string;
+  description: string;
+  pubDate: Date;
+  category: string;
+  slug: string;
+  author?: {
+    name: string;
+    title: string;
+    image?: string;
+  };
+}
+
+const { title, description, pubDate, category, slug, author } = Astro.props;
+---
+
+<article class="max-w-2xl mx-auto px-4 py-10 text-wowGold">
+  <header class="mb-6 border-b border-wowGold/20 pb-4">
+    <h1 class="text-3xl md:text-4xl font-bold font-cinzel tracking-wider uppercase">
+      {title}
+    </h1>
+    <p class="text-sm text-gray-300 mt-2 mb-6 font-cinzel">{description}</p>
+    <div class="flex flex-wrap items-center text-xs text-gray-400 gap-2 font-cinzel">
+      <span>
+        Dipublikasikan{" "}
+        <time datetime={pubDate.toISOString()}>
+          {
+            new Date(pubDate).toLocaleDateString("id-ID", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </time>
+      </span>
+      <span class="hidden sm:inline">|</span>
+      <span class="bg-wowGold/10 text-wowGold px-2 py-0.5 rounded-md text-[11px] font-medium tracking-wide">
+        {category}
+      </span>
+    </div>
+  </header>
+
+  {
+    author && (
+      <div class="flex items-center gap-3 mb-8">
+        {author.image && (
+          <img
+            src={author.image}
+            alt={author.name}
+            class="w-10 h-10 rounded-full border border-wowGold shadow"
+          />
+        )}
+        <div class="text-xs leading-tight font-inter">
+          <p class="text-wowGold font-semibold">{author.name}</p>
+          <p class="text-gray-400 italic">{author.title}</p>
+        </div>
+      </div>
+    )
+  }
+
+  <!-- Contoh pemakaian gambar otomatis berdasarkan slug -->
+  <img
+    src={`/assets/images/blog/${slug}/cover.jpg`}
+    alt="Cover {title}"
+    class="rounded-lg mb-6 shadow-lg border border-wowGold/20"
+  />
+
+  <!-- Konten blog dari markdown -->
+  <div class="prose prose-invert prose-sm sm:prose-base max-w-none text-gray-100 font-cinzel">
+    <slot />
+  </div>
+</article>

@@ -1,5 +1,4 @@
 ---
-
 export interface Props {
   title: string;
   description: string;
@@ -14,46 +13,59 @@ export interface Props {
 const { title, description, pubDate, category, author } = Astro.props;
 ---
 
-<article class="max-w-3xl mx-auto py-12 px-4 text-wowGold">
-  <header class="mb-8 border-b border-wowGold/30 pb-5">
-    <h1 class="text-4xl font-extrabold tracking-tight leading-tight text-wowGold drop-shadow-md font-inter">
+<article class="max-w-2xl mx-auto px-4 py-10 text-wowGold">
+  <header class="mb-6 border-b border-wowGold/20 pb-4">
+    <h1
+      class="text-3xl md:text-4xl font-bold font-cinzel tracking-wider text-wowGold uppercase"
+    >
       {title}
     </h1>
-    <p class="text-lg text-gray-300 mb-10 font-cinzel">{description}</p>
-    <p class="mt-2 text-sm text-gray-400 font-inter">
-      Dipublikasikan pada{" "}
-      <time datetime={pubDate.toISOString()}>
-        {new Date(pubDate).toLocaleDateString("id-ID", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        })}
-      </time>{" "}
-      • Kategori:{" "}
-      <span class="inline-block bg-wowGold/10 px-2 py-1 text-xs font-medium rounded">
+    <p class="text-sm text-gray-300 mt-2 mb-6 font-cinzel">{description}</p>
+    <div
+      class="flex flex-wrap items-center text-xs text-gray-400 gap-2 font-cinzel"
+    >
+      <span>
+        Dipublikasikan{" "}
+        <time datetime={pubDate.toISOString()}>
+          {
+            new Date(pubDate).toLocaleDateString("id-ID", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </time>
+      </span>
+      <span class="hidden sm:inline">|</span>
+      <span
+        class="bg-wowGold/10 text-wowGold px-2 py-0.5 rounded-md text-[11px] font-medium tracking-wide"
+      >
         {category}
       </span>
-    </p>
+    </div>
   </header>
 
-  {author && (
-    <div class="flex items-center gap-4 mb-10">
-      {author.image && (
-        <img
-          src={author.image}
-          alt={author.name}
-          class="w-12 h-12 rounded-full border-2 border-wowGold shadow-md"
-        />
-      )}
-      <div>
-        <p class="text-sm font-semibold text-wowGold font-inter">{author.name}</p>
-        <p class="text-xs text-gray-400 italic font-inter">{author.title}</p>
+  {
+    author && (
+      <div class="flex items-center gap-3 mb-8">
+        {author.image && (
+          <img
+            src={author.image}
+            alt={author.name}
+            class="w-10 h-10 rounded-full border border-wowGold shadow"
+          />
+        )}
+        <div class="text-xs leading-tight font-inter">
+          <p class="text-wowGold font-semibold">{author.name}</p>
+          <p class="text-gray-400 italic">{author.title}</p>
+        </div>
       </div>
-    </div>
-  )}
+    )
+  }
 
-  <!-- Slot konten utama artikel -->
-  <div class="prose prose-invert prose-lg text-gray-100 font-cinzel">
+  <div
+    class="prose prose-invert prose-sm sm:prose-base max-w-none text-gray-100 font-cinzel"
+  >
     <slot />
   </div>
 </article>

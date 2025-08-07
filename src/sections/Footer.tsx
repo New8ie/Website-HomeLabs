@@ -1,66 +1,66 @@
-
 export const Footer = () => {
   return (
-    <footer className="bg-zinc-900 text-zinc-300 py-10 mt-20 border-t border-zinc-700">
-      <div className="container mx-auto px-6 md:px-12 lg:px-20">
-        <div className="flex flex-col md:flex-row justify-between items-start gap-10">
+    <footer className="relative bg-zinc-900/90 backdrop-blur-md border-t border-yellow-600/30 shadow-inner shadow-yellow-500/10 py-16 mt-20 text-zinc-300">
+      <div className="container lg-auto px-12 md:px-12 lg:px-20">
+        <div className="flex flex-col md:flex-row justify-between items-start gap-8">
           {/* Kiri: Branding */}
-          <div className="flex-1 items-start gap-4">
+          <div className="flex-1 flex flex-col gap-0">
             <img
               src="/assets/images/HomeLabsFont.svg"
               alt="HomeLabs Logo"
-              className="w-32 mb-3"
+              className="w-36 drop-shadow-glow"
             />
-            <p className="text-sm font-cinzel leading-relaxed max-w-xs">
+            <p className="text-sm font-cinzel leading-relaxed max-w-xs text-zinc-400">
               HomeLabs adalah ruang eksplorasi teknologi, pengalaman proyek, dan
               blog. Dibangun dengan bantuan AI 🦄 dan semangat open-source.
             </p>
           </div>
 
-          {/* Tengah: Navigasi */}
-          <div className="flex flex-col font-cinzel gap-2">
-            <h3 className="text-yellow-400 font-bold text-sm uppercase mb-2">
-              Navigasi
-            </h3>
-            <a href="/" className="hover:text-yellow-400 transition">
-              Home
-            </a>
-            <a href="/blog" className="hover:text-yellow-400 transition">
-              Blog
-            </a>
-            <a href="/projects" className="hover:text-yellow-400 transition">
-              Projects
-            </a>
-            <a href="/tools" className="hover:text-yellow-400 transition">
-              Tools
-            </a>
-            <a href="/about" className="hover:text-yellow-400 transition">
-              About
-            </a>
+          {/* Tengah: Navigasi + Image */}
+          <div className="flex flex-col gap-6 items-start justify-start">
+            {/* Gambar dekorasi di atas navigasi */}
+
+            <div className="flex flex-col font-cinzel gap-2">
+              <h3 className="text-yellow-400 font-bold text-sm uppercase mb-2">
+                Navigasi
+              </h3>
+              <a href="/" className="hover:text-yellow-400 transition">
+                Home
+              </a>
+              <a href="/blog" className="hover:text-yellow-400 transition">
+                Blog
+              </a>
+              <a href="/projects" className="hover:text-yellow-400 transition">
+                Projects
+              </a>
+              <a href="/tools" className="hover:text-yellow-400 transition">
+                Tools
+              </a>
+              <a href="/about" className="hover:text-yellow-400 transition">
+                About
+              </a>
+            </div>
           </div>
 
           {/* Kanan: Kontak & Sosial */}
           <div className="flex flex-col font-cinzel gap-4">
-            <h3 className="text-yellow-400 font-bold text-sm uppercase mb-2">
+            <h3 className="text-yellow-400 font-bold text-sm uppercase mb-2 ml-12">
               Hubungi
             </h3>
 
-            {/* Email */}
             <a
               href="mailto:webadmin@thismydomains.com"
               className="flex items-center gap-2 hover:text-yellow-400 transition"
             >
-              <svg
-                className="w-5 h-5 fill-zinc-300 hover:fill-yellow-400 transition"
-                viewBox="0 0 24 24"
-              >
-                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2Zm0 4-8 5-8-5V6l8 5 8-5v2Z" />
-              </svg>
-              Email
+              {/* Gambar tambahan setelah teks */}
+              <img
+                src="/assets/images/decor/mailbox2-logo-tp.png"
+                alt="email decorative"
+                className="w-32 h-32 ml-5"
+              />
             </a>
-
-            {/* Ikon Sosial */}
-            <div className="flex gap-4 items-center mt-2">
+            {/* Sosial Media Icons */}
+            <div className="flex gap-5 items-center mt-5">
               {/* GitHub */}
               <a
                 href="https://github.com/new8ie"
@@ -76,9 +76,9 @@ export const Footer = () => {
                 </svg>
               </a>
 
-              {/* Twitter (X) */}
+              {/* Twitter */}
               <a
-                href="https://x.com/yourusername"
+                href="https://x.com/mfachmi"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Twitter"
@@ -93,7 +93,7 @@ export const Footer = () => {
 
               {/* Instagram */}
               <a
-                href="https://instagram.com/yourusername"
+                href="https://instagram.com/mfachmi.alhasni"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
@@ -108,7 +108,7 @@ export const Footer = () => {
 
               {/* LinkedIn */}
               <a
-                href="https://linkedin.com/in/yourusername"
+                href="https://www.linkedin.com/in/mohamad-fachmi-90b53074/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
@@ -123,9 +123,8 @@ export const Footer = () => {
             </div>
           </div>
         </div>
-
-        <div className="text-center text-sm text-zinc-500 mt-10">
-          © {new Date().getFullYear()} HomeLabs.
+        <div className="text-center text-sm text-zinc-500 mt-12">
+          © {new Date().getFullYear()} HomeLabs. All rights reserved.
         </div>
       </div>
     </footer>
