@@ -4,9 +4,9 @@ export const Footer = () => {
       <div className="container lg-auto px-12 md:px-12 lg:px-20">
         <div className="flex flex-col md:flex-row justify-between items-start gap-8">
           {/* Kiri: Branding */}
-          <div className="flex-1 flex flex-col gap-0">
+          <div className="flex-1 flex flex-col gap-4">
             <img
-              src="/assets/images/HomeLabsFont.svg"
+              src="/assets/images/footer1-logo.svg"
               alt="HomeLabs Logo"
               className="w-36 drop-shadow-glow"
             />
@@ -54,7 +54,7 @@ export const Footer = () => {
             >
               {/* Gambar tambahan setelah teks */}
               <img
-                src="/assets/images/decor/mailbox2-logo-tp.png"
+                src="/assets/images/decor/mailbox-logo-horde.png"
                 alt="email decorative"
                 className="w-32 h-32 ml-5"
               />

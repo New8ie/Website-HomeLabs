@@ -1,28 +1,95 @@
 ---
-import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../components/BlogPost.astro';
+import "../../styles/global.css";
 import DefaultLayout from "../../layouts/Default.astro";
 import { HeaderSection } from "../../sections/Header";
 import { Footer } from "../../sections/Footer";
-
+import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog');
-	return posts.map((post) => ({
-		params: { slug: post.slug }, // 👈 string, cocok untuk [slug].astro
-		props: post,
-	}));
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+  }));
 }
 
-type Props = CollectionEntry<'blog'>;
+const { slug } = Astro.params;
+const allPosts = await getCollection("blog");
+const post = allPosts.find((p) => p.slug === slug);
 
-const post = Astro.props;
-const { Content } = await render(post);
+if (!post) {
+  throw new Error(`Post dengan slug "${slug}" tidak ditemukan`);
+}
+
+// Render markdown menjadi komponen siap tampil
+const { Content } = await post.render();
+
+const sortedPosts = allPosts.sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+const currentIndex = sortedPosts.findIndex((p) => p.slug === slug);
+const prevPost = sortedPosts[currentIndex + 1] || null;
+const nextPost = sortedPosts[currentIndex - 1] || null;
 ---
-<DefaultLayout>
+
+<DefaultLayout title={post.data.title}>
   <HeaderSection />
-<BlogPost {...post.data}>
-  <Content />
-</BlogPost>
-<Footer/>
+
+  <main class="max-w-3xl mx-auto px-4 py-12 space-y-6">
+    <h1 class="text-3xl font-bold text-yellow-500">{post.data.title}</h1>
+
+    <div class="flex items-center gap-4 text-sm text-gray-300">
+      <span>
+        {
+          new Date(post.data.pubDate).toLocaleDateString("id-ID", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
+      </span>
+      <span class="px-2 py-1 bg-yellow-700/30 text-yellow-300 rounded">
+        {post.data.category}
+      </span>
+    </div>
+
+    <!-- Konten blog -->
+    <div class="prose prose-invert max-w-none">
+      <Content />
+    </div>
+    <!-- Navigasi bawah post -->
+    <nav
+      class="flex justify-between mt-12 border-t border-yellow-700 pt-6 text-yellow-400"
+    >
+      <!-- Kiri: Back to Blog -->
+      <a href="/blog" class="hover:underline"> ← Back to Blog </a>
+
+      <!-- Kanan: Prev & Next -->
+      <div class="flex items-center gap-6">
+        {
+          prevPost && (
+            <a
+              href={`/blog/${prevPost.slug}`}
+              class="hover:underline text-lg"
+              aria-label="Previous post"
+            >
+              ←
+            </a>
+          )
+        }
+        {
+          nextPost && (
+            <a
+              href={`/blog/${nextPost.slug}`}
+              class="hover:underline text-lg"
+              aria-label="Next post"
+            >
+              →
+            </a>
+          )
+        }
+      </div>
+    </nav>
+  </main>
+
+  <Footer />
 </DefaultLayout>

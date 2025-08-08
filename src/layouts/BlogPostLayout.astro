@@ -1,73 +1,60 @@
 ---
-export interface Props {
-  title: string;
-  description: string;
-  pubDate: Date;
-  category: string;
-  slug: string;
-  author?: {
-    name: string;
-    title: string;
-    image?: string;
-  };
-}
+import "../styles/global.css";
+import DefaultLayout from "../layouts/Default.astro";
+import { HeaderSection } from "../sections/Header";
+import { Footer } from "../sections/Footer";
+import { getCollection } from "astro:content";
+import SidebarCategories from "../components/SidebarCategories";
 
-const { title, description, pubDate, category, slug, author } = Astro.props;
+// Ambil & urutkan data post
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
-<article class="max-w-2xl mx-auto px-4 py-10 text-wowGold">
-  <header class="mb-6 border-b border-wowGold/20 pb-4">
-    <h1 class="text-3xl md:text-4xl font-bold font-cinzel tracking-wider uppercase">
-      {title}
-    </h1>
-    <p class="text-sm text-gray-300 mt-2 mb-6 font-cinzel">{description}</p>
-    <div class="flex flex-wrap items-center text-xs text-gray-400 gap-2 font-cinzel">
-      <span>
-        Dipublikasikan{" "}
-        <time datetime={pubDate.toISOString()}>
-          {
-            new Date(pubDate).toLocaleDateString("id-ID", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })
-          }
-        </time>
-      </span>
-      <span class="hidden sm:inline">|</span>
-      <span class="bg-wowGold/10 text-wowGold px-2 py-0.5 rounded-md text-[11px] font-medium tracking-wide">
-        {category}
-      </span>
+<DefaultLayout title="Blog - HomeLabs">
+  <HeaderSection />
+
+  <main class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-4 py-12">
+    <!-- Sidebar -->
+    <div class="md:col-span-1">
+      <SidebarCategories client:load />
     </div>
-  </header>
 
-  {
-    author && (
-      <div class="flex items-center gap-3 mb-8">
-        {author.image && (
-          <img
-            src={author.image}
-            alt={author.name}
-            class="w-10 h-10 rounded-full border border-wowGold shadow"
-          />
-        )}
-        <div class="text-xs leading-tight font-inter">
-          <p class="text-wowGold font-semibold">{author.name}</p>
-          <p class="text-gray-400 italic">{author.title}</p>
-        </div>
-      </div>
-    )
-  }
+    <!-- Blog Posts -->
+    <section class="md:col-span-3 space-y-8">
+      {
+        posts.map((post) => (
+          <article class="bg-zinc-900 border border-yellow-700 shadow-md shadow-yellow-300/10 rounded-lg p-4 transition-transform duration-300 hover:scale-[1.01] hover:shadow-yellow-300/20 hover:border-yellow-500">
+            <a href={`/blog/${post.slug}`} class="block group">
+              <h2 class="text-xl font-bold text-yellow-500 group-hover:underline">
+                {post.data.title}
+              </h2>
+              <p class="text-xs text-yellow-200 mb-1">
+                {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+              <p class="text-sm text-gray-200 mb-2">{post.data.description}</p>
 
-  <!-- Contoh pemakaian gambar otomatis berdasarkan slug -->
-  <img
-    src={`/assets/images/blog/${slug}/cover.jpg`}
-    alt="Cover {title}"
-    class="rounded-lg mb-6 shadow-lg border border-wowGold/20"
-  />
+              {post.data.author && (
+                <div class="flex items-center gap-2 mt-2">
+                  <img
+                    src={post.data.author.image}
+                    alt={post.data.author.name}
+                    class="w-6 h-6 rounded-full border border-yellow-700"
+                  />
+                  <span class="text-xs text-gray-400">{post.data.author.name}</span>
+                </div>
+              )}
+            </a>
+          </article>
+        ))
+      }
+    </section>
+  </main>
 
-  <!-- Konten blog dari markdown -->
-  <div class="prose prose-invert prose-sm sm:prose-base max-w-none text-gray-100 font-cinzel">
-    <slot />
-  </div>
-</article>
+  <Footer />
+</DefaultLayout>

@@ -7,23 +7,20 @@ export interface Props {
   author?: {
     name: string;
     title: string;
-    image?: string;
+  image?: string;
   };
 }
+
 const { title, description, pubDate, category, author } = Astro.props;
 ---
 
 <article class="max-w-2xl mx-auto px-4 py-10 text-wowGold">
   <header class="mb-6 border-b border-wowGold/20 pb-4">
-    <h1
-      class="text-3xl md:text-4xl font-bold font-cinzel tracking-wider text-wowGold uppercase"
-    >
+    <h1 class="text-3xl md:text-4xl font-bold font-cinzel tracking-wider uppercase">
       {title}
     </h1>
     <p class="text-sm text-gray-300 mt-2 mb-6 font-cinzel">{description}</p>
-    <div
-      class="flex flex-wrap items-center text-xs text-gray-400 gap-2 font-cinzel"
-    >
+    <div class="flex flex-wrap items-center text-xs text-gray-400 gap-2 font-cinzel">
       <span>
         Dipublikasikan{" "}
         <time datetime={pubDate.toISOString()}>
@@ -37,9 +34,7 @@ const { title, description, pubDate, category, author } = Astro.props;
         </time>
       </span>
       <span class="hidden sm:inline">|</span>
-      <span
-        class="bg-wowGold/10 text-wowGold px-2 py-0.5 rounded-md text-[11px] font-medium tracking-wide"
-      >
+      <span class="bg-wowGold/10 text-wowGold px-2 py-0.5 rounded-md text-[11px] font-medium tracking-wide">
         {category}
       </span>
     </div>
@@ -62,10 +57,8 @@ const { title, description, pubDate, category, author } = Astro.props;
       </div>
     )
   }
-
-  <div
-    class="prose prose-invert prose-sm sm:prose-base max-w-none text-gray-100 font-cinzel"
-  >
+  <!-- Konten blog dari markdown -->
+  <div class="prose prose-invert prose-sm sm:prose-base max-w-none text-gray-100 font-cinzel">
     <slot />
   </div>
 </article>

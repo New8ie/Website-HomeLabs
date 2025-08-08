@@ -1,58 +1,74 @@
 ---
-// Import
 import "../../styles/global.css";
 import DefaultLayout from "../../layouts/Default.astro";
 import { HeaderSection } from "../../sections/Header";
 import { Footer } from "../../sections/Footer";
+import CategorySidebar from "../../components/CategorySidebar.tsx";
 import { getCollection } from "astro:content";
 
-// Ambil & urutkan data
-const posts = (await getCollection("blog")).sort(
-  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-);
+const POSTS_PER_PAGE = 10;
+
+const allPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+// Jika konten kurang dari 10, ya semuanya ditampilkan
+const posts = allPosts.slice(0, POSTS_PER_PAGE).map((p) => ({
+  title: p.data.title,
+  slug: p.slug,
+  description: p.data.description,
+  pubDate: p.data.pubDate,
+  category: p.data.category,
+  image: p.data.image ?? null,
+}));
 ---
 
 <DefaultLayout title="Blog - HomeLabs">
   <HeaderSection />
 
-  <!-- Wrapper dengan background image -->
-  <div
-    class="relative isolate bg-cover bg-center bg-no-repeat before:absolute before:inset-0 before:bg-black/60 before:backdrop-blur-sm before:z-0"
-    style="background-image: url('/assets/images/home-bg-2.jpg');"
-  >
-    <!-- Main Content -->
-    <main
-      class="relative z-10 max-w-3xl mx-auto px-4 py-20 space-y-12 text-white"
-    >
-      <h1 class="text-4xl font-bold mb-8 drop-shadow-xl text-yellow-400">
-        Blog Posts
-      </h1>
-      <ul class="space-y-8">
-        {
-          posts.map((post) => (
-            <li>
-              <a
-                href={`/blog/${post.slug}`}
-                class="block group transition duration-300 hover:scale-[1.01]"
-              >
-                <h2 class="text-2xl font-bold text-yellow-400 group-hover:underline drop-shadow-lg">  
-                  {post.data.title}
-                </h2>
-                <p class="text-sm text-gray-300 mb-1">
-                  {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </p>
-                <p class="text-gray-300">{post.data.description}</p>
-              </a>
-            </li>
-          ))
-        }
-      </ul>
-    </main>
+  <main class="max-w-6xl mx-auto px-4 py-12 flex flex-col md:flex-row gap-8">
+    <!-- Sidebar -->
+    
 
-    <Footer />
-  </div>
+    <!-- List Blog -->
+    <section class="flex-1 space-y-6">
+      {posts.map((post) => (
+        <a
+          href={`/blog/${post.slug}`}
+          class="flex flex-col sm:flex-row gap-4 items-start bg-zinc-900 border border-yellow-700 rounded-lg p-4 shadow-md hover:shadow-lg transition duration-200"
+        >
+          {post.image ? (
+            <img
+              src={post.image}
+              alt={post.title}
+              class="w-full sm:w-36 h-48 sm:h-24 object-cover rounded"
+              loading="lazy"
+            />
+          ) : (
+            <div class="w-full sm:w-36 h-48 sm:h-24 bg-zinc-800 rounded flex items-center justify-center text-xs text-gray-400">
+              No image
+            </div>
+          )}
+
+          <div class="flex-1">
+            <h2 class="text-lg font-semibold text-yellow-400 mb-1">{post.title}</h2>
+            <p class="text-sm text-gray-300 mb-2 line-clamp-3">{post.description}</p>
+            <div class="flex items-center justify-between text-xs text-gray-400">
+              <span>
+                {post.pubDate.toLocaleDateString("id-ID", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric"
+                })}
+              </span>
+              <span class="px-2 py-0.5 bg-yellow-700/20 text-yellow-300 rounded">
+                {post.category}
+              </span>
+            </div>
+          </div>
+        </a>
+      ))}
+    </section>
+  </main>
+
+  <Footer />
 </DefaultLayout>
