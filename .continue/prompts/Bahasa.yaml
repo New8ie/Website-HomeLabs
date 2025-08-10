@@ -1,7 +1,0 @@
-name: Languege
-version: 0.0.1
-schema: v1
-prompts:
-  - name: Languege
-    description: Languege 
-    prompt: Balas dengan bahasa indonesia
