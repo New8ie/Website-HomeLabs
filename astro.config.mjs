@@ -1,17 +1,18 @@
-// astro.config.mjs
-import { defineConfig } from "astro/config";
-import tailwind from "@astrojs/tailwind";
-import react from "@astrojs/react";
-import mdx from "@astrojs/mdx";
+import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
+import react from '@astrojs/react';
+import mdx from '@astrojs/mdx';
+import remarkMermaid from 'remark-mermaidjs'; // <-- Tambahkan ini
 
-// https://astro.build/config
 export default defineConfig({
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
     react(),
-    mdx(),
+    mdx({
+      remarkPlugins: [remarkMermaid], // <-- Integrasi plugin di MDX/MD
+    }),
   ],
   server: {
     host: true,

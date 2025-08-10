@@ -13,7 +13,7 @@ const { page } = Astro.props;
     <div class="flex items-center space-x-2 w-full max-w-xl">
       <input 
         type="text" 
-        placeholder="Cari artikel..." 
+        placeholder="Search" 
         class="w-full px-4 py-2 rounded-md bg-zinc-900/60 text-zinc-200 border border-yellow-700/50 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-colors"
       >
       <button 
@@ -29,7 +29,7 @@ const { page } = Astro.props;
   {
     page.data.length === 0 ? (
       <p class="text-zinc-400 text-center mt-10">
-        Artikel tidak ditemukan. 😥
+       No articles found for this category. 😥
       </p>
     ) : (
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -50,7 +50,7 @@ const { page } = Astro.props;
               </div>
             ) : (
               <div class="h-40 w-full bg-zinc-800/50 flex items-center justify-center rounded-t-xl text-zinc-500 text-sm">
-                Tidak ada gambar
+                No images
               </div>
             )}
             <div class="p-4 flex flex-col justify-between h-44">

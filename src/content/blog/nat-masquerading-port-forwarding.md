@@ -3,11 +3,11 @@ title: "Konfigurasi NAT Masquerading dan Port Forwarding di Debian"
 description: "Panduan konfigurasi NAT Masquerading dan Port Forwarding menggunakan iptables di Debian untuk jaringan lokal dan akses internet."
 pubDate: 2025-08-08
 category: "Networking"
-image: "/assets/images/Logo/footer1-a-logo.svg"
+image: "/assets/images/Blog/Brands/linux.png"
 author:
   name: "Fachmi"
   title: "Admin"
-  image: "/assets/images/Logo/footer1-a-logo.svg"
+  image: "/assets/images/Logo/font-logo.svg"
 ---
 
 # NAT Masquerading dan Port Forwarding di Debian
@@ -18,11 +18,11 @@ Agar klien di jaringan lokal (LAN) dapat mengakses internet melalui satu IP publ
 
 ## 🛠️ Prasyarat
 
-- Sistem operasi: Debian (10/11/12)  
-- Akses root atau sudo  
-- Dua interface jaringan:  
-  - `eth0`: terhubung ke internet  
-  - `eth1`: terhubung ke jaringan lokal (LAN)  
+- Sistem operasi: Debian (10/11/12)
+- Akses root atau sudo
+- Dua interface jaringan:
+  - `eth0`: terhubung ke internet
+  - `eth1`: terhubung ke jaringan lokal (LAN)
 
 ---
 
@@ -60,15 +60,15 @@ sudo iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 ### Penjelasan:
 
-| Komponen       | Fungsi                                                       |
-| -------------- | ------------------------------------------------------------|
-| `-t nat`       | Menunjukkan aturan berada di tabel NAT                      |
-| `-A POSTROUTING` | Menambahkan aturan pada chain POSTROUTING                  |
-| `-o eth0`      | Berlaku untuk paket keluar lewat interface eth0 (ke internet) |
-| `-j MASQUERADE`| Mengubah source IP paket menjadi IP publik dari eth0 (dinamis) |
+| Komponen         | Fungsi                                                         |
+| ---------------- | -------------------------------------------------------------- |
+| `-t nat`         | Menunjukkan aturan berada di tabel NAT                         |
+| `-A POSTROUTING` | Menambahkan aturan pada chain POSTROUTING                      |
+| `-o eth0`        | Berlaku untuk paket keluar lewat interface eth0 (ke internet)  |
+| `-j MASQUERADE`  | Mengubah source IP paket menjadi IP publik dari eth0 (dinamis) |
 
 > **Note:**  
-> `MASQUERADE` digunakan saat IP publik bersifat dinamis (DHCP). Jika IP publik statik, gunakan SNAT seperti contoh di bawah:  
+> `MASQUERADE` digunakan saat IP publik bersifat dinamis (DHCP). Jika IP publik statik, gunakan SNAT seperti contoh di bawah:
 
 ```bash
 sudo iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 203.0.113.2
@@ -92,14 +92,14 @@ sudo iptables -A FORWARD -p tcp -d 192.168.1.100 --dport 80 -m state \
 
 ### Penjelasan:
 
-| Komponen          | Fungsi                                                  |
-| ----------------- | -------------------------------------------------------|
-| `-t nat`          | Tabel NAT                                               |
-| `-A PREROUTING`   | Menangani paket sebelum routing decision               |
-| `-i eth0`         | Paket masuk dari interface eth0 (internet)             |
-| `-p tcp --dport 80` | Protokol TCP dengan tujuan port 80                     |
-| `-j DNAT`         | Ubah alamat tujuan                                      |
-| `--to-destination`| Alamat tujuan baru (server lokal)                       |
+| Komponen            | Fungsi                                     |
+| ------------------- | ------------------------------------------ |
+| `-t nat`            | Tabel NAT                                  |
+| `-A PREROUTING`     | Menangani paket sebelum routing decision   |
+| `-i eth0`           | Paket masuk dari interface eth0 (internet) |
+| `-p tcp --dport 80` | Protokol TCP dengan tujuan port 80         |
+| `-j DNAT`           | Ubah alamat tujuan                         |
+| `--to-destination`  | Alamat tujuan baru (server lokal)          |
 
 ---
 
@@ -156,8 +156,8 @@ sudo iptables -L FORWARD -n -v
 
 ## 🛡️ Tips Keamanan
 
-- Jangan lupa mengatur firewall yang memblokir koneksi tidak sah dari luar.  
-- Gunakan fail2ban atau IDS jika port terbuka ke internet.  
+- Jangan lupa mengatur firewall yang memblokir koneksi tidak sah dari luar.
+- Gunakan fail2ban atau IDS jika port terbuka ke internet.
 - Batasi akses port forwarding hanya untuk IP tertentu jika perlu.
 
 ---
@@ -178,7 +178,7 @@ Internet
 
 **Tujuan:**
 
-- Semua klien LAN bisa akses internet  
+- Semua klien LAN bisa akses internet
 - Port 80 publik diarahkan ke server 192.168.1.100
 
 **Perintah Singkat:**
@@ -199,6 +199,6 @@ iptables -A FORWARD -p tcp -d 192.168.1.100 --dport 80 -j ACCEPT
 
 ## 📚 Referensi Tambahan
 
-- `man iptables`  
-- [Debian iptables Wiki](https://wiki.debian.org/iptables)  
+- `man iptables`
+- [Debian iptables Wiki](https://wiki.debian.org/iptables)
 - [Netfilter/NAT](https://netfilter.org/)

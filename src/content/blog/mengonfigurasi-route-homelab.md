@@ -7,7 +7,7 @@ image: "/assets/images/Blog/open-wrt.png"
 author:
   name: "Fachmi"
   title: "Tech Enthusiast"
-  image: "/assets/images/Logo/footer2-logo.svg"
+  image: "/assets/images/Logo/font-logo.svg"
 ---
 
 # Upgrade Router dengan OpenWrt
@@ -15,11 +15,13 @@ author:
 Router standar seringkali memiliki fitur terbatas. Dengan OpenWrt, firmware open-source, kamu bisa membuka potensi penuh dari router kamu, menambahkan fitur seperti VPN, firewall canggih, dan lainnya.
 
 ## Kenapa OpenWrt?
+
 - **Fleksibilitas:** Kontrol penuh atas konfigurasi jaringan.
 - **Keamanan:** Patch keamanan lebih cepat daripada firmware bawaan.
 - **Fitur Tambahan:** Mendukung ribuan paket perangkat lunak.
 
 ## Proses Instalasi
+
 1. Periksa kompatibilitas router di [situs resmi OpenWrt](https://openwrt.org/toh/start).
 2. Unduh firmware yang sesuai untuk model router kamu.
 3. Akses antarmuka web router dan cari opsi "Firmware Upgrade".

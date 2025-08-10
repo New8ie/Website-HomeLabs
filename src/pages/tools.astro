@@ -3,26 +3,50 @@ import "../styles/global.css";
 import DefaultLayout from "../layouts/Default.astro";
 import { HeaderSection } from "../sections/Header";
 import { FooterSection } from "../sections/Footer";
+import SubnetCalculator from "../components/SubnetCalculator";
+import BandwidthConverter from "../components/BandwidthConverter";
 ---
 
 <DefaultLayout title="Tools - HomeLabs">
- <HeaderSection client:load />
-   <!-- Main Content -->
-    <main class="flex-grow flex flex-col justify-center items-center text-center px-4">
-      <h1
-        class="text-4xl md:max-w-lg font-cinzel font-extrabold text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)"
-        style={{ textShadow: "0 0 10px gold" }}
-      >
-        Halaman Sedang Dalam Tahap Pengembangan
-      </h1>
-      <p class="max-w-lg text-yellow-300 text-lg md:text-xl mb-8">
-        Kami sedang membangun sesuatu yang keren! Mohon bersabar dan cek kembali nanti.
-      </p>
-      <img
-        src="/assets/images/Logo/leviathan.png"
-        alt="Under Construction"
-        class="w-48 md:w-64 drop-shadow-lg"
-      />
-    </main>
+  <HeaderSection client:load />
+
+  <main class="min-h-screen p-6 md:p-12 bg-zinc-900 text-zinc-100">
+    <div class="max-w-5xl mx-auto space-y-12">
+      <!-- Title Section -->
+      <div class="text-center space-y-4">
+        <h1 class="text-5xl font-bold text-yellow-400 uppercase tracking-widest leading-tight">
+          Networking Tools
+        </h1>
+        <p class="text-xl font-light text-zinc-400">
+         A collection of tools created to simplify tasks and development.
+        </p>
+      </div>
+
+      <!-- Tools Grid -->
+      <section class="grid md:grid-cols-2 gap-8">
+        
+        <!-- Subnet Calculator Card -->
+        <div class="relative bg-zinc-800 p-8 rounded-3xl shadow-xl border border-zinc-700/50 
+                    transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20">
+          <h2 class="text-3xl font-bold text-yellow-400 mb-6 text-center uppercase">
+            Subnet Calculator
+          </h2>
+          <SubnetCalculator client:load />
+        </div>
+
+        <!-- Bandwidth Converter Card -->
+        <div class="relative bg-zinc-800 p-8 rounded-3xl shadow-xl border border-zinc-700/50 
+                    transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20">
+          <h2 class="text-3xl font-bold text-yellow-400 mb-6 text-center uppercase">
+            Bandwidth Converter
+          </h2>
+          <BandwidthConverter client:load />
+        </div>
+
+      </section>
+    </div>
+  </main>
+
   <FooterSection />
 </DefaultLayout>
+

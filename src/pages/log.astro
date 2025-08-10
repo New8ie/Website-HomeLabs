@@ -1,0 +1,24 @@
+---
+import "../styles/global.css";
+import DefaultLayout from "../layouts/Default.astro";
+import { HeaderSection } from "../sections/Header";
+import { FooterSection } from "../sections/Footer";
+---
+
+<DefaultLayout title="Logs - HomeLabs">
+  <HeaderSection client:load />
+
+  <main class="flex flex-col items-center justify-center min-h-screen p-6">
+    <div class="text-center">
+        <h1 class="text-4xl font-bold text-yellow-400 mb-4 uppercase tracking-wider">
+            Logs
+        </h1>
+        <p class="text-zinc-300 text-lg">
+            Halaman ini akan menampilkan log sistem atau data monitoring Anda.
+        </p>
+    </div>
+  </main>
+
+  <FooterSection />
+</DefaultLayout>
+

@@ -4,57 +4,89 @@ import { HeaderSection } from "../sections/Header";
 import { FooterSection } from "../sections/Footer";
 ---
 
-<DefaultLayout title="Tentang Saya & HomeLabs">
+<DefaultLayout title="About me & HomeLabs">
   <HeaderSection client:load />
 
-  <main class="relative py-16 min-h-[80vh]">
-    <img
-      src="/assets/images/BG/bg-1.jpg"
-      alt="Latar belakang yang terinspirasi dari home lab"
-      class="absolute inset-0 w-full h-full object-cover z-0 opacity-20"
-    />
-    <div class="relative z-10 max-w-4xl mx-auto px-6 text-zinc-100">
+  <main class="relative py-16 min-h-[80vh] overflow-hidden">
+    <!-- Background Image with a subtle dark overlay for better text readability -->
+    <div class="absolute inset-0 z-0">
+        <img
+            src="/assets/images/BG/bg-1.jpg"
+            alt="Latar belakang yang terinspirasi dari home lab"
+            class="w-full h-full object-cover opacity-20"
+        />
+        <div class="absolute inset-0 bg-zinc-950/50"></div>
+    </div>
+    
+    <div class="relative z-10 max-w-5xl mx-auto px-6">
 
-      <header class="text-center mb-12">
-        <h1 class="text-4xl md:text-5xl font-extrabold font-cinzel text-yellow-500 mb-4 tracking-wider">
-          Tentang Saya
+      <!-- Hero Section with Profile Picture and Title -->
+      <section class="flex flex-col items-center text-center mb-16 md:mb-20">
+        <!-- Profile Picture -->
+        <div class="relative w-40 h-40 md:w-48 md:h-48 mb-6">
+          <img
+            src="https://placehold.co/200x200/FFD700/000000?text=F"
+            alt="Fachmi's profile picture"
+            class="rounded-full w-full h-full object-cover border-4 border-yellow-500 shadow-xl shadow-yellow-500/20"
+          />
+          <!-- Subtle animated ring -->
+          <span class="absolute inset-0 rounded-full ring-4 ring-yellow-500/20 animate-pulse-slow"></span>
+        </div>
+
+        <!-- Title and Subtitle -->
+        <h1 class="text-4xl md:text-6xl font-extrabold font-cinzel text-yellow-500 mb-2 tracking-wider drop-shadow-lg">
+          About Me
         </h1>
-        <p class="text-lg md:text-xl text-zinc-300">
-          Membangun, Mengelola, dan Belajar.
-        </p>
-      </header>
-
-      <section class="mb-12 p-8 bg-zinc-900/60 backdrop-blur-sm rounded-2xl border border-yellow-700/50 shadow-lg">
-        <h2 class="text-3xl font-bold font-cinzel text-yellow-400 mb-4">Siapa Saya?</h2>
-        <p class="mb-4 text-zinc-300 leading-relaxed">
-          Halo! Nama saya **Fachmi**, dan saya seorang entusiast di bidang teknologi.
-          Saya memiliki ketertarikan yang mendalam terhadap dunia <strong class="text-yellow-300">HomeLabs</strong> dan <strong class="text-yellow-300">jaringan komputer</strong>.
-          Sejak awal, saya suka bereksperimen dengan berbagai sistem operasi, virtualisasi, dan konfigurasi jaringan di rumah.
-        </p>
-        <p class="mb-4 text-zinc-300 leading-relaxed">
-          Website ini adalah tempat saya mendokumentasikan perjalanan saya, mencatat pelajaran yang saya dapatkan, dan berbagi pengetahuan yang mungkin bermanfaat bagi orang lain.
-          Tujuan saya adalah untuk membantu Anda membangun dan mengelola infrastruktur digital Anda sendiri dengan mudah.
+        <p class="text-lg font-cinzel md:text-2xl text-zinc-300 font-light">
+          Build, Manage, and Learn.
         </p>
       </section>
 
-      <section class="p-8 bg-zinc-900/60 backdrop-blur-sm rounded-2xl border border-yellow-700/50 shadow-lg">
-        <h2 class="text-3xl font-bold font-cinzel text-yellow-400 mb-4">Filosofi & Tujuan</h2>
-        <p class="mb-4 text-zinc-300 leading-relaxed">
-          Saya percaya bahwa belajar teknologi paling efektif adalah dengan langsung mempraktikkannya. Melalui blog ini, saya akan membagikan:
+      <!-- Who am I? Section -->
+      <section class="mb-12 p-8 md:p-12 bg-zinc-900/80 backdrop-blur-md rounded-3xl border border-yellow-700/50 shadow-2xl transition-all duration-300 hover:scale-[1.01]">
+        <h2 class="text-3xl font-bold font-cinzel text-yellow-400 mb-4">Who am I?</h2>
+        <p class="mb-4 text-zinc-300 font-cinzel leading-relaxed">
+          Hello! My name is Fachmi, and I am an enthusiast in the fields of <strong class="text-yellow-300">HomeLabs</strong> and <strong class="text-yellow-300">Networking</strong>.
+          From the beginning, I have enjoyed experimenting with different operating systems, virtualization, and network configurations at home.
         </p>
-        <ul class="list-disc list-inside space-y-2 text-zinc-300">
-          <li>Panduan langkah demi langkah untuk membangun HomeLab.</li>
-          <li>Ulasan perangkat keras dan lunak yang saya gunakan.</li>
-          <li>Solusi untuk masalah umum yang sering saya hadapi.</li>
-          <li>Tips dan trik untuk mengoptimalkan jaringan Anda.</li>
+        <p class="mb-4 italic text-zinc-400 font-cinzel leading-relaxed text-center">
+            "Find joy in your work, and your efforts will feel like a creative pursuit, not a chore. That's where true success begins."
+        </p>
+        <p class="mb-4 text-zinc-300 font-cinzel leading-relaxed">
+          This website is where I document my journey, record the lessons I've learned, and share knowledge that might be useful to others.
+          My goal is to help you build and manage your own digital infrastructure with ease.
+        </p>
+      </section>
+
+      <!-- Benefits & Objectives Section -->
+      <section class="p-8 md:p-12 bg-zinc-900/80 backdrop-blur-md rounded-3xl border border-yellow-700/50 shadow-2xl transition-all duration-300 hover:scale-[1.01]">
+        <h2 class="text-3xl font-bold font-cinzel text-yellow-400 mb-4">Benefits & Objectives</h2>
+        <p class="mb-4 text-zinc-300 font-cinzel leading-relaxed">
+          I believe that the most effective way to learn technology is through hands-on experience. Through this blog, I will share:
+        </p>
+        <ul class="list-disc list-inside font-cinzel space-y-2 text-zinc-300">
+          <li>Step-by-step guides for building a HomeLab.</li>
+          <li>Reviews of the hardware and software I use.</li>
+          <li>Solutions to common problems I often face.</li>
+          <li>Tips and tricks for optimizing your network.</li>
         </ul>
-        <p class="mt-4 text-zinc-300 leading-relaxed">
-          Terima kasih telah berkunjung. Mari kita belajar dan berkreasi bersama!
+        <p class="mt-4 text-zinc-300 font-cinzel leading-relaxed">
+          Thank you for visiting. Let's learn and create together!
         </p>
       </section>
-
+      
     </div>
   </main>
 
   <FooterSection />
 </DefaultLayout>
+
+<style>
+  @keyframes pulse-slow {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.1); opacity: 0.6; }
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 4s infinite ease-in-out;
+  }
+</style>

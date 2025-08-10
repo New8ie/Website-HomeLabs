@@ -9,10 +9,14 @@ const navLinks = [
   { title: "About", href: "/about" },
 ];
 
+// Definisikan URL gambar untuk setiap mode
+const darkLogoUrl = "/assets/images/Logo/horde2-logo.webp";
+const lightLogoUrl = "/assets/images/Logo/ally2-logo.webp";
+
 export const HeaderSection = () => {
   // State untuk mengelola status menu mobile
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Ref untuk mengakses elemen DOM menu geser ke bawah dengan tipe yang benar
+  // Ref untuk mengakses elemen DOM menu geser ke bawah.
   const menuRef = useRef<HTMLDivElement>(null);
   // State untuk mengelola tinggi menu geser ke bawah untuk animasi
   const [maxHeight, setMaxHeight] = useState("0px");
@@ -20,18 +24,19 @@ export const HeaderSection = () => {
   const [isDarkModeMessageVisible, setIsDarkModeMessageVisible] = useState(false);
   // State untuk menampilkan pesan kustom untuk ganti bahasa
   const [isLanguageMessageVisible, setIsLanguageMessageVisible] = useState(false);
+  // State baru untuk mengelola URL gambar logo kecil
+  const [smallLogoSrc, setSmallLogoSrc] = useState(darkLogoUrl);
 
   // Efek untuk mengelola tinggi menu geser ke bawah
   useEffect(() => {
     // Periksa apakah menuRef.current ada sebelum mengakses propertinya
-    if (menuRef.current) {
-      if (isMenuOpen) {
-        // Atur tinggi maksimum ke tinggi scroll elemen saat menu terbuka
-        setMaxHeight(menuRef.current.scrollHeight + "px");
-      } else {
-        // Atur tinggi maksimum ke 0 saat menu tertutup
-        setMaxHeight("0px");
-      }
+    const currentMenu = menuRef.current;
+    if (isMenuOpen && currentMenu) {
+      // Atur tinggi maksimum ke tinggi scroll elemen saat menu terbuka
+      setMaxHeight(currentMenu.scrollHeight + "px");
+    } else {
+      // Atur tinggi maksimum ke 0 saat menu tertutup
+      setMaxHeight("0px");
     }
   }, [isMenuOpen]);
 
@@ -54,21 +59,35 @@ export const HeaderSection = () => {
       return () => clearTimeout(timer);
     }
   }, [isLanguageMessageVisible]);
+  
+  // Efek untuk mengatur gambar logo awal berdasarkan mode saat ini
+  useEffect(() => {
+    if (document.documentElement.classList.contains("dark")) {
+      setSmallLogoSrc(darkLogoUrl);
+    } else {
+      setSmallLogoSrc(lightLogoUrl);
+    }
+  }, []);
 
   // Fungsi untuk menangani toggle dark mode
   const handleDarkModeToggle = () => {
-    document.documentElement.classList.toggle("dark");
+    const isDarkMode = document.documentElement.classList.toggle("dark");
+    if (isDarkMode) {
+      setSmallLogoSrc(darkLogoUrl);
+    } else {
+      setSmallLogoSrc(lightLogoUrl);
+    }
     setIsDarkModeMessageVisible(true);
   };
 
   return (
     <header className="sticky top-0 z-50 backdrop-blur-xl border-b border-yellow-600/30 bg-gradient-to-br from-zinc-900/80 to-zinc-800/60 shadow-lg shadow-yellow-500/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
           {/* Logo */}
           <div className="flex items-center">
             <img
-              src="/assets/images/Logo/footer1-a-logo.svg"
+              src="/assets/images/Logo/font-logo.svg"
               alt="HomeLabs Logo"
               className="w-32 drop-shadow-glow"
             />
@@ -91,8 +110,14 @@ export const HeaderSection = () => {
             ))}
           </nav>
 
-          {/* Tombol Sisi Kanan */}
+          {/* Tombol Sisi Kanan dan Gambar Baru */}
           <div className="flex gap-3 items-center">
+            <img
+              src={smallLogoSrc}
+              alt="Logo kecil"
+              className="w-10 h-10 rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg"
+            />
+            
             {/* Dark Mode Toggle */}
             <button
               title="Toggle Dark Mode"
@@ -160,7 +185,7 @@ export const HeaderSection = () => {
         <div className="fixed inset-0 flex items-center justify-center p-4 z-[9999]">
           <div className="bg-zinc-900/90 text-yellow-500 p-4 rounded-lg shadow-2xl flex items-center gap-2">
             <CheckCircle className="h-6 w-6 text-green-400" />
-            <p>Pesan: Mode gelap diaktifkan/dinonaktifkan!</p>
+            <p>Message: Dark mode enabled/disabled!</p>
           </div>
         </div>
       )}
@@ -170,7 +195,7 @@ export const HeaderSection = () => {
         <div className="fixed inset-0 flex items-center justify-center p-4 z-[9999]">
           <div className="bg-zinc-900/90 text-yellow-500 p-4 rounded-lg shadow-2xl flex items-center gap-2">
             <CheckCircle className="h-6 w-6 text-green-400" />
-            <p>Pesan: Toggle bahasa diklik!</p>
+            <p>Message: Language toggle clicked!</p>
           </div>
         </div>
       )}

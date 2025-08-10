@@ -39,28 +39,39 @@ export default function BlogSideBar({ allPosts, onSearch }: Props) {
   };
 
   return (
-    <aside className="relative rounded-xl p-6 shadow-2xl overflow-hidden sidebar-wow-theme border border-yellow-700/50">
+    <aside className="relative rounded-xl p-6 shadow-2xl overflow-hidden sidebar-wow-theme">
       <div className="absolute inset-0 bg-zinc-900/70 backdrop-blur-md"></div>
       <div className="absolute inset-0 rounded-xl pointer-events-none"></div>
 
-      <div className="relative z-10">
-        <h2 className="text-xl font-extrabold font-cinzel text-yellow-500 mb-4 tracking-wider">Search</h2>
-        <div className="flex space-x-2">
+      <div className="relative z-10 font-cinzel">
+        <h2 className="text-xl font-extrabold text-center text-yellow-500 mb-4 tracking-wider">Search</h2>
+        <div className="flex space-x-2 mb-6">
           <input
             type="text"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onKeyDown={handleKeyDown}
-            placeholder="Cari artikel..."
-            className="w-full px-4 py-2 rounded-md bg-zinc-800 text-zinc-200 border border-yellow-700/50 focus:outline-none focus:border-yellow-500 transition-colors"
+            placeholder="Search"
+            className="w-full px-4 py-2 rounded-md bg-zinc-800 font-cinzel text-center text-zinc-200 border border-yellow-700/50 focus:outline-none focus:border-yellow-500 focus:shadow-[0_0_15px_rgba(252,211,77,0.7)] transition-all duration-300 ease-in-out"
           />
           <button
             onClick={handleSearch}
-            className="px-4 py-2 bg-yellow-700/70 text-yellow-100 rounded-md font-semibold transition-colors hover:bg-yellow-600/70"
+            className="flex-shrink-0 px-3 py-1.5 rounded-md border font-cinzel border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-black hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md hover:shadow-yellow-300/30 font-extrabold uppercase tracking-wider text-lg"
+            style={{ textShadow: "0 0 2px gold" }}
           >
             Go
           </button>
         </div>
+        
+        {/* Gambar di bawah search box */}
+        <div className="relative w-full h-auto mt-6 rounded-lg overflow-hidden hidden md:block">
+          <img 
+            src="/assets/images/Items/horde-tower.png"  
+            alt="Placeholder"
+            className="w-full h-auto object-cover"
+          />
+        </div>
+
       </div>
     </aside>
   );

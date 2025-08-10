@@ -30,7 +30,7 @@ const posts = filteredPosts.slice(0, POSTS_PER_PAGE).map((p) => ({
     {
       posts.length === 0 ? (
         <p class="text-zinc-400 col-span-full text-center mt-10">
-          Artikel tidak ditemukan untuk kategori ini. 😥
+          No articles found for this category. 😥
         </p>
       ) : (
         posts.map((post) => (
@@ -50,7 +50,7 @@ const posts = filteredPosts.slice(0, POSTS_PER_PAGE).map((p) => ({
               </div>
             ) : (
               <div class="h-40 w-full bg-zinc-800 flex items-center justify-center rounded-t-xl text-zinc-500 text-sm">
-                Tidak ada gambar
+                No Images
               </div>
             )}
 

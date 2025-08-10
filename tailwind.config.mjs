@@ -8,7 +8,7 @@ export default {
       lg: "1200px",
     },
     fontFamily: {
-      heading: ["Inter", "sans-serif"],
+      heading: ["Cinzel", "sans-serif"],
       body: ["Cinzel", "serif"],
       cinzel: ["Cinzel", "serif"],
       inter: ["Inter", "sans-serif"],

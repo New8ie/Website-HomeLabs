@@ -2,16 +2,12 @@
 title: "Dotfiles Automation Install"
 description: "Konfigurasi shell interaktif dan terminal environment untuk Linux (Debian/Ubuntu) dan macOS — termasuk `zsh`, `oh-my-zsh`, `powerlevel10k`, plugin, alias, `neofetch`, `nano`, dan `fastfetch`. Dirancang untuk produktivitas dan estetika maksimal."
 pubDate: 2024-08-15
-image: "/assets/images/Logo/footer1-a-logo.svg"
+image: "/assets/images/Blog/dotfiles_1.png"
 category: "MacOS"
-slug: "environmental-impact-of-blockchain"
 author:
   name: "Mohamad Fachmi"
   title: "Mr"
 ---
-
-
-```markdown
 # 🧪 Dotfiles by New8ie
 
 🛠️ Konfigurasi shell interaktif dan terminal environment untuk Linux (Debian/Ubuntu) dan macOS — termasuk `zsh`, `oh-my-zsh`, `powerlevel10k`, plugin, alias, `neofetch`, `nano`, dan `fastfetch`. Dirancang untuk produktivitas dan estetika maksimal.
@@ -47,22 +43,26 @@ Dotfiles/
 │   ├── bin/                      # Binary tools (imgcat, dll)
 │   └── iterm2_shell_integration.zsh
 ```
+````
 
 ---
 
 ## 🚀 Instalasi Cepat
 
 ### 1. Clone repositori
+
 ```bash
 git clone https://github.com/New8ie/Dotfiles.git ~/.dotfiles
 ```
 
 ### 2. Jalankan skrip instalasi Zsh dan konfigurasi:
+
 ```bash
 bash ~/.dotfiles/Install/01-setup-zsh.sh
 ```
 
 > Pastikan Anda memiliki `git`, `curl`, dan akses `sudo`. Skrip akan:
+>
 > - Menginstal oh-my-zsh + plugin
 > - Mengganti `.zshrc`, `.p10k.zsh`, `.zprofile`, alias, dan konfigurasi lainnya
 > - Menyalin konfigurasi `nano`, `neofetch`, dan `fastfetch`
@@ -73,11 +73,11 @@ bash ~/.dotfiles/Install/01-setup-zsh.sh
 
 ## 💡 Dukungan Sistem
 
-| OS        | Status     | Keterangan                    |
-|-----------|------------|-------------------------------|
-| Debian 11+| ✅ Stabil   | Paket diinstal via APT        |
-| Ubuntu 22+| ✅ Stabil   | eza fallback dari GitHub      |
-| macOS 13+ | ✅ Stabil   | Menggunakan Homebrew & iTerm2 |
+| OS         | Status    | Keterangan                    |
+| ---------- | --------- | ----------------------------- |
+| Debian 11+ | ✅ Stabil | Paket diinstal via APT        |
+| Ubuntu 22+ | ✅ Stabil | eza fallback dari GitHub      |
+| macOS 13+  | ✅ Stabil | Menggunakan Homebrew & iTerm2 |
 
 ---
 
@@ -89,6 +89,8 @@ bash ~/.dotfiles/Install/01-setup-zsh.sh
 - `bat`, `eza`, `zoxide`, `neofetch`, `fastfetch`
 - `nano` dengan syntax highlighting
 - Logo bergambar untuk `neofetch` dan `fastfetch`
+
+![Tampilan Shell Zsh](/assets/images/Blog/dotfiles_2.png)
 
 ---
 
@@ -110,4 +112,7 @@ Feel free untuk fork dan kirim pull request.
 ## 📝 Lisensi
 
 MIT License. Gunakan, modifikasi, atau distribusikan dengan bebas.
+
+```
+
 ```

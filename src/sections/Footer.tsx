@@ -34,36 +34,43 @@ const socialLinks = [
 
 export const FooterSection = () => {
   return (
-    <footer className="relative bg-zinc-900/90 backdrop-blur-md border-t border-yellow-600/30 shadow-inner shadow-yellow-500/10 py-16 mt-20 text-zinc-300">
+    <footer className="relative bg-zinc-900/90 backdrop-blur-3xl border-t border-yellow-600/30 shadow-inner shadow-yellow-500/10 py-6 mt-0 text-zinc-300 z-50">
       <div className="container mx-auto px-6 md:px-8 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 lg:gap-24 text-center md:text-left">
-          {/* Kolom Kiri: Branding */}
-          <div className="flex flex-col items-center md:items-start gap-4">
-            <img
-              src="/assets/images/Logo/footer1-logo.svg"
-              alt="HomeLabs Logo"
-              className="w-36 drop-shadow-glow"
-            />
-            <p className="text-sm font-cinzel leading-relaxed text-zinc-400 max-w-xs mx-auto md:mx-0">
-              HomeLabs adalah ruang eksplorasi teknologi, pengalaman proyek,
-              dan blog. Dibangun dengan bantuan AI 🦄 dan semangat open-source.
-            </p>
-          </div>
+        {/* Mengubah menjadi 2 kolom di desktop */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 text-center md:text-left">
 
-          {/* Kolom Tengah: Navigasi */}
-          <div className="flex flex-col items-center md:items-start font-cinzel gap-2">
-            <h3 className="text-yellow-400 font-cinzel text-sm uppercase mb-2">
-              Navigasi
-            </h3>
-            {navLinks.map(({ title, href }) => (
-              <a key={title} href={href} className="hover:text-yellow-400 transition">
-                {title}
-              </a>
-            ))}
+          {/* Kolom Kiri: Gabungan Navigasi & Branding */}
+          <div className="flex flex-col md:flex-row items-center md: gap-12">
+            
+            {/* Navigasi */}
+            <div className="flex flex-col items-center md:items-center font-cinzel gap-2">
+              <h3 className="text-yellow-400 font-cinzel text-sm uppercase mb-2">
+                Navigasi
+              </h3>
+              {navLinks.map(({ title, href }) => (
+                <a key={title} href={href} className="hover:text-yellow-400 font-cinzel transition">
+                  {title}
+                </a>
+              ))}
+            </div>
+
+            {/* Branding */}
+            <div className="flex flex-col items-center md:items-start gap-4">
+              <img
+                src="/assets/images/Logo/font-logo.svg"
+                alt="HomeLabs Logo"
+                className="w-36 drop-shadow-glow"
+              />
+              <p className="text-sm font-cinzel leading-relaxed text-zinc-400 max-w-xs mx-auto md:mx-0">
+                HomeLabs is a space for technology exploration, project
+                experiences, and blogging. Built with the help of AI 🦄 and an
+                open-source spirit.
+              </p>
+            </div>
           </div>
 
           {/* Kolom Kanan: Hubungi & Sosial */}
-          <div className="flex flex-col items-center md:items-start font-cinzel gap-4"> 
+          <div className="flex flex-col items-center md:items-end font-cinzel gap-4"> 
             {/* Tautan email dengan gambar asli */}
             <a
               href="mailto:webadmin@thismydomains.com"
@@ -71,7 +78,7 @@ export const FooterSection = () => {
               aria-label="Email Web Admin"
             >
               <img
-                src="/assets/images/Logo/mailbox-logo-horde.png"
+                src="/assets/images/Items/mailbox-logo-horde.png"
                 alt="email decorative"
                 className="w-32 h-32"
               />

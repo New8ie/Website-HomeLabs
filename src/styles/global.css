@@ -2,6 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * File CSS: styles.css atau global.css
+ *
+ * Menggunakan CSS Custom Properties untuk mengelola tema gelap dan terang.
+ * Properti ini mendefinisikan warna dasar untuk latar belakang, teks, dan elemen lainnya.
+ * Dengan cara ini, Anda hanya perlu mengubah nilai variabel di satu tempat.
+ */
+
+/*
+ * Tema terang (default)
+ * Properti ini diterapkan pada elemen <html> secara default.
+ */
+:root {
+  /* Warna Dasar */
+  --background-color: #f8fafc;
+  --text-color: #1e293b;
+  --primary-button-bg: #f59e0b;
+  --primary-button-text: #000000;
+  --header-bg: rgba(248, 250, 252, 0.8);
+  --header-border: rgba(251, 191, 36, 0.3);
+  --shadow-color: rgba(251, 191, 36, 0.1);
+  --glow-color: rgb(251, 191, 36);
+  --glow-text-shadow: 0 0 2px rgb(251, 191, 36);
+  --link-bg-from: #f59e0b;
+  --link-bg-via: #eab308;
+  --link-bg-to: #d97706;
+}
+
+/*
+ * Tema gelap
+ * Properti ini diterapkan saat elemen <html> memiliki kelas 'dark'.
+ */
+.dark {
+  /* Warna Dasar */
+  --background-color: #0f172a;
+  --text-color: #e2e8f0;
+  --primary-button-bg: #d97706;
+  --primary-button-text: #ffffff;
+  --header-bg: rgba(15, 23, 42, 0.8);
+  --header-border: rgba(147, 51, 234, 0.3);
+  --shadow-color: rgba(147, 51, 234, 0.1);
+  --glow-color: rgb(147, 51, 234);
+  --glow-text-shadow: 0 0 2px rgb(147, 51, 234);
+  --link-bg-from: #9d174d;
+  --link-bg-via: #be185d;
+  --link-bg-to: #e11d48;
+}
+
+/*
+ * Penerapan transisi yang halus
+ * Transisi ini akan membuat perubahan warna tampak mulus.
+ */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+}
+
+/*
+ * Contoh penggunaan variabel CSS pada elemen lain
+ */
+.header {
+  background-color: var(--header-bg);
+  border-bottom-color: var(--header-border);
+  box-shadow: 0 4px 6px -1px var(--shadow-color),
+    0 2px 4px -1px var(--shadow-color);
+  backdrop-filter: blur(10px);
+}
+
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 4px var(--glow-color));
+}
+
+.text-glow {
+  text-shadow: var(--glow-text-shadow);
+}
 
 
 /* Atur font default untuk body dan heading */
@@ -87,4 +163,14 @@
   100% {
     transform: rotate(360deg);
   }
+}
+.separator {
+  /* Memberikan warna hitam dengan transparansi 70% */
+  background-color: rgba(0, 0, 0, 0); 
+
+  /* Efek blur pada konten di bawah elemen ini */
+  backdrop-filter: blur(100%); 
+
+  /* Tambahan untuk kompatibilitas browser lama (tidak wajib) */
+  -webkit-backdrop-filter: blur(10px); 
 }
