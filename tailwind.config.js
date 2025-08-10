@@ -8,10 +8,10 @@ export default {
       lg: "1200px",
     },
     fontFamily: {
-      heading: "Inter, sans-serif",
-      body: "Cinzel, serif",
-      cinzel: "Cinzel, serif",
-      inter: "Inter, sans-serif",
+      heading: ["Inter", "sans-serif"],
+      body: ["Cinzel", "serif"],
+      cinzel: ["Cinzel", "serif"],
+      inter: ["Inter", "sans-serif"],
     },
     container: {
       center: true,
@@ -21,7 +21,22 @@ export default {
         lg: "5.5rem",
       },
     },
-    extend: {},
+    extend: {
+      colors: {
+        yellow: {
+          300: "#fcd34d",
+          400: "#fbbf24",
+          500: "#f59e0b",
+          600: "#d97706",
+          700: "#b45309",
+          900: "#78350f",
+        },
+        zinc: {
+          800: "#27272a",
+          900: "#18181b",
+        },
+      },
+    },
   },
   plugins: [require("@tailwindcss/typography")],
 };

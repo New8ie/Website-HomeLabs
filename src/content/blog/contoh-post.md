@@ -2,12 +2,12 @@
 title: "Panduan Setup HomeLab dengan Proxmox"
 description: "Tutorial langkah demi langkah untuk membangun server HomeLab menggunakan Proxmox VE."
 pubDate: 2025-08-08
-category: "Homelab"
-image: "/assets/images/footer1-logo.png"
+category: "Virtual"
+image: "/assets/images/Logo/proxmox-logo.png"
 author:
   name: "Fachmi"
   title: "Tech Enthusiast"
-  image: "/assets/images/footer1-logo.png"
+  image: "/assets/images/Logo/proxmox-logo.png"
 ---
 
 # Memulai HomeLab dengan Proxmox
@@ -25,7 +25,7 @@ HomeLab adalah lingkungan server pribadi yang digunakan untuk belajar, eksperime
 2. Boot server menggunakan USB installer.
 3. Ikuti wizard instalasi hingga selesai.
 
-![Tampilan Dashboard Proxmox](/assets/images/footer1-logo.png)
+![Tampilan Dashboard Proxmox](/assets/images/Logo/proxmox-logo.png)
 
 ---
 

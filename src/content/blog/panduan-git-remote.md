@@ -3,7 +3,7 @@ title: "Panduan Git Remote"
 description: "Pelajari dasar-dasar Git Remote dengan cara yang mudah dan terstruktur."
 pubDate: 2025-08-07
 category: "Git"
-image: "../../assets/images/decor/mailbox-logo-horde.png"
+image: "/assets/images/Logo/footer1-a-logo.svg"
 url: ""
 author:
   name: "Fachmi"

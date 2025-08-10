@@ -2,7 +2,8 @@
 title: "Dotfiles Automation Install"
 description: "Konfigurasi shell interaktif dan terminal environment untuk Linux (Debian/Ubuntu) dan macOS — termasuk `zsh`, `oh-my-zsh`, `powerlevel10k`, plugin, alias, `neofetch`, `nano`, dan `fastfetch`. Dirancang untuk produktivitas dan estetika maksimal."
 pubDate: 2024-08-15
-category: "sustainability"
+image: "/assets/images/Logo/footer1-a-logo.svg"
+category: "MacOS"
 slug: "environmental-impact-of-blockchain"
 author:
   name: "Mohamad Fachmi"

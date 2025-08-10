@@ -2,7 +2,7 @@
 import "../../styles/global.css";
 import DefaultLayout from "../../layouts/Default.astro";
 import { HeaderSection } from "../../sections/Header";
-import { Footer } from "../../sections/Footer";
+import { FooterSection } from "../../sections/Footer";
 import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
@@ -32,47 +32,62 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
 ---
 
 <DefaultLayout title={post.data.title}>
-  <HeaderSection />
+  <HeaderSection client:load />
 
-  <main class="max-w-3xl mx-auto px-4 py-12 space-y-6">
-    <h1 class="text-3xl font-bold text-yellow-500">{post.data.title}</h1>
+  <main class="max-w-3xl mx-auto px-4 py-12 space-y-8 animate-fade-in-up">
+    <header class="space-y-4 text-center md:text-left">
+      <h1 class="text-4xl sm:text-5xl font-extrabold text-yellow-500 tracking-tight leading-tight animate-slide-in-left">
+        {post.data.title}
+      </h1>
 
-    <div class="flex items-center gap-4 text-sm text-gray-300">
-      <span>
-        {
-          new Date(post.data.pubDate).toLocaleDateString("id-ID", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })
-        }
-      </span>
-      <span class="px-2 py-1 bg-yellow-700/30 text-yellow-300 rounded">
-        {post.data.category}
-      </span>
-    </div>
+      <div class="flex flex-wrap justify-center md:justify-start items-center gap-4 text-sm text-gray-300 animate-slide-in-right">
+        <span class="flex items-center gap-1.5 opacity-80">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          {
+            new Date(post.data.pubDate).toLocaleDateString("id-ID", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }
+        </span>
+        <span class="px-3 py-1 bg-yellow-700/30 text-yellow-300 rounded-full font-semibold text-xs tracking-wide transform hover:scale-105 transition-transform duration-200">
+          {post.data.category}
+        </span>
+      </div>
+    </header>
 
-    <!-- Konten blog -->
-    <div class="prose prose-invert max-w-none">
+    <article class="prose prose-invert max-w-none prose-yellow animate-fade-in">
       <Content />
-    </div>
-    <!-- Navigasi bawah post -->
-    <nav
-      class="flex justify-between mt-12 border-t border-yellow-700 pt-6 text-yellow-400"
-    >
-      <!-- Kiri: Back to Blog -->
-      <a href="/blog" class="hover:underline"> ← Back to Blog </a>
+    </article>
 
-      <!-- Kanan: Prev & Next -->
+    <nav
+      class="flex flex-col sm:flex-row justify-between mt-12 border-t border-yellow-700 pt-6 text-yellow-400 gap-4 sm:gap-0 animate-fade-in-up"
+    >
+      <a 
+        href="/blog" 
+        class="group flex items-center gap-2 hover:text-yellow-300 transition-colors duration-200"
+      > 
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+        </svg>
+        <span class="hover:underline">Kembali ke Blog</span>
+      </a>
+
       <div class="flex items-center gap-6">
         {
           prevPost && (
             <a
               href={`/blog/${prevPost.slug}`}
-              class="hover:underline text-lg"
+              class="flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors duration-200"
               aria-label="Previous post"
             >
-              ←
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+              </svg>
+              <span class="hidden md:inline hover:underline text-sm">Sebelumnya</span>
             </a>
           )
         }
@@ -80,10 +95,13 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
           nextPost && (
             <a
               href={`/blog/${nextPost.slug}`}
-              class="hover:underline text-lg"
+              class="flex items-center gap-2 text-yellow-400 hover:text-yellow-300 transition-colors duration-200"
               aria-label="Next post"
             >
-              →
+              <span class="hidden md:inline hover:underline text-sm">Selanjutnya</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform hover:translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
             </a>
           )
         }
@@ -91,5 +109,51 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
     </nav>
   </main>
 
-  <Footer />
+  <style>
+    /* Keyframes untuk animasi */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeIn-up {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideInLeft {
+      from { opacity: 0; transform: translateX(-20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @keyframes slideInRight {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    /* Kelas animasi */
+    .animate-fade-in-up {
+      animation: fadeIn-up 0.6s ease-out;
+    }
+    .animate-slide-in-left {
+      animation: slideInLeft 0.7s ease-out;
+    }
+    .animate-slide-in-right {
+      animation: slideInRight 0.7s ease-out 0.2s; /* Tambahkan delay */
+      animation-fill-mode: backwards;
+    }
+    .animate-fade-in {
+      animation: fadeIn 0.8s ease-out 0.4s; /* Tambahkan delay */
+      animation-fill-mode: backwards;
+    }
+    /* Menyesuaikan gaya `prose` untuk konten */
+    .prose-yellow h1, .prose-yellow h2, .prose-yellow h3, .prose-yellow h4, .prose-yellow strong {
+      color: theme('colors.yellow.400');
+    }
+    .prose-yellow a {
+      color: theme('colors.yellow.500');
+    }
+  </style>
+
+  <FooterSection />
 </DefaultLayout>

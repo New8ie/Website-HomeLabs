@@ -19,7 +19,7 @@ export default function SidebarCategories({ onSelectCategory }: { onSelectCatego
 
   return (
     <aside className="bg-zinc-900 border border-yellow-700 rounded-lg p-4 space-y-2">
-      <h2 className="text-lg font-bold text-yellow-500 mb-2">Categories</h2>
+      <h2 className="text-lg font-cinzel font-bold text-yellow-500 mb-2">Categories</h2>
       <ul className="space-y-1">
         {categories.map((cat) => (
           <li key={cat}>

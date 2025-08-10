@@ -1,8 +1,5 @@
 ---
 import "../styles/global.css";
-import DefaultLayout from "../layouts/Default.astro";
-import { HeaderSection } from "../sections/Header";
-import { Footer } from "../sections/Footer";
 import { getCollection } from "astro:content";
 import SidebarCategories from "../components/SidebarCategories";
 
@@ -11,10 +8,7 @@ const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
 ---
-
-<DefaultLayout title="Blog - HomeLabs">
-  <HeaderSection />
-
+<!-- Layout Body -->
   <main class="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-6xl mx-auto px-4 py-12">
     <!-- Sidebar -->
     <div class="md:col-span-1">
@@ -56,5 +50,3 @@ const posts = (await getCollection("blog")).sort(
     </section>
   </main>
 
-  <Footer />
-</DefaultLayout>

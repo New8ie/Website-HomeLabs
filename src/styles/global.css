@@ -2,32 +2,89 @@
 @tailwind components;
 @tailwind utilities;
 
+
+
+/* Atur font default untuk body dan heading */
 @layer base {
   body {
-    @apply antialiased bg-zinc-900 text-zinc-300 font-body;
+    @apply font-body antialiased bg-zinc-900 text-zinc-300;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading;
   }
 }
+
+/* Definisi font-face untuk Cinzel dan Inter */
 @font-face {
-  font-family: 'Cinzel';
-  src: url('/assets/fonts/Cinzel-Regular.ttf') format('truetype');
+  font-family: "Cinzel";
+  src: url("/assets/fonts/Cinzel-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Cinzel';
-  src: url('/assets/fonts/Cinzel-Bold.ttf') format('truetype');
+  font-family: "Cinzel";
+  src: url("/assets/fonts/Cinzel-Bold.ttf") format("truetype");
   font-weight: 700;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Cinzel';
-  src: url('/assets/fonts/Cinzel-Black.ttf') format('truetype');
+  font-family: "Cinzel";
+  src: url("/assets/fonts/Cinzel-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
 }
 @font-face {
-  font-family: 'Inter';
-  src: url('/assets/fonts/Inter-Regular.ttf') format('truetype');
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter-Regular.ttf") format("truetype");
   font-weight: 400;
   font-style: normal;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+.transition-[max-height] {
+  transition-property: max-height;
+}
+
+.will-change-max-height {
+  will-change: max-height;
+}
+/* Contoh styling tambahan bila diperlukan */
+.parallax-section {
+  background-image: url("/assets/images/BG/bg-3.jpg");
+  min-height: 500px; 
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Mengangkat elemen ke atas */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
+}
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-left-color: #09f;
+  animation: spin 1s ease infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

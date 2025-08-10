@@ -1,0 +1,64 @@
+---
+// src/pages/blog/[page].astro
+import "../../styles/global.css";
+import DefaultLayout from "../../layouts/Default.astro";
+import { HeaderSection } from "../../sections/Header";
+import { FooterSection } from "../../sections/Footer";
+import { getCollection, type CollectionEntry } from "astro:content";
+import type { GetStaticPaths, Page } from "astro";
+import BlogManager from "../../components/BlogManager";
+import MainBlogLayout from "@layouts/MainBlogLayout.astro";
+import { useState } from "react";
+
+const allPosts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  );
+  return paginate(posts, { pageSize: 9 });
+}
+
+const { page } = Astro.props as { page: Page<CollectionEntry<'blog'>> };
+
+const [searchResults, setSearchResults] = useState<CollectionEntry<'blog'>[] | null>(null);
+
+const postsToDisplay = searchResults !== null ? searchResults : page.data;
+const noResultsFound = searchResults !== null && searchResults.length === 0;
+
+const pageForLayout = {
+  ...page,
+  data: postsToDisplay,
+  total: postsToDisplay.length,
+};
+
+---
+
+<DefaultLayout title={`Blog - Halaman ${page.currentPage}`}>
+  <HeaderSection client:load />
+
+  <main class="relative py-12 min-h-[80vh]">
+    <img
+      src="/assets/images/BG/bg-4.jpg"
+      alt="Home sweet Home"
+      class="absolute inset-0 w-full h-full object-cover z-0 opacity-40"
+    />
+    <div class="relative z-10 max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div class="md:col-span-1">
+          <BlogManager posts={allPosts} page={page} onUpdate={setSearchResults} client:load />
+        </div>
+        <div class="md:col-span-3">
+          {noResultsFound ? (
+            <p class="text-zinc-400 text-center mt-10">Tidak ada artikel yang cocok dengan pencarian Anda.</p>
+          ) : (
+            <MainBlogLayout page={pageForLayout} />
+          )}
+        </div>
+      </div>
+    </div>
+  </main>
+  <FooterSection />
+</DefaultLayout>

@@ -2,11 +2,12 @@
 title: "Git Remote - Dokumentasi Lengkap"
 description: "Panduan profesional untuk konfigurasi Git remote ke GitHub, termasuk perintah umum dan contoh penggunaannya."
 pubDate: 2025-08-06
-category: "git"
+category: "Git"
+image: "/assets/images/Logo/footer1-a-logo.svg"
 author:
   name: "John Smith"
   title: "Sr. Developer - BlockWorld"
-  image: "/assets/images/decor/mailbox-logo-horde.png"
+  image: "/assets/images/Logo/footer1-a-logo.svg"
 ---
 
 # 📄 Dokumentasi Git Remote (GitHub) — Lengkap & Profesional

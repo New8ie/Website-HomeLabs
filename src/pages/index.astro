@@ -1,18 +1,19 @@
 ---
-import "../styles/global.css";
+import "./../styles/global.css";
 import DefaultLayout from "../layouts/Default.astro";
 import { HeaderSection } from "../sections/Header";
-import { Footer } from "../sections/Footer";
+import { FooterSection } from "../sections/Footer";
 
 ---
 
 <DefaultLayout title="Project - HomeLabs">
-   <HeaderSection className="border border-zinc-700 rounded-xl mx-2 mt-2 shadow-lg" />
+   
+  <HeaderSection client:load />
 
   <section class="relative h-screen w-full">
     <!-- Gambar Latar -->
     <img 
-      src="/assets/images/orc-bg.jpg" 
+      src="/assets/images/BG/bg-4.jpg" 
       alt="Home sweet Home"
       class="absolute inset-0 w-full h-full object-cover z-0"
     />
@@ -39,5 +40,7 @@ import { Footer } from "../sections/Footer";
     </div>
   </section>
 
-  <Footer />
+  <FooterSection />
+
+  
 </DefaultLayout>
