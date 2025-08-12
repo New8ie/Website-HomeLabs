@@ -38,18 +38,18 @@ export default function BlogPage({ allPosts, page }: Props) {
             </div>
             <div className="md:col-span-3">
                 {filteredPosts.length === 0 ? (
-                    <p className="text-zinc-400 text-center mt-10">No articles match your search.</p>
+                    <p className="text-zinc-400 text-center mt-10 font-cinzel">Tidak ada artikel yang cocok dengan pencarian Anda.</p>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {filteredPosts.map((post) => (
                             <a
                                 href={`/blog/${post.slug}`}
-                                className="group block bg-zinc-900/60 border border-yellow-700/30 rounded-xl shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-2 hover:shadow-2xl hover:border-yellow-400/80 hover:bg-zinc-800/80"
+                                className="group block border-2 border-yellow-700/50 bg-zinc-900/60 rounded-xl shadow-lg transition-all duration-300 ease-in-out transform hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(252,211,77,0.5)] hover:border-yellow-500/80 hover:bg-zinc-800/80"
                                 aria-label={`Baca artikel ${post.data.title}`}
                                 key={post.slug}
                             >
                                 {post.data.image ? (
-                                    <div className="h-40 w-full overflow-hidden rounded-t-xl bg-zinc-800/50 flex items-center justify-center">
+                                    <div className="h-40 w-full overflow-hidden rounded-t-lg bg-zinc-800/50 flex items-center justify-center">
                                         <img
                                             src={post.data.image}
                                             alt={post.data.title}
@@ -58,8 +58,8 @@ export default function BlogPage({ allPosts, page }: Props) {
                                         />
                                     </div>
                                 ) : (
-                                    <div className="h-40 w-full bg-zinc-800/50 flex items-center justify-center rounded-t-xl text-zinc-500 text-sm">
-                                        No Image
+                                    <div className="h-40 w-full bg-zinc-800/50 flex items-center justify-center rounded-t-lg text-zinc-500 text-sm font-cinzel">
+                                        Tidak Ada Gambar
                                     </div>
                                 )}
                                 <div className="p-4 flex flex-col justify-between h-44">
@@ -89,16 +89,22 @@ export default function BlogPage({ allPosts, page }: Props) {
                     </div>
                 )}
                 {/* Pagination */}
-                <div className="flex justify-between items-center mt-12 text-yellow-400 font-cinzel">
+                <div className="flex justify-center items-center gap-4 mt-12 text-yellow-400 font-cinzel">
                     {page.url.prev && (
-                        <a href={page.url.prev} className="hover:text-yellow-300 transition-colors duration-200">
-                            ← Previous Page
+                        <a
+                            href={page.url.prev}
+                            className="px-4 py-2 rounded-md border-2 border-yellow-700/50 bg-gradient-to-tr from-yellow-900/50 to-yellow-700/50 text-yellow-400 hover:from-yellow-600 hover:to-yellow-400 hover:text-black transition-all duration-200 shadow-md hover:shadow-yellow-300/30 font-extrabold uppercase tracking-wider"
+                        >
+                            ← Halaman Sebelumnya
                         </a>
                     )}
-                    <span className="flex-1 text-center">Page {page.currentPage} of {page.lastPage}</span>
+                    <span className="flex-1 text-center font-bold text-lg">Halaman {page.currentPage} dari {page.lastPage}</span>
                     {page.url.next && (
-                        <a href={page.url.next} className="hover:text-yellow-300 transition-colors duration-200">
-                            Next Page →
+                        <a
+                            href={page.url.next}
+                            className="px-4 py-2 rounded-md border-2 border-yellow-700/50 bg-gradient-to-tr from-yellow-900/50 to-yellow-700/50 text-yellow-400 hover:from-yellow-600 hover:to-yellow-400 hover:text-black transition-all duration-200 shadow-md hover:shadow-yellow-300/30 font-extrabold uppercase tracking-wider"
+                        >
+                            Halaman Berikutnya →
                         </a>
                     )}
                 </div>

@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Github, Twitter, Instagram, Linkedin } from "lucide-react";
 
 // Data untuk tautan navigasi, konsisten dengan Header
@@ -32,16 +33,52 @@ const socialLinks = [
   },
 ];
 
+// Definisikan URL gambar untuk setiap mode
+const hordeMailboxUrl = "/assets/images/Items/mailbox-logo-horde.png";
+const allianceMailboxUrl = "/assets/images/Items/mailbox-logo-alliance.png";
+
 export const FooterSection = () => {
+  // Inisialisasi state dengan nilai default, menghindari akses 'document' di SSR
+  const [mailIconSrc, setMailIconSrc] = useState(hordeMailboxUrl);
+
+  // Efek untuk memuat tema dari localStorage dan mengatur gambar kotak surat
+  useEffect(() => {
+    // Pastikan kode ini hanya berjalan di sisi klien (browser)
+    if (typeof window !== "undefined") {
+      const htmlElement = document.documentElement;
+
+      const updateMailboxIcon = () => {
+        const isDarkMode = htmlElement.classList.contains("dark");
+        const newSrc = isDarkMode ? hordeMailboxUrl : allianceMailboxUrl;
+        setMailIconSrc(newSrc);
+      };
+
+      // Panggil sekali saat mount untuk mengatur nilai awal yang benar di klien
+      updateMailboxIcon();
+
+      // Buat MutationObserver untuk memantau perubahan atribut 'class' pada <html>
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+          if (mutation.attributeName === "class") {
+            updateMailboxIcon();
+          }
+        });
+      });
+
+      observer.observe(htmlElement, { attributes: true });
+
+      // Cleanup observer saat komponen di-unmount
+      return () => observer.disconnect();
+    }
+  }, []);
+
   return (
     <footer className="relative bg-zinc-900/90 backdrop-blur-3xl border-t border-yellow-600/30 shadow-inner shadow-yellow-500/10 py-6 mt-0 text-zinc-300 z-50">
       <div className="container mx-auto px-6 md:px-8 lg:px-12">
         {/* Mengubah menjadi 2 kolom di desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 text-center md:text-left">
-
           {/* Kolom Kiri: Gabungan Navigasi & Branding */}
           <div className="flex flex-col md:flex-row items-center md: gap-12">
-            
             {/* Navigasi */}
             <div className="flex flex-col items-center md:items-center font-cinzel gap-2">
               <h3 className="text-yellow-400 font-cinzel text-sm uppercase mb-2">
@@ -78,7 +115,7 @@ export const FooterSection = () => {
               aria-label="Email Web Admin"
             >
               <img
-                src="/assets/images/Items/mailbox-logo-horde.png"
+                src={mailIconSrc}
                 alt="email decorative"
                 className="w-32 h-32"
               />
@@ -100,7 +137,7 @@ export const FooterSection = () => {
           </div>
         </div>
         <div className="text-center text-sm text-zinc-500 mt-12">
-          © {new Date().getFullYear()} HomeLabs. All rights reserved.
+          &copy; {new Date().getFullYear()} HomeLabs. All rights reserved.
         </div>
       </div>
     </footer>

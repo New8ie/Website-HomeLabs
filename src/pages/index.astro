@@ -5,40 +5,30 @@ import { HeaderSection } from "../sections/Header";
 import { FooterSection } from "../sections/Footer";
 ---
 
-<DefaultLayout title="Project - HomeLabs">
+<DefaultLayout title="Main - HomeLabs">
   <HeaderSection client:load />
 
-  <section class="relative h-screen w-full">
-    <!-- Gambar Latar -->
-    <img
-      src="/assets/images/BG/bg-4.jpg"
-      alt="Home sweet Home"
-      class="absolute inset-0 w-full h-full object-cover z-0"
-    />
-
-    <!-- Overlay Gelap Transparan Tipis -->
-    <div class="absolute inset-0 bg-black/30 z-10"></div>
-
-    <!-- Konten Hero -->
+  <section class="relative h-screen w-full homepage-hero">
     <div
       class="relative z-20 flex flex-col items-center justify-center h-full pb-24 px-4 text-center"
     >
       <h1
-        class="text-4xl md:text-6xl font-cinzel font-extrabold text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]"
+        class="text-4xl md:text-6xl font-cinzel font-extrabold text-white dark:text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]"
+        style="color: var(--text-color);"
       >
         HomeLabs
       </h1>
       <p
-        class="mt-4 max-w-2xl text-zinc-100 text-base md:text-lg justify-center leading-relaxed font-cinzel drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]"
+        class="mt-4 max-w-2xl text-base md:text-lg justify-center font-extrabold leading-relaxed font-cinzel dark:text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)"
+        style="color: var(--text-bg-color);"
       >
-       Explore technology, AI, open source, and the digital world from the comfort of your home lab. Discover new innovations, projects, and inspiration every day. <span
-          class="italic text-bold">homelab</span
-        >. Discover new innovations, projects, and inspiration every day.
+        Explore technology, AI, open source, and the digital world from the comfort of your home lab. Discover new innovations, projects, and inspiration every day. <span class="italic text-bold">homelab</span>. Discover new innovations, projects, and inspiration every day.
       </p>
       <div class="mt-8">
         <a
           href="/blog"
-          class="px-6 py-2 bg-yellow-400 text-zinc-900 font-cinzel font-semibold rounded shadow-md hover:bg-yellow-300 transition"
+          class="px-6 py-2 rounded font-cinzel font-extrabold shadow-md transition"
+          style="background-color: var(--primary-button-bg); color: var(--text-bg-color);"
         >
           Explore Blogs
         </a>
@@ -46,5 +36,5 @@ import { FooterSection } from "../sections/Footer";
     </div>
   </section>
 
-  <FooterSection />
+  <FooterSection client:load />
 </DefaultLayout>

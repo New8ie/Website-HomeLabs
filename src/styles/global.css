@@ -5,108 +5,77 @@
 /*
  * File CSS: styles.css atau global.css
  *
- * Menggunakan CSS Custom Properties untuk mengelola tema gelap dan terang.
- * Properti ini mendefinisikan warna dasar untuk latar belakang, teks, dan elemen lainnya.
- * Dengan cara ini, Anda hanya perlu mengubah nilai variabel di satu tempat.
+ * Menggunakan CSS Custom Properties untuk mengelola tema Horde (gelap) dan Alliance (terang).
  */
 
 /*
- * Tema terang (default)
+ * Tema terang: Alliance (default)
+ * Warna dasar biru muda dengan aksen gold yang lebih terang.
  * Properti ini diterapkan pada elemen <html> secara default.
  */
 :root {
   /* Warna Dasar */
-  --background-color: #f8fafc;
-  --text-color: #1e293b;
-  --primary-button-bg: #f59e0b;
-  --primary-button-text: #000000;
-  --header-bg: rgba(248, 250, 252, 0.8);
-  --header-border: rgba(251, 191, 36, 0.3);
-  --shadow-color: rgba(251, 191, 36, 0.1);
-  --glow-color: rgb(251, 191, 36);
-  --glow-text-shadow: 0 0 2px rgb(251, 191, 36);
-  --link-bg-from: #f59e0b;
-  --link-bg-via: #eab308;
-  --link-bg-to: #d97706;
+  --background-color: #e3f2fd; /* Biru muda */
+  --text-color: #d97706; /* Biru tua untuk teks */
+  --text-bg-color : #0f172a;
+  --primary-button-bg: #ef6210; /* Gold yang lebih terang */
+  --primary-button-text: #1a237e;
+  --header-bg: rgba(227, 242, 253, 0.9);
+  --header-border: rgba(255, 224, 130, 0.5);
+  --shadow-color: rgba(255, 224, 130, 0.2);
+  --glow-color: rgb(255, 224, 130);
+  --glow-text-shadow: 0 0 2px rgb(255, 224, 130);
+  --link-bg-from: #fff8e1;
+  --link-bg-via: #ffecb3;
+  --link-bg-to: #ffecb3;
 }
 
 /*
- * Tema gelap
- * Properti ini diterapkan saat elemen <html> memiliki kelas 'dark'.
+ * Tema gelap: Horde
+ * Properti ini diterapkan pada elemen <html> ketika memiliki kelas "dark".
  */
 .dark {
   /* Warna Dasar */
-  --background-color: #0f172a;
-  --text-color: #e2e8f0;
-  --primary-button-bg: #d97706;
-  --primary-button-text: #ffffff;
-  --header-bg: rgba(15, 23, 42, 0.8);
-  --header-border: rgba(147, 51, 234, 0.3);
-  --shadow-color: rgba(147, 51, 234, 0.1);
-  --glow-color: rgb(147, 51, 234);
-  --glow-text-shadow: 0 0 2px rgb(147, 51, 234);
-  --link-bg-from: #9d174d;
-  --link-bg-via: #be185d;
-  --link-bg-to: #e11d48;
+  --background-color: #0f172a; /* Biru tua */
+  --text-color: #fcd34d; /* Emas yang lebih cerah */
+  --text-bg-color : #e3f2fd;
+  --primary-button-bg: #ed0000; /* Biru tua */
+  --primary-button-text: #e3f2fd;
+  --header-bg: rgba(15, 23, 42, 0.9);
+  --header-border: rgba(212, 172, 70, 0.5);
+  --shadow-color: rgba(212, 172, 70, 0.2);
+  --glow-color: rgb(212, 172, 70);
+  --glow-text-shadow: 0 0 2px rgb(212, 172, 70);
+  --link-bg-from: #1c2a39;
+  --link-bg-via: #253341;
+  --link-bg-to: #253341;
 }
 
-/*
- * Penerapan transisi yang halus
- * Transisi ini akan membuat perubahan warna tampak mulus.
+/* * Aturan dasar untuk transisi latar belakang.
+ * Tambahkan transisi ke <body> atau <html> untuk perubahan tema yang mulus.
+ * Transisi warna latar belakang akan berjalan selama 0.5 detik.
+ *
+ * Catatan: Pastikan Anda memiliki gambar `bg-alliance.jpg` dan `bg-horde.jpg`
+ * di folder `/assets/images/BG/` atau sesuaikan path-nya.
  */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  background-image: url("/assets/images/BG/bg-alliance.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
 }
 
-/*
- * Contoh penggunaan variabel CSS pada elemen lain
- */
-.header {
-  background-color: var(--header-bg);
-  border-bottom-color: var(--header-border);
-  box-shadow: 0 4px 6px -1px var(--shadow-color),
-    0 2px 4px -1px var(--shadow-color);
-  backdrop-filter: blur(10px);
+.dark body {
+  background-image: url("/assets/images/BG/bg-horde.jpg");
 }
 
-.drop-shadow-glow {
-  filter: drop-shadow(0 0 4px var(--glow-color));
-}
-
-.text-glow {
-  text-shadow: var(--glow-text-shadow);
-}
-
-
-/* Atur font default untuk body dan heading */
-@layer base {
-  body {
-    @apply font-body antialiased bg-zinc-900 text-zinc-300;
-  }
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-heading;
-  }
-}
-
-/* Definisi font-face untuk Cinzel dan Inter */
 @font-face {
   font-family: "Cinzel";
   src: url("/assets/fonts/Cinzel-Regular.ttf") format("truetype");
   font-weight: 400;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Cinzel";
-  src: url("/assets/fonts/Cinzel-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-}
-@font-face {
-  font-family: "Cinzel";
-  src: url("/assets/fonts/Cinzel-Black.ttf") format("truetype");
-  font-weight: 900;
   font-style: normal;
 }
 @font-face {
@@ -129,6 +98,7 @@ body {
 .will-change-max-height {
   will-change: max-height;
 }
+
 /* Contoh styling tambahan bila diperlukan */
 .parallax-section {
   background-image: url("/assets/images/BG/bg-3.jpg");
@@ -152,25 +122,12 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border-left-color: #09f;
-  animation: spin 1s ease infinite;
+  border-left-color: var(--glow-color);
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
+  to {
     transform: rotate(360deg);
   }
-}
-.separator {
-  /* Memberikan warna hitam dengan transparansi 70% */
-  background-color: rgba(0, 0, 0, 0); 
-
-  /* Efek blur pada konten di bawah elemen ini */
-  backdrop-filter: blur(100%); 
-
-  /* Tambahan untuk kompatibilitas browser lama (tidak wajib) */
-  -webkit-backdrop-filter: blur(10px); 
 }

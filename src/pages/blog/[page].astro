@@ -25,12 +25,11 @@ const { page } = Astro.props as { page: Page<CollectionEntry<'blog'>> };
 <DefaultLayout title={`Blog - Halaman ${page.currentPage}`}>
   <HeaderSection client:load />
 
-  <main class="relative py-12 min-h-[80vh] from-zinc-950">
+  <main class="relative py-12 min-h-[80vh] bg-zinc-950/70 dark:bg-zinc-950/90">
     <div class="relative z-10 max-w-6xl mx-auto px-4">
       <BlogPage allPosts={allPosts} page={page} client:load />
     </div>
 
   </main>
-  <FooterSection />
+   <FooterSection client:load />
 </DefaultLayout>
-

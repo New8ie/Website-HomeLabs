@@ -10,14 +10,14 @@ import BandwidthConverter from "../components/BandwidthConverter";
 <DefaultLayout title="Tools - HomeLabs">
   <HeaderSection client:load />
 
-  <main class="min-h-screen p-6 md:p-12 bg-zinc-900 text-zinc-100">
+  <main class="min-h-screen p-6 md:p-12 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 dark:from-zinc-900/90 dark:via-zinc-950/90 dark:to-zinc-900/90 text-zinc-100">
     <div class="max-w-5xl mx-auto space-y-12">
       <!-- Title Section -->
       <div class="text-center space-y-4">
-        <h1 class="text-5xl font-bold text-yellow-400 uppercase tracking-widest leading-tight">
+        <h1 class="text-5xl font-bold text-yellow-400 font-cinzel uppercase tracking-widest leading-tight">
           Networking Tools
         </h1>
-        <p class="text-xl font-light text-zinc-400">
+        <p class="text-xl font-light font-cinzel text-zinc-400">
          A collection of tools created to simplify tasks and development.
         </p>
       </div>
@@ -28,8 +28,7 @@ import BandwidthConverter from "../components/BandwidthConverter";
         <!-- Subnet Calculator Card -->
         <div class="relative bg-zinc-800 p-8 rounded-3xl shadow-xl border border-zinc-700/50 
                     transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20">
-          <h2 class="text-3xl font-bold text-yellow-400 mb-6 text-center uppercase">
-            Subnet Calculator
+
           </h2>
           <SubnetCalculator client:load />
         </div>
@@ -37,9 +36,7 @@ import BandwidthConverter from "../components/BandwidthConverter";
         <!-- Bandwidth Converter Card -->
         <div class="relative bg-zinc-800 p-8 rounded-3xl shadow-xl border border-zinc-700/50 
                     transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20">
-          <h2 class="text-3xl font-bold text-yellow-400 mb-6 text-center uppercase">
-            Bandwidth Converter
-          </h2>
+
           <BandwidthConverter client:load />
         </div>
 
@@ -47,6 +44,7 @@ import BandwidthConverter from "../components/BandwidthConverter";
     </div>
   </main>
 
-  <FooterSection />
+   <FooterSection client:load />
 </DefaultLayout>
+
 

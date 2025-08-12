@@ -29,7 +29,7 @@ export default function SubnetCalculator() {
       const cidrNum = parseInt(cidr, 10);
 
       if (ipOctets.length !== 4 || ipOctets.some(octet => isNaN(octet) || octet < 0 || octet > 255) || cidrNum < 0 || cidrNum > 32) {
-        setError('Alamat IP atau CIDR tidak valid.');
+        setError('Invalid IP address or CIDR.');
         setIsCalculating(false);
         return;
       }
@@ -107,12 +107,12 @@ export default function SubnetCalculator() {
 
   return (
     <div className="bg-zinc-800 p-8 rounded-2xl shadow-2xl w-full max-w-lg space-y-6 transform transition-transform duration-300 hover:scale-105">
-      <h1 className="text-3xl font-bold text-yellow-400 text-center uppercase tracking-wider">
+      <h1 className="text-3xl font-bold text-yellow-400 text-center uppercase tracking-wider font-cinzel">
         Subnet Calculator
       </h1>
 
       {/* Input Section */}
-      <div className="space-y-4">
+      <div className="space-y-4 font-cinzel">
         <div className="flex flex-col sm:flex-row gap-4 items-center group">
           <label htmlFor="ipAddress" className="w-full sm:w-1/3 text-sm font-semibold text-zinc-300 transition-colors duration-200 group-hover:text-yellow-400">
             IP Address
@@ -120,7 +120,7 @@ export default function SubnetCalculator() {
           <input
             type="text"
             id="ipAddress"
-            placeholder="Contoh: 192.168.1.1"
+            placeholder="Example: 192.168.1.1"
             value={ipAddress}
             onChange={(e) => setIpAddress(e.target.value)}
             className="w-full px-4 py-2 bg-zinc-700 border border-yellow-700/50 rounded-lg focus:outline-none focus:border-yellow-500 focus:shadow-[0_0_15px_rgba(252,211,77,0.7)] transition-all duration-300"
@@ -133,7 +133,7 @@ export default function SubnetCalculator() {
           <input
             type="number"
             id="cidr"
-            placeholder="Contoh: 24"
+            placeholder="Example: 24"
             value={cidr}
             onChange={(e) => setCidr(e.target.value)}
             className="w-full px-4 py-2 bg-zinc-700 border border-yellow-700/50 rounded-lg focus:outline-none focus:border-yellow-500 focus:shadow-[0_0_15px_rgba(252,211,77,0.7)] transition-all duration-300"
@@ -145,21 +145,21 @@ export default function SubnetCalculator() {
       <button
         onClick={calculateSubnet}
         disabled={isCalculating}
-        className={`w-full px-6 py-3 rounded-lg border border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-black hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md font-bold uppercase tracking-wider
+        className={`w-full px-6 py-3 rounded-lg border border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-black hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md font-bold uppercase tracking-wider font-cinzel
           ${isCalculating ? 'opacity-70 cursor-not-allowed animate-pulse' : 'hover:shadow-yellow-300/30'}
         `}
       >
-        {isCalculating ? 'Menghitung...' : 'Hitung'}
+        {isCalculating ? 'Calculating...' : 'Calculate'}
       </button>
 
       {/* Result Section */}
       {error && (
-        <div className="mt-6 p-4 bg-red-900/50 border border-red-700 rounded-lg">
+        <div className="mt-6 p-4 bg-red-900/50 border border-red-700 rounded-lg font-cinzel">
           <p className="text-red-400 font-semibold">{error}</p>
         </div>
       )}
       {result && !error && (
-        <div className="mt-6 p-4 bg-zinc-700 border border-yellow-700/50 rounded-lg space-y-2 animate-fade-in">
+        <div className="mt-6 p-4 bg-zinc-700 border border-yellow-700/50 rounded-lg space-y-2 animate-fade-in font-cinzel">
           <div className="flex justify-between items-center text-sm">
             <span className="font-semibold text-zinc-400">Network Address:</span>
             <span className="font-medium text-yellow-300">{result.networkAddress}</span>

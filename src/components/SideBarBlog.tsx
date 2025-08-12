@@ -1,5 +1,5 @@
 // src/components/SideBarBlog.tsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import type { CollectionEntry } from "astro:content";
 
 interface Props {
@@ -7,8 +7,44 @@ interface Props {
   onSearch: (results: CollectionEntry<'blog'>[] | null) => void;
 }
 
+// Definisikan URL gambar untuk setiap mode
+const hordeTowerUrl = "/assets/images/Items/horde-tower.png";
+const allyTowerUrl = "/assets/images/Items/ally-tower.png";
+
 export default function BlogSideBar({ allPosts, onSearch }: Props) {
   const [query, setQuery] = useState("");
+  const [towerImageSrc, setTowerImageSrc] = useState(hordeTowerUrl);
+
+  // Efek untuk memuat tema dari localStorage dan mengatur gambar menara
+  useEffect(() => {
+    // Pastikan kode ini hanya berjalan di sisi klien (browser)
+    if (typeof window !== "undefined") {
+      const htmlElement = document.documentElement;
+
+      const updateTowerImage = () => {
+        const isDarkMode = htmlElement.classList.contains("dark");
+        const newSrc = isDarkMode ? hordeTowerUrl : allyTowerUrl;
+        setTowerImageSrc(newSrc);
+      };
+
+      // Panggil sekali saat mount untuk mengatur nilai awal yang benar di klien
+      updateTowerImage();
+
+      // Buat MutationObserver untuk memantau perubahan atribut 'class' pada <html>
+      const observer = new MutationObserver(mutations => {
+        mutations.forEach(mutation => {
+          if (mutation.attributeName === "class") {
+            updateTowerImage();
+          }
+        });
+      });
+
+      observer.observe(htmlElement, { attributes: true });
+
+      // Cleanup observer saat komponen di-unmount
+      return () => observer.disconnect();
+    }
+  }, []);
 
   const handleSearch = () => {
     if (!allPosts || !Array.isArray(allPosts)) {
@@ -66,8 +102,8 @@ export default function BlogSideBar({ allPosts, onSearch }: Props) {
         {/* Gambar di bawah search box */}
         <div className="relative w-full h-auto mt-6 rounded-lg overflow-hidden hidden md:block">
           <img 
-            src="/assets/images/Items/horde-tower.png"  
-            alt="Placeholder"
+            src={towerImageSrc}  
+            alt="Tower based on theme"
             className="w-full h-auto object-cover"
           />
         </div>
