@@ -1,12 +1,59 @@
 ---
 import DefaultLayout from "../layouts/Default.astro";
+
 ---
 
 <DefaultLayout title="Halaman Tidak Ditemukan">
-  <div class="h-screen flex items-center justify-center">
-    <div class="text-center text-white">
-      <h1 class="text-6xl font-bold">404</h1>
-      <p class="mt-4 text-xl">Halaman yang Anda cari tidak ditemukan.</p>
-    </div>
-  </div>
+    <!-- Menggunakan tata letak grid untuk centering dan efek paralaks sederhana -->
+    <main class="h-screen flex flex-col justify-between py-16 text-white overflow-hidden">
+      
+
+        <div class="flex-grow flex items-center justify-center relative z-10 p-4">
+            <div class="text-center">
+                <!-- Judul 404 yang besar dan berani dengan animasi -->
+                <h1
+                    class="text-8xl md:text-[10rem] font-extrabold font-cinzel text-yellow-500 mb-4 tracking-wider drop-shadow-lg animate-fade-in-up"
+                    style="--animation-delay: 0.2s;"
+                >
+                    404
+                </h1>
+                
+                <!-- Pesan yang lebih menarik dengan font Cinzel -->
+                <p class="mt-4 text-xl md:text-3xl font-cinzel text-zinc-300 animate-fade-in-up" style="--animation-delay: 0.4s;">
+                    Maaf, halaman yang kamu cari tidak ada.
+                </p>
+
+                <!-- Tombol untuk kembali ke beranda -->
+                <a
+                    href="/"
+                    class="mt-8 inline-block px-8 py-3 rounded-md border-2 border-yellow-700/50 bg-gradient-to-tr from-yellow-900/50 to-yellow-700/50 text-yellow-400 font-extrabold uppercase tracking-wider transition-all duration-300 hover:from-yellow-600 hover:to-yellow-400 hover:text-black hover:shadow-lg hover:shadow-yellow-300/30 animate-fade-in-up"
+                    style="--animation-delay: 0.6s;"
+                >
+                    Kembali ke Beranda
+                </a>
+            </div>
+        </div>
+
+     
+    </main>
 </DefaultLayout>
+
+<style>
+    /* Menambahkan keyframes untuk animasi */
+    @keyframes fadeIn-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Menggunakan variabel CSS untuk delay animasi */
+    .animate-fade-in-up {
+        animation: fadeIn-up 0.6s ease-out var(--animation-delay, 0s);
+        animation-fill-mode: backwards;
+    }
+</style>

@@ -11,9 +11,9 @@ import BandwidthConverter from "../components/BandwidthConverter";
   <HeaderSection client:load />
 
   <main class="min-h-screen p-6 md:p-12 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 dark:from-zinc-900/90 dark:via-zinc-950/90 dark:to-zinc-900/90 text-zinc-100">
-    <div class="max-w-5xl mx-auto space-y-12">
+    <div class="max-w-5xl mx-auto space-y-12 animate-fade-in">
       <!-- Title Section -->
-      <div class="text-center space-y-4">
+      <div class="text-center space-y-4 animate-fade-in-up">
         <h1 class="text-5xl font-bold text-yellow-400 font-cinzel uppercase tracking-widest leading-tight">
           Networking Tools
         </h1>
@@ -25,17 +25,18 @@ import BandwidthConverter from "../components/BandwidthConverter";
       <!-- Tools Grid -->
       <section class="grid md:grid-cols-2 gap-8">
         
-        <!-- Subnet Calculator Card -->
+        <!-- Subnet Calculator Card dengan animasi slide-in dari kiri -->
         <div class="relative bg-zinc-800 p-8 rounded-3xl shadow-xl border border-zinc-700/50 
-                    transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20">
+                    transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20 
+                    animate-slide-in-left">
 
-          </h2>
           <SubnetCalculator client:load />
         </div>
 
-        <!-- Bandwidth Converter Card -->
+        <!-- Bandwidth Converter Card dengan animasi slide-in dari kanan -->
         <div class="relative bg-zinc-800 p-8 rounded-3xl shadow-xl border border-zinc-700/50 
-                    transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20">
+                    transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20 
+                    animate-slide-in-right">
 
           <BandwidthConverter client:load />
         </div>
@@ -46,5 +47,3 @@ import BandwidthConverter from "../components/BandwidthConverter";
 
    <FooterSection client:load />
 </DefaultLayout>
-
-

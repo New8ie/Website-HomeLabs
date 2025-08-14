@@ -17,8 +17,8 @@ const lightLogoUrl = "/assets/images/Logo/ally-logo.png";
 export const HeaderSection = () => {
   // State untuk mengelola status menu mobile
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // Ref untuk mengakses elemen DOM menu geser ke bawah.
-  const menuRef = useRef(null);
+  // Ref untuk mengakses elemen DOM menu geser ke bawah, dengan tipe yang diperbaiki
+  const menuRef = useRef<HTMLDivElement>(null);
   // State untuk mengelola tinggi menu geser ke bawah untuk animasi
   const [maxHeight, setMaxHeight] = useState("0px");
   // State untuk mengelola URL gambar logo kecil

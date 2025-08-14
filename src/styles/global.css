@@ -51,25 +51,48 @@
   --link-bg-to: #253341;
 }
 
-/* * Aturan dasar untuk transisi latar belakang.
- * Tambahkan transisi ke <body> atau <html> untuk perubahan tema yang mulus.
- * Transisi warna latar belakang akan berjalan selama 0.5 detik.
- *
- * Catatan: Pastikan Anda memiliki gambar `bg-alliance.jpg` dan `bg-horde.jpg`
- * di folder `/assets/images/BG/` atau sesuaikan path-nya.
+/*
+ * Aturan dasar untuk transisi latar belakang.
+ * Menggunakan pseudo-element untuk transisi gambar latar belakang.
  */
 body {
   background-color: var(--background-color);
   color: var(--text-color);
   transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
+  /* Atur gambar latar belakang untuk mode terang */
   background-image: url("/assets/images/BG/bg-alliance.jpg");
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
+  position: relative; /* Penting untuk penempatan pseudo-element */
+  z-index: 1; /* Penting untuk memastikan konten di atas pseudo-element */
 }
 
-.dark body {
+/* Pseudo-element untuk gambar latar belakang mode gelap */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url("/assets/images/BG/bg-horde.jpg");
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  opacity: 0; /* Secara default, gambar gelap tidak terlihat */
+  transition: opacity 0.5s ease-in-out; /* Transisi untuk opacity */
+  z-index: -1; /* Posisikan di belakang konten utama */
+}
+
+/* Ketika body memiliki kelas .dark, tampilkan pseudo-element gambar gelap */
+.dark body::after {
+  opacity: 1;
+}
+
+/* Hapus gambar dari .dark body, karena sekarang ditangani oleh pseudo-element */
+.dark body {
+  background-image: none;
 }
 
 @font-face {
@@ -102,7 +125,7 @@ body {
 /* Contoh styling tambahan bila diperlukan */
 .parallax-section {
   background-image: url("/assets/images/BG/bg-3.jpg");
-  min-height: 500px; 
+  min-height: 500px;
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -130,4 +153,85 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+
+
+/* Keyframes untuk animasi */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeIn-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Kelas animasi */
+.animate-fade-in-up {
+  animation: fadeIn-up 0.6s ease-out;
+}
+.animate-slide-in-left {
+  animation: slideInLeft 0.7s ease-out;
+}
+.animate-slide-in-right {
+  animation: slideInRight 0.7s ease-out 0.2s;
+  animation-fill-mode: backwards;
+}
+.animate-fade-in {
+  animation: fadeIn 0.8s ease-out 0.4s;
+  animation-fill-mode: backwards;
+}
+
+/* Penyesuaian gaya `prose` untuk konten */
+.prose-yellow h1, .prose-yellow h2, .prose-yellow h3, .prose-yellow h4, .prose-yellow strong {
+  color: theme('colors.yellow.400');
+}
+.prose-yellow a {
+  color: theme('colors.yellow.500');
+}
+
+/* Gaya kustom untuk elemen teknis */
+.prose pre {
+    @apply bg-zinc-900 border border-yellow-700/50 rounded-lg p-4 overflow-x-auto shadow-inner;
+}
+.prose code {
+    @apply bg-zinc-800 text-yellow-300 text-sm px-1.5 py-0.5 rounded;
+    /* Font yang diperbarui untuk elemen kode */
+    font-family: 'Inter', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+.prose table {
+    @apply w-full text-left table-auto border-collapse;
+}
+.prose thead {
+    @apply text-yellow-400 font-bold;
+}
+.prose th, .prose td {
+    @apply p-3 border border-yellow-800/50;
+}
+.prose tbody tr:nth-child(even) {
+    @apply bg-zinc-800;
+}
+.prose tbody tr:hover {
+    @apply bg-yellow-900/30 transition-colors duration-200;
+}
+
+/* Perbaikan Mermaid agar dirender dengan baik */
+.prose pre.mermaid {
+    @apply bg-transparent border-0 shadow-none text-zinc-100;
+}
+
+/* Efek bayangan teks kustom */
+.text-shadow-gold {
+  text-shadow: 0 0 2px theme('colors.yellow.400');
 }
