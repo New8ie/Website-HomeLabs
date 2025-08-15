@@ -10,40 +10,68 @@ import BandwidthConverter from "../components/BandwidthConverter";
 <DefaultLayout title="Tools - HomeLabs">
   <HeaderSection client:load />
 
-  <main class="min-h-screen p-6 md:p-12 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 dark:from-zinc-900/90 dark:via-zinc-950/90 dark:to-zinc-900/90 text-zinc-100">
+  <!-- Menggunakan variabel CSS untuk latar belakang, warna teks, dan transisi -->
+  <main
+    class="min-h-screen p-6 md:p-12 transition-colors duration-500"
+    style={{
+      backgroundColor: "var(--background-color)",
+      color: "var(--text-color)",
+    }}
+  >
+     <img
+      src="/assets/images/BG/gm-island.jpg"  
+      alt="Under Construction"
+      class="absolute inset-0 w-full h-full object-cover z-0"
+    />
     <div class="max-w-5xl mx-auto space-y-12 animate-fade-in">
       <!-- Title Section -->
       <div class="text-center space-y-4 animate-fade-in-up">
-        <h1 class="text-5xl font-bold text-yellow-400 font-cinzel uppercase tracking-widest leading-tight">
+        <!-- Menggunakan variabel CSS untuk warna teks judul -->
+        <h1
+          class="hero-title uppercase tracking-widest leading-tight transition-colors duration-500"
+          style={{ color: "var(--title-color)" }}
+        >
           Networking Tools
         </h1>
-        <p class="text-xl font-light font-cinzel text-zinc-400">
-         A collection of tools created to simplify tasks and development.
+        <!-- Menggunakan variabel CSS untuk warna teks paragraf -->
+        <p
+          class="text-xl font-light font-cinzel transition-colors duration-500"
+          style={{ color: "var(--text-color)" }}
+        >
+          A collection of tools created to simplify tasks and development.
         </p>
       </div>
 
       <!-- Tools Grid -->
       <section class="grid md:grid-cols-2 gap-8">
-        
         <!-- Subnet Calculator Card dengan animasi slide-in dari kiri -->
-        <div class="relative bg-zinc-800 p-8 rounded-3xl shadow-xl border border-zinc-700/50 
-                    transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20 
-                    animate-slide-in-left">
-
+        <div
+          class="relative p-8 rounded-3xl shadow-xl transform transition-all duration-200 hover:scale-[1.01] animate-slide-in-left"
+          style={{
+            backgroundColor: "var(--footer-bg)",
+            borderColor: "var(--border-bg)",
+            borderWidth: "1px",
+            boxShadow: "0 0 10px var(--shadow-color)",
+          }}
+        >
           <SubnetCalculator client:load />
         </div>
 
         <!-- Bandwidth Converter Card dengan animasi slide-in dari kanan -->
-        <div class="relative bg-zinc-800 p-8 rounded-3xl shadow-xl border border-zinc-700/50 
-                    transform transition-all duration-500 hover:scale-[1.03] hover:shadow-yellow-500/20 
-                    animate-slide-in-right">
-
+        <div
+          class="relative p-8 rounded-3xl shadow-xl transform transition-all duration-200 hover:scale-[1.01] animate-slide-in-right"
+          style={{
+            backgroundColor: "var(--footer-bg)",
+            borderColor: "var(--border-bg)",
+            borderWidth: "1px",
+            boxShadow: "0 0 20px var(--shadow-color)",
+          }}
+        >
           <BandwidthConverter client:load />
         </div>
-
       </section>
     </div>
   </main>
 
-   <FooterSection client:load />
+  <FooterSection client:load />
 </DefaultLayout>

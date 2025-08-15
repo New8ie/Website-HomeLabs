@@ -73,7 +73,7 @@ export const FooterSection = () => {
   }, []);
 
   return (
-    <footer className="relative bg-zinc-900/90 backdrop-blur-3xl border-t border-yellow-600/30 shadow-inner shadow-yellow-500/10 py-6 mt-0 text-zinc-300 z-50">
+    <footer className="card-footer-header-bg border-t-2 py-6 mt-0 text-zinc-300 z-50">
       <div className="container mx-auto px-6 md:px-8 lg:px-12">
         {/* Mengubah menjadi 2 kolom di desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 text-center md:text-left">

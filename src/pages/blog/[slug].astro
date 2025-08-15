@@ -36,11 +36,24 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
 
   <main class="max-w-5xl mx-auto px-4 py-12 space-y-8 animate-fade-in-up">
     <header class="space-y-4 font-cinzel text-center md:text-left">
-      <h1 class="text-4xl sm:text-5xl font-cinzel font-extrabold text-yellow-500 tracking-tight leading-tight animate-slide-in-left text-shadow-gold">
+      <h1
+        class="text-4xl sm:text-5xl font-cinzel font-extrabold tracking-tight leading-tight animate-slide-in-left transition-colors"
+        style={{
+          color: 'var(--title-color)',
+          textShadow: '0 0 10px var(--shadow-color)'
+        }}
+      >
         {post.data.title}
       </h1>
 
-      <div class="flex flex-wrap justify-center md:justify-start gap-4 text-sm text-gray-300 animate-slide-in-right bg-zinc-800/70 backdrop-blur-sm p-4 rounded-lg shadow-lg">
+      <div
+        class="flex flex-wrap justify-center md:justify-start gap-4 text-sm backdrop-blur-sm p-4 rounded-lg shadow-lg animate-slide-in-right transition-colors"
+        style={{
+          color: 'var(--text-color)',
+          backgroundColor: 'var(--footer-bg)',
+          borderColor: 'var(--border-bg)'
+        }}
+      >
         <span class="flex items-center gap-1.5 opacity-80 px-3 py-1">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -53,25 +66,45 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
             })
           }
         </span>
-        <span class="px-3 py-1 bg-yellow-700/30 text-yellow-300 rounded-full font-semibold font-cinzel text-xs tracking-wide transform hover:scale-105 transition-transform duration-200">
+        <span
+          class="px-3 py-1 rounded-full font-semibold font-cinzel text-xs tracking-wide transform hover:scale-105 transition-transform duration-200"
+          style={{
+            backgroundColor: 'var(--tag-bg)',
+            color: 'var(--tag-text)',
+            border: '1px solid var(--tag-border)'
+          }}
+        >
           {post.data.category}
         </span>
       </div>
     </header>
 
     <!-- Kontainer baru untuk efek blur pada konten post -->
-    <div class="bg-zinc-800/70 backdrop-blur-sm p-6 rounded-lg shadow-lg animate-fade-in font-cinzel">
+    <div
+      class="backdrop-blur-sm p-6 rounded-lg shadow-lg animate-fade-in font-cinzel transition-colors"
+      style={{
+        backgroundColor: 'var(--footer-bg)',
+        border: '1px solid var(--border-bg)'
+      }}
+    >
         <article class="prose prose-invert max-w-none prose-yellow">
           <Content />
         </article>
     </div>
 
     <nav
-      class="flex flex-col sm:flex-row justify-between mt-12 border-t font-cinzel border-yellow-700 pt-6 text-yellow-400 gap-4 sm:gap-0 animate-fade-in-up"
+      class="flex flex-col sm:flex-row justify-between mt-12 pt-6 text-yellow-400 gap-4 sm:gap-0 animate-fade-in-up"
+      style={{ borderTop: '1px solid var(--border-bg)' }}
     >
       <a 
         href="/blog" 
-        class="block w-fit px-4 py-2 rounded-md border border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-zinc-950 hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md hover:shadow-yellow-300/30 text-sm font-bold uppercase tracking-wider"
+        class="block w-fit px-4 py-2 rounded-md transition-all duration-200 shadow-md text-sm font-bold uppercase tracking-wider"
+        style={{
+          backgroundImage: 'linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))',
+          borderColor: 'var(--nav-link-border)',
+          borderWidth: '1px',
+          color: 'var(--nav-link-text)',
+        }}
       > 
         <span class="flex items-center gap-2">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 transform group-hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -86,8 +119,14 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
           prevPost && (
             <a
               href={`/blog/${prevPost.slug}`}
-              class="block w-fit px-4 py-2 rounded-md border border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-zinc-950 hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md hover:shadow-yellow-300/30 text-sm font-bold uppercase tracking-wider"
+              class="block w-fit px-4 py-2 rounded-md transition-all duration-200 shadow-md text-sm font-bold uppercase tracking-wider"
               aria-label="Previous post"
+              style={{
+                backgroundImage: 'linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))',
+                borderColor: 'var(--nav-link-border)',
+                borderWidth: '1px',
+                color: 'var(--nav-link-text)',
+              }}
             >
               <span class="flex items-center gap-2">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 transform hover:-translate-x-1 transition-transform duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -102,8 +141,14 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
           nextPost && (
             <a
               href={`/blog/${nextPost.slug}`}
-              class="block w-fit px-4 py-2 rounded-md border border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-zinc-950 hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md hover:shadow-yellow-300/30 text-sm font-bold uppercase tracking-wider"
+              class="block w-fit px-4 py-2 rounded-md transition-all duration-200 shadow-md text-sm font-bold uppercase tracking-wider"
               aria-label="Next post"
+              style={{
+                backgroundImage: 'linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))',
+                borderColor: 'var(--nav-link-border)',
+                borderWidth: '1px',
+                color: 'var(--nav-link-text)',
+              }}
             >
               <span class="flex items-center gap-2">
                 Next
@@ -118,88 +163,8 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
     </nav>
   </main>
 
-  <style>
-    /* Keyframes untuk animasi */
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
 
-    @keyframes fadeIn-up {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideInLeft {
-      from { opacity: 0; transform: translateX(-20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    @keyframes slideInRight {
-      from { opacity: 0; transform: translateX(20px); }
-      to { opacity: 1; transform: translateX(0); }
-    }
-
-    /* Kelas animasi */
-    .animate-fade-in-up {
-      animation: fadeIn-up 0.6s ease-out;
-    }
-    .animate-slide-in-left {
-      animation: slideInLeft 0.7s ease-out;
-    }
-    .animate-slide-in-right {
-      animation: slideInRight 0.7s ease-out 0.2s;
-      animation-fill-mode: backwards;
-    }
-    .animate-fade-in {
-      animation: fadeIn 0.8s ease-out 0.4s;
-      animation-fill-mode: backwards;
-    }
-
-    /* Penyesuaian gaya `prose` untuk konten */
-    .prose-yellow h1, .prose-yellow h2, .prose-yellow h3, .prose-yellow h4, .prose-yellow strong {
-      color: theme('colors.yellow.400');
-    }
-    .prose-yellow a {
-      color: theme('colors.yellow.500');
-    }
-
-    /* Gaya kustom untuk elemen teknis */
-    .prose pre {
-        @apply bg-zinc-900 border border-yellow-700/50 rounded-lg p-4 overflow-x-auto shadow-inner;
-    }
-    .prose code {
-        @apply bg-zinc-800 text-yellow-300 text-sm px-1.5 py-0.5 rounded;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-    }
-    .prose table {
-        @apply w-full text-left table-auto border-collapse;
-    }
-    .prose thead {
-        @apply text-yellow-400 font-bold;
-    }
-    .prose th, .prose td {
-        @apply p-3 border border-yellow-800/50;
-    }
-    .prose tbody tr:nth-child(even) {
-        @apply bg-zinc-800;
-    }
-    .prose tbody tr:hover {
-        @apply bg-yellow-900/30 transition-colors duration-200;
-    }
-
-    /* Perbaikan Mermaid agar dirender dengan baik */
-    .prose pre.mermaid {
-        @apply bg-transparent border-0 shadow-none text-zinc-100;
-    }
-    
-    /* Efek bayangan teks kustom */
-    .text-shadow-gold {
-      text-shadow: 0 0 2px theme('colors.yellow.400');
-    }
-  </style>
-
-  <FooterSection />
+  <FooterSection client:load/>
 
   <!-- Memuat skrip Mermaid dari CDN dengan benar -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js" is:inline></script>

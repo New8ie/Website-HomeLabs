@@ -1,3 +1,4 @@
+// src/sections/Header.tsx
 import { useState, useEffect, useRef } from "react";
 import { Sun, Moon, Globe2, Menu, X } from "lucide-react";
 
@@ -71,21 +72,19 @@ export const HeaderSection = () => {
       setSmallLogoSrc(lightLogoUrl);
       localStorage.setItem("theme", "light");
     }
-    // Pesan notifikasi tidak lagi ditampilkan
   };
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl border-b border-yellow-600/30 bg-gradient-to-br from-zinc-900/80 to-zinc-800/60 shadow-lg shadow-yellow-500/10">
+    <header className="sticky top-0 z-50 card-footer-header-bg shadow-lg shadow-yellow-500/10">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
-          {/* Logo Utama dan Logo Kecil (dipindah ke sini) */}
+          {/* Logo Utama dan Logo Kecil */}
           <div className="flex items-center gap-3">
             <img
               src="/assets/images/Logo/font-logo.svg"
               alt="HomeLabs Logo"
               className="w-32 drop-shadow-glow"
             />
-            {/* Logo kecil sekarang berada di sebelah kanan logo utama dan lebih besar */}
             <img
               src={smallLogoSrc}
               alt="Logo kecil"
@@ -93,22 +92,23 @@ export const HeaderSection = () => {
             />
           </div>
 
-          {/* Navigasi Desktop */}
-          <nav className="hidden md:flex gap-3 items-center font-bold text-xs sm:text-sm lg:text-base uppercase tracking-wider">
-            {navLinks.map(({ title, href }) => (
-              <a
-                key={title}
-                href={href}
-                className="px-3 py-1.5 lg:px-4 lg:py-2 rounded-md border border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-black hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md hover:shadow-yellow-300/30"
-                style={{
-                  fontFamily: "'Cinzel', serif",
-                  textShadow: "0 0 2px gold",
-                }}
-              >
-                {title}
-              </a>
-            ))}
-          </nav>
+          {/* Kontainer Navigasi Desktop yang baru, sekarang terpusat */}
+          <div className="hidden md:flex flex-1 justify-center">
+            <nav className="flex gap-3 items-center font-bold text-xs sm:text-sm lg:text-base uppercase tracking-wider">
+              {navLinks.map(({ title, href }) => (
+                <a
+                  key={title}
+                  href={href}
+                  className="nav-link-style"
+                  style={{
+                    fontFamily: "'Cinzel', serif",
+                  }}
+                >
+                  {title}
+                </a>
+              ))}
+            </nav>
+          </div>
 
           {/* Tombol Sisi Kanan */}
           <div className="flex gap-3 items-center">
@@ -156,20 +156,19 @@ export const HeaderSection = () => {
             <a
               key={title}
               href={href}
-              className="block px-4 py-2 rounded-md border border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-black hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md hover:shadow-yellow-300/30 text-sm font-bold uppercase tracking-wider"
+              // Menambahkan transisi warna dan efek hover yang halus
+              className="nav-mobile-style font-bold"
               style={{
                 fontFamily: "'Cinzel', serif",
                 textShadow: "0 0 2px gold",
               }}
-              onClick={() => setIsMenuOpen(false)} // tutup menu saat tautan diklik
+              onClick={() => setIsMenuOpen(false)}
             >
               {title}
             </a>
           ))}
         </div>
       </div>
-      {/* Pesan kustom untuk dark mode telah dihapus */}
-      {/* Pesan kustom untuk ganti bahasa telah dihapus */}
     </header>
   );
 };

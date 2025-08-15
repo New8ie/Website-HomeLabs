@@ -106,15 +106,27 @@ export default function SubnetCalculator() {
   };
 
   return (
-    <div className="bg-zinc-800 p-8 rounded-2xl shadow-2xl w-full max-w-lg space-y-6 transform transition-transform duration-300 hover:scale-105">
-      <h1 className="text-3xl font-bold text-yellow-400 text-center uppercase tracking-wider font-cinzel">
+    <div
+      className="p-8 rounded-2xl shadow-2xl w-full max-w-lg space-y-6 transform transition-transform duration-300 hover:scale-10"
+      style={{
+        boxShadow: '0 0 0px var(--shadow-color)',
+      }}
+    >
+      <h1
+        className="text-3xl font-bold text-center uppercase tracking-wider font-cinzel transition-colors duration-500"
+        style={{ color: 'var(--title-color)' }}
+      >
         Subnet Calculator
       </h1>
 
       {/* Input Section */}
       <div className="space-y-4 font-cinzel">
         <div className="flex flex-col sm:flex-row gap-4 items-center group">
-          <label htmlFor="ipAddress" className="w-full sm:w-1/3 text-sm font-semibold text-zinc-300 transition-colors duration-200 group-hover:text-yellow-400">
+          <label
+            htmlFor="ipAddress"
+            className="w-full sm:w-1/3 text-sm font-semibold transition-colors duration-200"
+            style={{ color: 'var(--text-color)' }}
+          >
             IP Address
           </label>
           <input
@@ -123,11 +135,21 @@ export default function SubnetCalculator() {
             placeholder="Example: 192.168.1.1"
             value={ipAddress}
             onChange={(e) => setIpAddress(e.target.value)}
-            className="w-full px-4 py-2 bg-zinc-700 border border-yellow-700/50 rounded-lg focus:outline-none focus:border-yellow-500 focus:shadow-[0_0_15px_rgba(252,211,77,0.7)] transition-all duration-300"
+            className="w-full px-4 py-2 rounded-lg focus:outline-none transition-all duration-300"
+            style={{
+              backgroundColor: 'var(--background-color)',
+              borderColor: 'var(--border-bg)',
+              borderWidth: '1px',
+              color: 'var(--text-color)',
+            }}
           />
         </div>
         <div className="flex flex-col sm:flex-row gap-4 items-center group">
-          <label htmlFor="cidr" className="w-full sm:w-1/3 text-sm font-semibold text-zinc-300 transition-colors duration-200 group-hover:text-yellow-400">
+          <label
+            htmlFor="cidr"
+            className="w-full sm:w-1/3 text-sm font-semibold transition-colors duration-200"
+            style={{ color: 'var(--text-color)' }}
+          >
             CIDR (/xx)
           </label>
           <input
@@ -136,7 +158,13 @@ export default function SubnetCalculator() {
             placeholder="Example: 24"
             value={cidr}
             onChange={(e) => setCidr(e.target.value)}
-            className="w-full px-4 py-2 bg-zinc-700 border border-yellow-700/50 rounded-lg focus:outline-none focus:border-yellow-500 focus:shadow-[0_0_15px_rgba(252,211,77,0.7)] transition-all duration-300"
+            className="w-full px-4 py-2 rounded-lg focus:outline-none transition-all duration-300"
+            style={{
+              backgroundColor: 'var(--background-color)',
+              borderColor: 'var(--border-bg)',
+              borderWidth: '1px',
+              color: 'var(--text-color)',
+            }}
           />
         </div>
       </div>
@@ -145,44 +173,129 @@ export default function SubnetCalculator() {
       <button
         onClick={calculateSubnet}
         disabled={isCalculating}
-        className={`w-full px-6 py-3 rounded-lg border border-yellow-700 bg-gradient-to-tr from-yellow-900 via-yellow-700 to-yellow-500 text-black hover:from-yellow-600 hover:to-yellow-400 transition-all duration-200 shadow-md font-bold uppercase tracking-wider font-cinzel
-          ${isCalculating ? 'opacity-70 cursor-not-allowed animate-pulse' : 'hover:shadow-yellow-300/30'}
+        className={`w-full px-6 py-3 rounded-lg border font-bold uppercase tracking-wider font-cinzel transition-all duration-200 shadow-md
+          ${isCalculating ? 'opacity-70 cursor-not-allowed animate-pulse' : 'hover:shadow-[0_0_15px_var(--title-color)]'}
         `}
+        style={{
+          backgroundImage: 'linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))',
+          borderColor: 'var(--nav-link-border)',
+          borderWidth: '1px',
+          color: 'var(--nav-link-text)',
+        }}
       >
         {isCalculating ? 'Calculating...' : 'Calculate'}
       </button>
 
       {/* Result Section */}
       {error && (
-        <div className="mt-6 p-4 bg-red-900/50 border border-red-700 rounded-lg font-cinzel">
-          <p className="text-red-400 font-semibold">{error}</p>
+        <div
+          className="mt-6 p-4 rounded-lg font-cinzel transition-colors duration-500"
+          style={{
+            backgroundColor: 'var(--error-bg)',
+            borderColor: 'var(--error-border)',
+            borderWidth: '1px',
+          }}
+        >
+          <p
+            className="font-semibold transition-colors duration-500"
+            style={{ color: 'var(--error-text)' }}
+          >
+            {error}
+          </p>
         </div>
       )}
       {result && !error && (
-        <div className="mt-6 p-4 bg-zinc-700 border border-yellow-700/50 rounded-lg space-y-2 animate-fade-in font-cinzel">
+        <div
+          className="mt-6 p-4 rounded-lg space-y-2 animate-fade-in font-cinzel transition-colors duration-500"
+          style={{
+            backgroundColor: 'var(--background-color)',
+            borderColor: 'var(--border-bg)',
+            borderWidth: '1px',
+          }}
+        >
           <div className="flex justify-between items-center text-sm">
-            <span className="font-semibold text-zinc-400">Network Address:</span>
-            <span className="font-medium text-yellow-300">{result.networkAddress}</span>
+            <span
+              className="font-semibold transition-colors duration-500"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Network Address:
+            </span>
+            <span
+              className="font-medium transition-colors duration-500"
+              style={{ color: 'var(--title-color)' }}
+            >
+              {result.networkAddress}
+            </span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="font-semibold text-zinc-400">Subnet Mask:</span>
-            <span className="font-medium text-yellow-300">{result.mask}</span>
+            <span
+              className="font-semibold transition-colors duration-500"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Subnet Mask:
+            </span>
+            <span
+              className="font-medium transition-colors duration-500"
+              style={{ color: 'var(--title-color)' }}
+            >
+              {result.mask}
+            </span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="font-semibold text-zinc-400">Broadcast Address:</span>
-            <span className="font-medium text-yellow-300">{result.broadcastAddress}</span>
+            <span
+              className="font-semibold transition-colors duration-500"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Broadcast Address:
+            </span>
+            <span
+              className="font-medium transition-colors duration-500"
+              style={{ color: 'var(--title-color)' }}
+            >
+              {result.broadcastAddress}
+            </span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="font-semibold text-zinc-400">Usable IP Range:</span>
-            <span className="font-medium text-yellow-300">{result.firstHost} - {result.lastHost}</span>
+            <span
+              className="font-semibold transition-colors duration-500"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Usable IP Range:
+            </span>
+            <span
+              className="font-medium transition-colors duration-500"
+              style={{ color: 'var(--title-color)' }}
+            >
+              {result.firstHost} - {result.lastHost}
+            </span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="font-semibold text-zinc-400">Total Hosts:</span>
-            <span className="font-medium text-yellow-300">{result.totalHosts}</span>
+            <span
+              className="font-semibold transition-colors duration-500"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Total Hosts:
+            </span>
+            <span
+              className="font-medium transition-colors duration-500"
+              style={{ color: 'var(--title-color)' }}
+            >
+              {result.totalHosts}
+            </span>
           </div>
           <div className="flex justify-between items-center text-sm">
-            <span className="font-semibold text-zinc-400">Usable Hosts:</span>
-            <span className="font-medium text-yellow-300">{result.usableHosts}</span>
+            <span
+              className="font-semibold transition-colors duration-500"
+              style={{ color: 'var(--text-color)' }}
+            >
+              Usable Hosts:
+            </span>
+            <span
+              className="font-medium transition-colors duration-500"
+              style={{ color: 'var(--title-color)' }}
+            >
+              {result.usableHosts}
+            </span>
           </div>
         </div>
       )}
