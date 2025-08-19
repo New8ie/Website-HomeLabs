@@ -73,16 +73,16 @@
 
   /*Footer Headerr */
   --footer-bg: rgba(5, 5, 5, 0.727);
-  --border-bg: rgb(183, 2, 2);
+  --border-bg: #d20e0e;
   --header-bg: rgb(3, 27, 85);
-  --header-border: rgba(255, 0, 0, 0.5);
+  --header-border: rgba(255, 0, 0, 0.619);
  /* Navigasi Button */
-  --nav-link-from: rgb(183, 2, 2);/* Contoh warna kuning/emas terang */
-  --nav-link-via: rgb(183, 2, 2);   /* Warna via */
-  --nav-link-to: #7c6200;     /* Warna to */
+  --nav-link-from: #d20e0e;/* Contoh warna kuning/emas terang */
+  --nav-link-via: #d20e0e;   /* Warna via */
+  --nav-link-to: #8f8665;     /* Warna to */
   --nav-link-text: #171717;  /* Teks hitam */
-  --nav-link-border: rgb(183, 2, 2); /* Warna border */
-  --nav-link-shadow: rgb(183, 2, 2); /* Warna shadow */
+  --nav-link-border: #d20e0e; /* Warna border */
+  --nav-link-shadow: #d20e0e; /* Warna shadow */
 }/* Navigasi Button */
 /* Kelas kustom untuk link navigasi */
 .nav-link-style {
