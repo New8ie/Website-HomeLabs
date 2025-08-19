@@ -27,7 +27,7 @@ Router standar seringkali memiliki fitur terbatas. Dengan OpenWrt, firmware open
 3. Akses antarmuka web router dan cari opsi "Firmware Upgrade".
 4. Unggah file firmware OpenWrt dan ikuti instruksi.
 
-![Tampilan Antarmuka Web OpenWrt](/assets/images/Logo/openwrt-logo.png)
+![Tampilan Antarmuka Web OpenWrt](/assets/images/Blog/Brands/OpenWrt-UI.png)
 
 ---
 

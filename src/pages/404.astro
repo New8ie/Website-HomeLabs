@@ -3,7 +3,8 @@ import DefaultLayout from "../layouts/Default.astro";
 
 ---
 
-<DefaultLayout title="Halaman Tidak Ditemukan">
+<DefaultLayout title="Error Page">
+
     <!-- Menggunakan tata letak grid untuk centering dan efek paralaks sederhana -->
     <main class="h-screen flex flex-col justify-between py-16 text-white overflow-hidden">
       
@@ -20,7 +21,7 @@ import DefaultLayout from "../layouts/Default.astro";
                 
                 <!-- Pesan yang lebih menarik dengan font Cinzel -->
                 <p class="mt-4 text-xl md:text-3xl font-cinzel text-zinc-300 animate-fade-in-up" style="--animation-delay: 0.4s;">
-                    Maaf, halaman yang kamu cari tidak ada.
+                   No articles match your search.
                 </p>
 
                 <!-- Tombol untuk kembali ke beranda -->
@@ -29,13 +30,14 @@ import DefaultLayout from "../layouts/Default.astro";
                     class="mt-8 inline-block px-8 py-3 rounded-md border-2 border-yellow-700/50 bg-gradient-to-tr from-yellow-900/50 to-yellow-700/50 text-yellow-400 font-extrabold uppercase tracking-wider transition-all duration-300 hover:from-yellow-600 hover:to-yellow-400 hover:text-black hover:shadow-lg hover:shadow-yellow-300/30 animate-fade-in-up"
                     style="--animation-delay: 0.6s;"
                 >
-                    Kembali ke Beranda
+                    Back to Web
                 </a>
             </div>
         </div>
 
      
     </main>
+
 </DefaultLayout>
 
 <style>

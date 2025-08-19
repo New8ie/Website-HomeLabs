@@ -1,66 +1,66 @@
 // src/components/BandwidthConverter.tsx
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function BandwidthConverter() {
-  const [inputValue, setInputValue] = useState<string>('');
-  const [fromUnit, setFromUnit] = useState<string>('Mbps');
-  const [toUnit, setToUnit] = useState<string>('MBps');
+  const [inputValue, setInputValue] = useState<string>("");
+  const [fromUnit, setFromUnit] = useState<string>("Mbps");
+  const [toUnit, setToUnit] = useState<string>("MBps");
   const [result, setResult] = useState<number | null>(null);
-  const [error, setError] = useState<string>('');
+  const [error, setError] = useState<string>("");
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
 
   const units = [
-    { value: 'bps', label: 'b/s' },
-    { value: 'Kbps', label: 'Kbps' },
-    { value: 'Mbps', label: 'Mbps' },
-    { value: 'Gbps', label: 'Gbps' },
-    { value: 'Bps', label: 'B/s' },
-    { value: 'KBps', label: 'KB/s' },
-    { value: 'MBps', label: 'MB/s' },
-    { value: 'GBps', label: 'GB/s' },
+    { value: "bps", label: "b/s" },
+    { value: "Kbps", label: "Kbps" },
+    { value: "Mbps", label: "Mbps" },
+    { value: "Gbps", label: "Gbps" },
+    { value: "Bps", label: "B/s" },
+    { value: "KBps", label: "KB/s" },
+    { value: "MBps", label: "MB/s" },
+    { value: "GBps", label: "GB/s" },
   ];
 
   const calculateConversion = () => {
-    setError('');
+    setError("");
     setResult(null);
     setIsCalculating(true);
 
     const value = parseFloat(inputValue);
 
     if (isNaN(value) || value <= 0) {
-      setError('Please enter a valid positive number.');
+      setError("Please enter a valid positive number.");
       setIsCalculating(false);
       return;
     }
-    
+
     // Simulate a brief calculation time to showcase the loading state
     setTimeout(() => {
       let baseBitsPerSecond: number;
-      
+
       // Convert from 'fromUnit' to the base unit: bits per second (b/s)
       switch (fromUnit) {
-        case 'bps':
+        case "bps":
           baseBitsPerSecond = value;
           break;
-        case 'Kbps':
+        case "Kbps":
           baseBitsPerSecond = value * 1000;
           break;
-        case 'Mbps':
+        case "Mbps":
           baseBitsPerSecond = value * 1000 * 1000;
           break;
-        case 'Gbps':
+        case "Gbps":
           baseBitsPerSecond = value * 1000 * 1000 * 1000;
           break;
-        case 'Bps':
+        case "Bps":
           baseBitsPerSecond = value * 8;
           break;
-        case 'KBps':
+        case "KBps":
           baseBitsPerSecond = value * 1024 * 8;
           break;
-        case 'MBps':
+        case "MBps":
           baseBitsPerSecond = value * 1024 * 1024 * 8;
           break;
-        case 'GBps':
+        case "GBps":
           baseBitsPerSecond = value * 1024 * 1024 * 1024 * 8;
           break;
         default:
@@ -72,28 +72,28 @@ export default function BandwidthConverter() {
 
       // Convert from the base unit to 'toUnit'
       switch (toUnit) {
-        case 'bps':
+        case "bps":
           convertedValue = baseBitsPerSecond;
           break;
-        case 'Kbps':
+        case "Kbps":
           convertedValue = baseBitsPerSecond / 1000;
           break;
-        case 'Mbps':
+        case "Mbps":
           convertedValue = baseBitsPerSecond / (1000 * 1000);
           break;
-        case 'Gbps':
+        case "Gbps":
           convertedValue = baseBitsPerSecond / (1000 * 1000 * 1000);
           break;
-        case 'Bps':
+        case "Bps":
           convertedValue = baseBitsPerSecond / 8;
           break;
-        case 'KBps':
+        case "KBps":
           convertedValue = baseBitsPerSecond / (1024 * 8);
           break;
-        case 'MBps':
+        case "MBps":
           convertedValue = baseBitsPerSecond / (1024 * 1024 * 8);
           break;
-        case 'GBps':
+        case "GBps":
           convertedValue = baseBitsPerSecond / (1024 * 1024 * 1024 * 8);
           break;
         default:
@@ -107,19 +107,19 @@ export default function BandwidthConverter() {
   };
 
   const formatNumber = (num: number): string => {
-    return num.toFixed(2).replace(/\.?0*$/, '');
+    return num.toFixed(2).replace(/\.?0*$/, "");
   };
 
   return (
     <div
       className="p-8 rounded-2xl shadow-2xl w-full max-w-lg space-y-6 transform transition-transform duration-300 hover:scale-10"
       style={{
-        boxShadow: '0 0 0px var(--shadow-color)',
+        boxShadow: "0 0 0px var(--shadow-color)",
       }}
     >
       <h1
         className="text-3xl font-bold text-center uppercase tracking-wider font-cinzel transition-colors duration-500"
-        style={{ color: 'var(--title-color)' }}
+        style={{ color: "var(--title-color)" }}
       >
         Bandwidth Converter
       </h1>
@@ -130,7 +130,7 @@ export default function BandwidthConverter() {
           <label
             htmlFor="inputValue"
             className="w-full sm:w-1/3 text-sm font-semibold transition-colors duration-200"
-            style={{ color: 'var(--text-color)' }}
+            style={{ color: "var(--text-color)" }}
           >
             Value
           </label>
@@ -142,10 +142,10 @@ export default function BandwidthConverter() {
             onChange={(e) => setInputValue(e.target.value)}
             className="w-full px-4 py-2 rounded-lg focus:outline-none transition-all duration-300"
             style={{
-              backgroundColor: 'var(--background-color)',
-              borderColor: 'var(--border-bg)',
-              borderWidth: '1px',
-              color: 'var(--text-color)',
+              backgroundColor: "var(--background-color)",
+              borderColor: "var(--border-bg)",
+              borderWidth: "1px",
+              color: "var(--text-color)",
             }}
           />
         </div>
@@ -153,7 +153,7 @@ export default function BandwidthConverter() {
           <label
             htmlFor="fromUnit"
             className="w-full sm:w-1/3 text-sm font-semibold transition-colors duration-200"
-            style={{ color: 'var(--text-color)' }}
+            style={{ color: "var(--text-color)" }}
           >
             From
           </label>
@@ -163,14 +163,16 @@ export default function BandwidthConverter() {
             onChange={(e) => setFromUnit(e.target.value)}
             className="w-full px-4 py-2 rounded-lg focus:outline-none transition-all duration-300 appearance-none"
             style={{
-              backgroundColor: 'var(--background-color)',
-              borderColor: 'var(--border-bg)',
-              borderWidth: '1px',
-              color: 'var(--text-color)',
+              backgroundColor: "var(--background-color)",
+              borderColor: "var(--border-bg)",
+              borderWidth: "1px",
+              color: "var(--text-color)",
             }}
           >
             {units.map((unit) => (
-              <option key={unit.value} value={unit.value}>{unit.label}</option>
+              <option key={unit.value} value={unit.value}>
+                {unit.label}
+              </option>
             ))}
           </select>
         </div>
@@ -178,7 +180,7 @@ export default function BandwidthConverter() {
           <label
             htmlFor="toUnit"
             className="w-full sm:w-1/3 text-sm font-semibold transition-colors duration-200"
-            style={{ color: 'var(--text-color)' }}
+            style={{ color: "var(--text-color)" }}
           >
             To
           </label>
@@ -188,14 +190,16 @@ export default function BandwidthConverter() {
             onChange={(e) => setToUnit(e.target.value)}
             className="w-full px-4 py-2 rounded-lg focus:outline-none transition-all duration-300 appearance-none"
             style={{
-              backgroundColor: 'var(--background-color)',
-              borderColor: 'var(--border-bg)',
-              borderWidth: '1px',
-              color: 'var(--text-color)',
+              backgroundColor: "var(--background-color)",
+              borderColor: "var(--border-bg)",
+              borderWidth: "1px",
+              color: "var(--text-color)",
             }}
           >
             {units.map((unit) => (
-              <option key={unit.value} value={unit.value}>{unit.label}</option>
+              <option key={unit.value} value={unit.value}>
+                {unit.label}
+              </option>
             ))}
           </select>
         </div>
@@ -206,16 +210,17 @@ export default function BandwidthConverter() {
         onClick={calculateConversion}
         disabled={isCalculating}
         className={`w-full px-6 py-3 rounded-lg border font-bold uppercase tracking-wider font-cinzel transition-all duration-200 shadow-md
-          ${isCalculating ? 'opacity-70 cursor-not-allowed animate-pulse' : 'hover:shadow-[0_0_15px_var(--title-color)]'}
+          ${isCalculating ? "opacity-70 cursor-not-allowed animate-pulse" : "hover:shadow-[0_0_15px_var(--title-color)]"}
         `}
         style={{
-          backgroundImage: 'linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))',
-          borderColor: 'var(--nav-link-border)',
-          borderWidth: '1px',
-          color: 'var(--nav-link-text)',
+          backgroundImage:
+            "linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))",
+          borderColor: "var(--nav-link-border)",
+          borderWidth: "1px",
+          color: "var(--nav-link-text)",
         }}
       >
-        {isCalculating ? 'Calculating...' : 'Convert'}
+        {isCalculating ? "Calculating..." : "Convert"}
       </button>
 
       {/* Result Section */}
@@ -223,14 +228,14 @@ export default function BandwidthConverter() {
         <div
           className="mt-6 p-4 rounded-lg font-cinzel transition-colors duration-500"
           style={{
-            backgroundColor: 'var(--error-bg)',
-            borderColor: 'var(--error-border)',
-            borderWidth: '1px',
+            backgroundColor: "var(--error-bg)",
+            borderColor: "var(--error-border)",
+            borderWidth: "1px",
           }}
         >
           <p
             className="font-semibold transition-colors duration-500"
-            style={{ color: 'var(--error-text)' }}
+            style={{ color: "var(--error-text)" }}
           >
             {error}
           </p>
@@ -240,29 +245,29 @@ export default function BandwidthConverter() {
         <div
           className="mt-6 p-4 rounded-lg space-y-2 text-center animate-fade-in font-cinzel transition-colors duration-500"
           style={{
-            backgroundColor: 'var(--background-color)',
-            borderColor: 'var(--border-bg)',
-            borderWidth: '1px',
+            backgroundColor: "var(--background-color)",
+            borderColor: "var(--border-bg)",
+            borderWidth: "1px",
           }}
         >
-            <p
-              className="text-lg transition-colors duration-500"
-              style={{ color: 'var(--text-color)' }}
+          <p
+            className="text-lg transition-colors duration-500"
+            style={{ color: "var(--text-color)" }}
+          >
+            <span
+              className="font-semibold transition-colors duration-500"
+              style={{ color: "var(--title-color)" }}
             >
-                <span
-                  className="font-semibold transition-colors duration-500"
-                  style={{ color: 'var(--title-color)' }}
-                >
-                  {formatNumber(parseFloat(inputValue))} {fromUnit}
-                </span>{' '}
-                equals
-            </p>
-            <p
-              className="text-xl font-bold transition-colors duration-500"
-              style={{ color: 'var(--title-color)' }}
-            >
-                {formatNumber(result)} {toUnit}
-            </p>
+              {formatNumber(parseFloat(inputValue))} {fromUnit}
+            </span>{" "}
+            equals
+          </p>
+          <p
+            className="text-xl font-bold transition-colors duration-500"
+            style={{ color: "var(--title-color)" }}
+          >
+            {formatNumber(result)} {toUnit}
+          </p>
         </div>
       )}
     </div>

@@ -75,7 +75,7 @@ export const HeaderSection = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 card-footer-header-bg shadow-lg shadow-yellow-500/10">
+    <header className="header">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
           {/* Logo Utama dan Logo Kecil */}
@@ -85,14 +85,9 @@ export const HeaderSection = () => {
               alt="HomeLabs Logo"
               className="w-32 drop-shadow-glow"
             />
-            <img
-              src={smallLogoSrc}
-              alt="Logo kecil"
-              className="w-16 h-16 rounded-full transition-all duration-300 transform hover:scale-110 shadow-lg md:w-20 md:h-20"
-            />
           </div>
 
-          {/* Kontainer Navigasi Desktop yang baru, sekarang terpusat */}
+          {/* Kontainer Navigasi Desktop yang sekarang terpusat */}
           <div className="hidden md:flex flex-1 justify-center">
             <nav className="flex gap-3 items-center font-bold text-xs sm:text-sm lg:text-base uppercase tracking-wider">
               {navLinks.map(({ title, href }) => (
@@ -110,21 +105,20 @@ export const HeaderSection = () => {
             </nav>
           </div>
 
-          {/* Tombol Sisi Kanan */}
+          {/* Tombol Sisi Kanan (sekarang termasuk Dark Mode Toggle) */}
           <div className="flex gap-3 items-center">
-            {/* Dark Mode Toggle */}
+            {/* Dark Mode Toggle yang menggunakan logo */}
             <button
               title="Toggle Dark Mode"
-              className="p-2 rounded-full bg-yellow-700 hover:bg-yellow-500 text-black transition-all border border-yellow-300 shadow"
               onClick={handleDarkModeToggle}
+              className="p-1 rounded-full bg-transparent transition-transform duration-300 transform hover:scale-110"
             >
-              {isDarkMode ? (
-                <Sun className="h-5 w-5" />
-              ) : (
-                <Moon className="h-5 w-5" />
-              )}
+              <img
+                src={smallLogoSrc}
+                alt="Logo kecil"
+                className="w-16 h-16 rounded-full shadow-lg md:w-20 md:h-20"
+              />
             </button>
-
             {/* Tombol Toggle Menu Mobile */}
             <button
               className="md:hidden p-2 rounded-full bg-yellow-700 hover:bg-yellow-500 text-black border border-yellow-300 shadow"
@@ -169,6 +163,7 @@ export const HeaderSection = () => {
           ))}
         </div>
       </div>
+
     </header>
   );
 };

@@ -1,210 +1,97 @@
-/* src/styles/global.css atau file lain */
+/*
+ * File: src/styles/global.css
+ * Diatur ulang secara profesional untuk keterbacaan dan pemeliharaan.
+ */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/*
- * File CSS: styles.css atau global.css
- *
- * Menggunakan CSS Custom Properties untuk mengelola tema Horde (gelap) dan Alliance (terang).
- */
+/* =========================================================================
+   1. Properti Kustom CSS  , Fonts (Variables)
+   ========================================================================= */
 
-/*
- * Tema terang: Alliance (default)
- * Warna dasar biru dengan aksen oranye.
- * Properti ini diterapkan pada elemen <html> secara default.
- */
+/* Tema Terang: Alliance (Default) */
 :root {
   /* Warna Dasar */
-  --background-color: #0f172a; /* Biru tua */
-  --text-color: rgb(241, 236, 232);/* Emas yang lebih cerah */
-  --text-bg-color : #e3f2fd;
-  --primary-button-bg: #ff8000; /* Orange yang lebih terang */
+  --background-color: #0f1c39;
+  --text-color: #f1ece8;
+  --text-bg-color: #e3f2fd;
+  --primary-button-bg: #ff8000;
   --primary-button-text: #1a237e;
 
-  --shadow-color: rgba(255, 128, 0, 0.2);
+  /* Bayangan & Glow */
+  --shadow-color: #ff8000e5;
   --glow-color: #ff8000;
   --glow-text-shadow: 0 0 2px #cc6600;
+
+  /* Latar Belakang Link */
   --link-bg-from: #fff8e1;
   --link-bg-via: #ffecb3;
   --link-bg-to: #ffecb3;
- /* Text Main Page Body */
-  --title-color: #ff8000;  /* Teks oranye */
-  --title-shadow-color: rgba(5, 5, 5, 0.907);
 
-  /*Footer Headerr */
-  --footer-bg: rgba(15, 23, 42, 0.9);
-  --border-bg: #ff8000;
-  --header-bg: rgba(4, 70, 176, 0.9);
+  /* Teks Utama */
+  --title-color: #ff8000;
+  --title-shadow-color: #050505e7;
+
+  /* Footer & Header */
+  --footer-bg: #0f172ae6;
+  --footer-border: #ff8000;
+  --header-bg: #0f172ae6;
   --header-border: #cc6600;
+  --header-footer-shadow: 0 4px 6px -1px #000000c4, 0 2px 4px -2px #000000a5;
+  --pages-bg: #0f172a7b;
 
- /* Navigasi Button */
-  --nav-link-from: #ff8000; /* Contoh warna oranye terang */
-  --nav-link-via: #d66800;   /* Warna via */
-  --nav-link-to: #b35900;     /* Warna to */
-  --nav-link-text: #171717;  /* Teks hitam */
-  --nav-link-border: #cc6600; /* Warna border */
-  --nav-link-shadow: #cc6600; /* Warna shadow */
+  /* Tombol Navigasi */
+  --nav-link-from: #ff8000;
+  --nav-link-via: #d66800;
+  --nav-link-to: #db3806;
+  --nav-link-text: #ffffff;
+  --nav-link-border: #cc6600;
+  --nav-link-shadow: #cc6600;
 }
 
-/*
- * Tema gelap: Horde
- * Properti ini diterapkan pada elemen <html> ketika memiliki kelas "dark".
- */
+/* Tema Gelap: Horde */
 .dark {
   /* Warna Dasar */
-  --background-color: #0f172a; /* Biru tua */
-  --text-color: rgb(246, 241, 242);/* Emas yang lebih cerah */
-  --text-bg-color : #e3f2fd;
-  --primary-button-bg: #ed0000; /* Biru tua */
+  --background-color: #0b0b0a57;
+  --text-color: #f6f1f2;
+  --text-bg-color: #e3f2fd;
+  --primary-button-bg: #ed0000;
   --primary-button-text: #e3f2fd;
-  --border-shadow: rgba(255, 255, 255, 0.1);
-  --shadow-color: rgba(212, 172, 70, 0.2);
-  --glow-color: rgb(212, 172, 70);
-  --glow-text-shadow: 0 0 2px rgb(212, 172, 70);
+
+  /* Bayangan & Glow */
+  --border-shadow: #ffffff1a;
+  --shadow-color: #ef0d0dd9;
+  --glow-color: #d4ac46;
+  --glow-text-shadow: 0 0 2px #d4ac46;
+
+  /* Latar Belakang Link */
   --link-bg-from: #fff8e1;
   --link-bg-via: #ffecb3;
   --link-bg-to: #ffecb3;
 
- /* Text Main Page Body */
-  --title-color: rgb(177, 14, 9); /* Teks default (abu-abu gelap) */
-  --title-shadow-color: rgba(0, 0, 0, 0.9);
+  /* Teks Utama */
+  --title-color: #b10e09;
+  --title-shadow-color: #000000e6;
 
-
-  /*Footer Headerr */
-  --footer-bg: rgba(5, 5, 5, 0.727);
-  --border-bg: #d20e0e;
-  --header-bg: rgb(3, 27, 85);
-  --header-border: rgba(255, 0, 0, 0.619);
- /* Navigasi Button */
-  --nav-link-from: #d20e0e;/* Contoh warna kuning/emas terang */
-  --nav-link-via: #d20e0e;   /* Warna via */
-  --nav-link-to: #8f8665;     /* Warna to */
-  --nav-link-text: #171717;  /* Teks hitam */
-  --nav-link-border: #d20e0e; /* Warna border */
-  --nav-link-shadow: #d20e0e; /* Warna shadow */
-}/* Navigasi Button */
-/* Kelas kustom untuk link navigasi */
-.nav-link-style {
-  @apply px-3 py-1.5 lg:px-4 lg:py-2 rounded-md transition-all duration-200 shadow-md;
-
-  /* Properti yang terkait warna menggunakan variabel */
-  background-image: linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to));
-  color: var(--nav-link-text);
-  border: 1px solid var(--nav-link-border);
-  box-shadow: 0 4px 6px -1px var(--nav-link-shadow), 0 2px 4px -2px var(--nav-link-shadow);
-  text-shadow: 0 0 2px var(--nav-link-shadow); /* Gunakan variabel untuk shadow teks */
-}
- /* Navigasi Button */
-/* Hover state untuk kelas kustom */
-.nav-link-style:hover {
-  filter: brightness(1.2); /* Mencerahkan warna saat dihover */
+  /* Footer & Header */
+  --footer-bg: #0e0d0cef;
+  --footer-border: #d20e0e;
+  --header-bg: #0a0a09d6;
+  --header-border: #ff00009e;
+  --header-footer-shadow: 0 4px 6px -1px #000000bb, 0 2px 4px -2px #00000033;
+  --pages-bg: #807e7e0e;
+  /* Tombol Navigasi */
+  --nav-link-from: #d20e0e;
+  --nav-link-via: #d20e0e;
+  --nav-link-to: #e17c09;
+  --nav-link-text: #261919;
+  --nav-link-border: #d20e0e;
+  --nav-link-shadow: #d20e0e;
 }
 
-/* Gaya kustom untuk navigasi mobile */
-.nav-mobile-style {
-  @apply block w-full text-center px-4 py-2 rounded-md transition-all duration-200 shadow-md;
-
-  /* Properti yang terkait warna menggunakan variabel */
-  background-image: linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to));
-  color: var(--nav-link-text);
-  border: 1px solid var(--nav-link-border);
-  box-shadow: 0 4px 6px -1px var(--nav-link-shadow), 0 2px 4px -2px var(--nav-link-shadow);
-  text-shadow: 0 0 2px var(--nav-link-shadow);
-}
-
-.nav-mobile-style:hover {
-  filter: brightness(1.2);
-}
-  /*Footer Headerr */
-.card-footer-header-bg {
-  @apply relative backdrop-blur-xl border-b py-6 mt-0 z-50;
-  background-color: var(--footer-bg);
-  border-color: var(--border-bg);
-  /* Contoh penggunaan variabel untuk shadow */
-  box-shadow: 0 0 10px var(--shadow-color);
-}
-
-
-/* Text Main Page Body */
-.hero-title {
-  @apply text-4xl md:text-6xl font-cinzel font-extrabold drop-shadow-[0_2px_6px_var(--title-shadow-color)] animate-fade-in-up;
-
-  /* Atur warna teks menggunakan variabel CSS */
-  color: var(--title-color);
-}
-/* Gaya kustom untuk tombol primer dengan efek timbul */
-.primary-button-style {
-  @apply px-6 py-2 rounded font-cinzel font-extrabold transition-all duration-300 ease-in-out;
-
-  /* Menggunakan variabel warna dari tema aktif */
-  background: linear-gradient(145deg, var(--nav-link-from), var(--nav-link-to));
-  color: var(--text-bg-color);
-  border: 1px solid var(--nav-link-border);
-  
-  /* Efek timbul dan bayangan */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
-  cursor: pointer;
-}
-
-.primary-button-style:hover {
-  @apply scale-105;
-  filter: brightness(1.2);
-  /* Efek saat hover, membuat bayangan lebih besar */
-  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.6), inset 0 2px 4px rgba(255, 255, 255, 0.4);
-}
-
-.primary-button-style:active {
-  @apply scale-100;
-  transform: translateY(1px); /* Tombol ditekan ke bawah */
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255, 255, 255, 0.2);
-}
-/*
- * Aturan dasar untuk transisi latar belakang.
- * Menggunakan pseudo-element untuk transisi gambar latar belakang.
- */
-body {
-  background-color: var(--background-color);
-  color: var(--text-color);
-  transition: background-color 0.5s ease-in-out, color 0.5s ease-in-out;
-  /* Atur gambar latar belakang untuk mode terang */
-  background-image: url("/assets/images/BG/bg-alliance.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  position: relative; /* Penting untuk penempatan pseudo-element */
-  z-index: 1; /* Penting untuk memastikan konten di atas pseudo-element */
-}
-
-/* Pseudo-element untuk gambar latar belakang mode gelap */
-body::after {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("/assets/images/BG/bg-horde.jpg");
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  opacity: 0; /* Secara default, gambar gelap tidak terlihat */
-  transition: opacity 0.5s ease-in-out; /* Transisi untuk opacity */
-  z-index: -1; /* Posisikan di belakang konten utama */
-}
-
-/* Ketika body memiliki kelas .dark, tampilkan pseudo-element gambar gelap */
-.dark body::after {
-  opacity: 1;
-}
-
-/* Hapus gambar dari .dark body, karena sekarang ditangani oleh pseudo-element */
-.dark body {
-  background-image: none;
-}
-
-
+/* Font Faces */
 @font-face {
   font-family: "Cinzel";
   src: url("/assets/fonts/Cinzel-Regular.ttf") format("truetype");
@@ -224,6 +111,88 @@ body::after {
   font-style: normal;
 }
 
+/* =========================================================================
+   2. Gaya Dasar (Body, Utilities)
+   ========================================================================= */
+
+/* Gaya Body & Latar Belakang */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition:
+    background-color 0.5s ease-in-out,
+    color 0.5s ease-in-out;
+  /* Properti background diganti dengan yang lebih spesifik */
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  position: relative;
+  z-index: 1;
+  /* Memastikan body mencakup seluruh viewport */
+  min-height: 100vh;
+}
+
+/* Aturan mode gelap untuk tag body */
+.dark body {
+  background-image: none;
+  background-color: var(--background-color);
+}
+
+/* KONDISI LATAR BELAKANG HALAMAN INDEX */
+body.home-page {
+  background-image: url("/assets/images/BG/blue.jpg");
+  /* Tambahan overlay untuk efek gelap */
+  position: relative;
+}
+
+body.home-page:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); /* Sesuaikan opasitas untuk tingkat kegelapan */
+  z-index: -1;
+}
+
+.dark body.home-page {
+  background-image: url("/assets/images/BG/black.jpg");
+}
+
+.dark body.home-page:before {
+  background: rgba(0, 0, 0, 0); /* Lebih gelap untuk mode gelap */
+}
+
+body:not(.home-page) {
+  background-image: url("/assets/images/BG/blue.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  position: relative;
+}
+
+.blog-pages-background:after,
+body:not(.home-page):after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1); /* Atur tingkat kegelapan di sini */
+  z-index: -1;
+}
+
+.dark body.blog-pages-background {
+  background-image: url("/assets/images/BG/black.jpg");
+}
+
+.dark body.blog-pages-background:after {
+  background-color: rgba(0, 0, 0, 0);
+}
+
+/* Utilitas & Transisi */
 .transition-[max-height] {
   transition-property: max-height;
 }
@@ -232,7 +201,186 @@ body::after {
   will-change: max-height;
 }
 
-/* Contoh styling tambahan bila diperlukan */
+.text-shadow-gold {
+  text-shadow: 0 0 2px theme("colors.yellow.400");
+}
+
+
+#three-container canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  background: radial-gradient(circle at center, #0a0a0a 40%, #000000 100%);
+}
+
+
+/* =========================================================================
+   3. Gaya Komponen
+   ========================================================================= */
+
+/* Gaya Header & Footer */
+header {
+  @apply sticky top-0 z-50;
+  /*  background-image: url('/assets/images/BG/blue.jpg'); */
+  background-color: var(--footer-bg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-bottom: 1px solid var(--header-border);
+  box-shadow:
+    var(--header-footer-shadow),
+    0 0 10px 1px var(--header-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+footer {
+  @apply relative py-4 z-50;
+  /* background-image: url('/assets/images/BG/blue.jpg'); */
+  background-color: var(--footer-bg);
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  border-top: 1px solid var(--footer-border);
+  box-shadow:
+    var(--header-footer-shadow),
+    0 0 10px 1px var(--footer-border);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Aturan untuk Mode Gelap */
+.dark header {
+  /*   background-image: url('/assets/images/BG/black.jpg');  */
+  background-color: var(--header-bg);
+}
+
+.dark footer {
+  /*  background-image: url('/assets/images/BG/black.jpg'); */
+  background-color: var(--footer-bg);
+}
+
+/* =========================================================================
+   4. Navigasi Button
+   ========================================================================= */
+/* Gaya Navigasi - Garis Bawah Fade-in */
+.nav-link-style {
+  @apply relative inline-block px-4 py-2 font-bold uppercase tracking-wider;
+  color: var(--text-color);
+}
+
+.nav-link-style:after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: var(--nav-link-from);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.nav-link-style:hover:after {
+  transform: scaleX(1);
+}
+
+/* Gaya Mobile untuk Garis Bawah Fade-in */
+.nav-mobile-style {
+  @apply block w-full px-4 py-2 text-center font-bold uppercase tracking-wider rounded-lg;
+  color: var(--text-color);
+  background: transparent;
+  border: 1px solid var(--nav-link-border);
+  transition: all 0.3s ease-in-out;
+}
+
+.nav-mobile-style:hover {
+  background-color: var(--nav-link-from);
+  color: var(--nav-link-text);
+  box-shadow: 0 0 10px 1px var(--nav-link-from);
+}
+/* =========================================================================
+   4. Navigasi Button Homepage
+   ========================================================================= */
+
+.primary-button {
+  @apply px-8 py-3 rounded-lg font-bold uppercase tracking-wider;
+  /* Latar belakang dinamis sesuai tema */
+  background: linear-gradient(145deg, var(--nav-link-from), var(--nav-link-to));
+  /* Warna teks dinamis */
+  color: var(--nav-link-text);
+  /* Border dinamis */
+  border: 1px solid var(--nav-link-border);
+  /* Bayangan dinamis */
+  box-shadow:
+    0 0 5px var(--nav-link-from),
+    0 0 10px var(--nav-link-from);
+  /* Transisi halus */
+  transition: all 0.4s ease-in-out;
+}
+
+.primary-button:hover {
+  /* Tombol sedikit lebih cerah saat di-hover */
+  filter: brightness(1.2);
+  /* Efek 'glow' yang lebih kuat saat di-hover */
+  box-shadow:
+    0 0 15px var(--nav-link-to),
+    0 0 25px var(--nav-link-to),
+    0 0 40px var(--nav-link-to);
+  /* Efek scaling halus saat di-hover */
+  transform: scale(1.02);
+}
+
+.primary-button:active {
+  /* Mengembalikan ukuran normal saat diklik */
+  transform: scale(1);
+}
+
+/* Penyesuaian untuk mode gelap */
+.dark .primary-button {
+  /* Menyesuaikan warna glow agar lebih sesuai dengan tema gelap */
+  box-shadow:
+    0 0 5px var(--nav-link-from),
+    0 0 10px var(--nav-link-from);
+}
+
+.dark .primary-button:hover {
+  /* Efek 'glow' yang lebih kuat saat di-hover di mode gelap */
+  box-shadow:
+    0 0 15px var(--nav-link-to),
+    0 0 25px var(--nav-link-to),
+    0 0 40px var(--nav-link-to);
+}
+
+/* =========================================================================
+   5. Garis Pemisah Menyala
+   ========================================================================= */
+.glowing-divider {
+  width: 100%;
+  height: 2px;
+  background-color: var(--border-bg);
+  box-shadow: 0 0 10px 1px var(--border-bg);
+  filter: blur(0.5px);
+  opacity: 0.8;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.dark .glowing-divider {
+  background-color: var(--border-bg);
+  box-shadow: 0 0 10px 1px var(--border-bg);
+}
+
+/* Teks Utama */
+.hero-title {
+  @apply text-4xl md:text-6xl font-cinzel font-extrabold drop-shadow-[0_2px_6px_var(--title-shadow-color)] animate-fade-in-up;
+  color: var(--title-color);
+}
+
+/* Parallax */
 .parallax-section {
   background-image: url("/assets/images/BG/bg-3.jpg");
   min-height: 500px;
@@ -242,14 +390,18 @@ body::after {
   background-size: cover;
 }
 
+/* Kartu */
 .card {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-.card:hover {
-  transform: translateY(-5px); /* Mengangkat elemen ke atas */
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Menambahkan bayangan */
-}
+/* Spinner */
 .spinner {
   border: 4px solid rgba(0, 0, 0, 0.1);
   width: 36px;
@@ -259,35 +411,130 @@ body::after {
   animation: spin 1s linear infinite;
 }
 
+/* Prose (Konten Markdown) */
+.prose-yellow h1,
+.prose-yellow h2,
+.prose-yellow h3,
+.prose-yellow h4,
+.prose-yellow strong {
+  color: var(--title-color);
+}
+.prose-yellow a {
+  color: var(--title-color);
+}
+.prose pre {
+  @apply bg-zinc-900 border border-yellow-700/50 rounded-lg p-4 overflow-x-auto shadow-inner;
+  position: relative;
+}
+.prose code {
+  @apply bg-zinc-800 text-yellow-300 text-sm px-1.5 py-0.5 rounded;
+  font-family:
+    "Inter", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+}
+.prose table {
+  @apply w-full text-left table-auto border-collapse;
+}
+.prose thead {
+  @apply text-yellow-400 font-bold;
+}
+.prose th,
+.prose td {
+  @apply p-3 border border-yellow-800/50;
+}
+.prose tbody tr:nth-child(even) {
+  @apply bg-zinc-800;
+}
+.prose tbody tr:hover {
+  @apply bg-yellow-900/30 transition-colors duration-200;
+}
+.prose pre.mermaid {
+  @apply bg-transparent border-0 shadow-none text-zinc-100;
+}
+
+/* Tombol Salin */
+.copy-button {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition:
+    background-color 0.2s,
+    opacity 0.2s;
+  opacity: 0.7;
+  z-index: 10;
+}
+
+.copy-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  opacity: 1;
+}
+
+.copy-button.copied {
+  background-color: #28a745;
+  color: white;
+  opacity: 1;
+  pointer-events: none;
+}
+
+/* =========================================================================
+   6. Animasi & Keyframes
+   ========================================================================= */
+
 @keyframes spin {
   to {
     transform: rotate(360deg);
   }
 }
 
-
-/* Keyframes untuk animasi */
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeIn-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes slideInLeft {
-  from { opacity: 0; transform: translateX(-20px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes slideInRight {
-  from { opacity: 0; transform: translateX(20px); }
-  to { opacity: 1; transform: translateX(0); }
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-/* Kelas animasi */
 .animate-fade-in-up {
   animation: fadeIn-up 0.6s ease-out;
 }
@@ -301,47 +548,4 @@ body::after {
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out 0.4s;
   animation-fill-mode: backwards;
-}
-
-/* Penyesuaian gaya `prose` untuk konten */
-.prose-yellow h1, .prose-yellow h2, .prose-yellow h3, .prose-yellow h4, .prose-yellow strong {
-  color: var(--title-color);
-}
-.prose-yellow a {
-  color: var(--title-color);
-}
-
-/* Gaya kustom untuk elemen teknis */
-.prose pre {
-    @apply bg-zinc-900 border border-yellow-700/50 rounded-lg p-4 overflow-x-auto shadow-inner;
-}
-.prose code {
-    @apply bg-zinc-800 text-yellow-300 text-sm px-1.5 py-0.5 rounded;
-    /* Font yang diperbarui untuk elemen kode */
-    font-family: 'Inter', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-}
-.prose table {
-    @apply w-full text-left table-auto border-collapse;
-}
-.prose thead {
-    @apply text-yellow-400 font-bold;
-}
-.prose th, .prose td {
-    @apply p-3 border border-yellow-800/50;
-}
-.prose tbody tr:nth-child(even) {
-    @apply bg-zinc-800;
-}
-.prose tbody tr:hover {
-    @apply bg-yellow-900/30 transition-colors duration-200;
-}
-
-/* Perbaikan Mermaid agar dirender dengan baik */
-.prose pre.mermaid {
-    @apply bg-transparent border-0 shadow-none text-zinc-100;
-}
-
-/* Efek bayangan teks kustom */
-.text-shadow-gold {
-  text-shadow: 0 0 2px theme('colors.yellow.400');
 }

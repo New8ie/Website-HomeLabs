@@ -192,3 +192,8 @@ echo "[$NOW] Backup finished." >> "$LOG_FILE"
 - `**exec: node: is a directory**` → Pastikan `exec node` mengarah ke binary, bukan folder. Recheck isi `PATH`
 
 ## ![Tampilan Dashboard Trilium Notes](/assets/images/Blog/trilium-notes_2.png)
+
+[github][def]
+
+
+[def]: https://github.com/TriliumNext/Trilium.git

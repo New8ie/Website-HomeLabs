@@ -73,8 +73,8 @@ export const FooterSection = () => {
   }, []);
 
   return (
-    <footer className="card-footer-header-bg border-t-2 py-6 mt-0 text-zinc-300 z-50">
-      <div className="container mx-auto px-6 md:px-8 lg:px-12">
+    <footer className="footer">
+      <div className="container mx-auto px-6 gap-4 md:px-8 lg:px-12">
         {/* Mengubah menjadi 2 kolom di desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-24 text-center md:text-left">
           {/* Kolom Kiri: Gabungan Navigasi & Branding */}
@@ -121,7 +121,7 @@ export const FooterSection = () => {
               />
             </a>
             {/* Ikon Sosial Media yang dipisahkan */}
-            <div className="flex gap-5 items-center mt-5">
+            <div className="flex gap-5 items-center mt-1">
               {socialLinks.map(({ name, href, icon: Icon }) => (
                 <a
                   key={name}
@@ -136,7 +136,7 @@ export const FooterSection = () => {
             </div>
           </div>
         </div>
-        <div className="text-center text-sm text-zinc-500 mt-12">
+        <div className="text-center text-sm --title-color mt-6">
           &copy; {new Date().getFullYear()} HomeLabs. All rights reserved.
         </div>
       </div>

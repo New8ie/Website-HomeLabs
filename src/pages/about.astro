@@ -6,16 +6,11 @@ import { FooterSection } from "../sections/Footer";
 
 <DefaultLayout title="About me & HomeLabs">
   <HeaderSection client:load />
-
-  <main class="relative py-16 min-h-[80vh] overflow-hidden">
+  <main class="relative py-16 min-h-[80vh] ">
     <!-- Background Image with a subtle dark overlay for better text readability -->
     <div class="absolute inset-0 z-0">
-        <img
-            src="/assets/images/BG/bg-1.jpg"
-            alt="Latar belakang yang terinspirasi dari home lab"
-            class="w-full h-full object-cover opacity-20"
-        />
-        <div class="absolute inset-0 bg-zinc-950/50"></div>
+        
+        <div class="absolute inset-0"></div>
     </div>
     
     <div class="relative z-10 max-w-5xl mx-auto px-6">
@@ -94,8 +89,8 @@ import { FooterSection } from "../sections/Footer";
           From the beginning, I have enjoyed experimenting with different operating systems, virtualization, and network configurations at home.
         </p>
         <p
-          class="mb-4 italic font-cinzel leading-relaxed text-center transition-colors"
-          style={{ color: 'var(--text-color)', opacity: '0.7' }}
+          class="transition-colors italic text-center mb-4 font-cinzel leading-relaxed"
+          style={{ color: 'var(--title-color)' }}
         >
             "Find joy in your work, and your efforts will feel like a creative pursuit, not a chore. That's where true success begins."
         </p>
@@ -147,6 +142,7 @@ import { FooterSection } from "../sections/Footer";
       </section>
       
     </div>
+    
   </main>
 
    <FooterSection client:load />

@@ -1,36 +1,36 @@
 ---
 import "./../styles/global.css";
-import DefaultLayout from "../layouts/Default.astro";
+import IndexDefault from "../layouts/IndexDefault.astro";
 import { HeaderSection } from "../sections/Header";
 import { FooterSection } from "../sections/Footer";
+import ThreeDCanvas from "../components/ThreeDCanvas";
 ---
 
-<DefaultLayout title="Main - HomeLabs">
-  <HeaderSection client:load />
+<IndexDefault title="Main - HomeLabs">
+  {
+    /* The 3D canvas is placed here, so it is rendered behind the other content */
+  }
+  <ThreeDCanvas />
 
-  <section class="relative h-screen w-full homepage-hero">
+  <HeaderSection client:load />
+  <section class="relative h-screen w-full">
     <div
       class="relative z-20 flex flex-col items-center justify-center h-full pb-24 px-4 text-center animate-fade-in"
     >
-      <h1 class="hero-title">
-        HomeLabs
-      </h1>
+      <h1 class="hero-title">HomeLabs</h1>
       <p
         class="mt-4 max-w-2xl text-base md:text-lg justify-center font-extrabold leading-relaxed font-cinzel dark:text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9) animate-fade-in-up"
         style="color: var(--text-bg-color);"
       >
-        Explore technology, AI, open source, and the digital world from the comfort of your home lab. Discover new innovations, projects, and inspiration every day. <span class="italic text-bold">homelab</span>. Discover new innovations, projects, and inspiration every day.
+        Explore technology, AI, open source, and the digital world from the
+        comfort of your home lab. Discover new innovations, projects, and
+        inspiration every day. <span class="italic text-bold">homelab</span>.
+        Discover new innovations, projects, and inspiration every day.
       </p>
       <div class="mt-8 animate-fade-in-up">
-        <a
-          href="/blog"
-          class="primary-button-style"
-        >
-          Explore Blogs
-        </a>
+        <a href="/blog" class="primary-button"> Explore Blogs </a>
       </div>
     </div>
-  </section>
-
+</section>
   <FooterSection client:load />
-</DefaultLayout>
+</IndexDefault>
