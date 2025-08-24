@@ -9,6 +9,7 @@ export default function BandwidthConverter() {
   const [error, setError] = useState<string>("");
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
 
+  // Array of available units with their labels
   const units = [
     { value: "bps", label: "b/s" },
     { value: "Kbps", label: "Kbps" },
@@ -20,6 +21,7 @@ export default function BandwidthConverter() {
     { value: "GBps", label: "GB/s" },
   ];
 
+  // Function to perform the conversion calculation
   const calculateConversion = () => {
     setError("");
     setResult(null);
@@ -106,30 +108,19 @@ export default function BandwidthConverter() {
     }, 500); // 500ms delay
   };
 
+  // Helper function to format the number for display
   const formatNumber = (num: number): string => {
     return num.toFixed(2).replace(/\.?0*$/, "");
   };
 
   return (
-    <div
-      className="p-8 rounded-2xl shadow-2xl w-full max-w-lg space-y-6 transform transition-transform duration-300 hover:scale-10"
-      style={{
-        boxShadow: "0 0 0px var(--shadow-color)",
-      }}
-    >
-      <h1
-        className="text-3xl font-bold text-center uppercase tracking-wider font-cinzel transition-colors duration-500"
-        style={{ color: "var(--title-color)" }}
-      >
-        Bandwidth Converter
-      </h1>
-
+    <div className="p-4 rounded-2xl w-full max-w-lg space-y-6">
       {/* Input Section */}
       <div className="space-y-4 font-cinzel">
         <div className="flex flex-col sm:flex-row gap-4 items-center group">
           <label
             htmlFor="inputValue"
-            className="w-full sm:w-1/3 text-sm font-semibold transition-colors duration-200"
+            className="w-full sm:w-1/3 text-sm font-semibold font-cinzel transition-colors duration-200"
             style={{ color: "var(--text-color)" }}
           >
             Value
@@ -209,15 +200,14 @@ export default function BandwidthConverter() {
       <button
         onClick={calculateConversion}
         disabled={isCalculating}
-        className={`w-full px-6 py-3 rounded-lg border font-bold uppercase tracking-wider font-cinzel transition-all duration-200 shadow-md
-          ${isCalculating ? "opacity-70 cursor-not-allowed animate-pulse" : "hover:shadow-[0_0_15px_var(--title-color)]"}
-        `}
+        className="w-full p-3 rounded-lg font-bold font-cinzel text-center transition-all duration-300"
         style={{
-          backgroundImage:
-            "linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))",
-          borderColor: "var(--nav-link-border)",
-          borderWidth: "1px",
-          color: "var(--nav-link-text)",
+          backgroundColor: "var(--primary-button-bg)",
+          color: "var(--primary-button-text)",
+          boxShadow: isCalculating
+            ? "none"
+            : "0 4px 6px -1px var(--shadow-color)",
+          transform: isCalculating ? "translateY(2px)" : "none",
         }}
       >
         {isCalculating ? "Calculating..." : "Convert"}

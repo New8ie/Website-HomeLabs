@@ -19,7 +19,7 @@
   --text-bg-color: #e3f2fd;
   --primary-button-bg: #ff8000;
   --primary-button-text: #1a237e;
-
+  --card-hover-bg: rgba(255, 255, 255, 0.05);
   /* Bayangan & Glow */
   --shadow-color: #ff8000e5;
   --glow-color: #ff8000;
@@ -32,7 +32,7 @@
 
   /* Teks Utama */
   --title-color: #ff8000;
-  --title-shadow-color: #050505e7;
+  --title-shadow-color: #323131e7;
 
   /* Footer & Header */
   --footer-bg: #0f172ae6;
@@ -54,12 +54,12 @@
 /* Tema Gelap: Horde */
 .dark {
   /* Warna Dasar */
-  --background-color: #0b0b0a57;
+  --background-color: #0f0c0cf9;
   --text-color: #f6f1f2;
   --text-bg-color: #e3f2fd;
   --primary-button-bg: #ed0000;
   --primary-button-text: #e3f2fd;
-
+  --card-hover-bg: rgba(255, 255, 255, 0.05);
   /* Bayangan & Glow */
   --border-shadow: #ffffff1a;
   --shadow-color: #ef0d0dd9;
@@ -81,7 +81,10 @@
   --header-bg: #0a0a09d6;
   --header-border: #ff00009e;
   --header-footer-shadow: 0 4px 6px -1px #000000bb, 0 2px 4px -2px #00000033;
-  --pages-bg: #807e7e0e;
+
+  /* Pages Blog List */
+  --pages-bg: #3f3e3e37;
+  --pages-border-shadow: #f7f5ef2b;
   /* Tombol Navigasi */
   --nav-link-from: #d20e0e;
   --nav-link-via: #d20e0e;
@@ -124,12 +127,14 @@ body {
     color 0.5s ease-in-out;
   /* Properti background diganti dengan yang lebih spesifik */
   background-size: cover;
-  background-attachment: fixed;
+  /* Hapus 'background-attachment: fixed;' untuk menghilangkan efek sticky */
   background-position: center;
   position: relative;
   z-index: 1;
   /* Memastikan body mencakup seluruh viewport */
   min-height: 100vh;
+  /* Tambahkan transisi halus untuk perpindahan background */
+  transition: background-position 0.8s ease-out;
 }
 
 /* Aturan mode gelap untuk tag body */
@@ -139,11 +144,6 @@ body {
 }
 
 /* KONDISI LATAR BELAKANG HALAMAN INDEX */
-body.home-page {
-  background-image: url("/assets/images/BG/blue.jpg");
-  /* Tambahan overlay untuk efek gelap */
-  position: relative;
-}
 
 body.home-page:before {
   content: "";
@@ -154,18 +154,13 @@ body.home-page:before {
   height: 100%;
   background: rgba(0, 0, 0, 0); /* Sesuaikan opasitas untuk tingkat kegelapan */
   z-index: -1;
-}
-
-.dark body.home-page {
-  background-image: url("/assets/images/BG/black.jpg");
-}
-
-.dark body.home-page:before {
-  background: rgba(0, 0, 0, 0); /* Lebih gelap untuk mode gelap */
+  /* Tambahkan transisi pada overlay */
+  transition: background 0.5s ease-in-out;
 }
 
 body:not(.home-page) {
-  background-image: url("/assets/images/BG/blue.jpg");
+  background-color: var(--background-color);
+  /*   background-image: url("/assets/images/BG/blue.jpg"); */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -180,16 +175,19 @@ body:not(.home-page):after {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.1); /* Atur tingkat kegelapan di sini */
+  background-color: var(
+    --background-color
+  ); /* Atur tingkat kegelapan di sini */
   z-index: -1;
 }
 
 .dark body.blog-pages-background {
-  background-image: url("/assets/images/BG/black.jpg");
+  /* background-image: url("/assets/images/BG/black.jpg");  */
+  background-color: var(--background-color);
 }
 
 .dark body.blog-pages-background:after {
-  background-color: rgba(0, 0, 0, 0);
+  background-color: var(--background-color);
 }
 
 /* Utilitas & Transisi */
@@ -205,7 +203,6 @@ body:not(.home-page):after {
   text-shadow: 0 0 2px theme("colors.yellow.400");
 }
 
-
 #three-container canvas {
   position: absolute;
   inset: 0;
@@ -214,7 +211,6 @@ body:not(.home-page):after {
   z-index: 0;
   background: radial-gradient(circle at center, #0a0a0a 40%, #000000 100%);
 }
-
 
 /* =========================================================================
    3. Gaya Komponen
@@ -356,6 +352,37 @@ footer {
 }
 
 /* =========================================================================
+   4. Navigasi Button tools Pages
+   ========================================================================= */
+
+.tools-nav-link {
+  background-image: linear-gradient(
+    to top right,
+    var(--nav-link-from),
+    var(--nav-link-via),
+    var(--nav-link-to)
+  );
+  color: var(--nav-link-text);
+  border-color: var(--nav-link-border);
+  box-shadow:
+    0 4px 6px -1px var(--nav-link-shadow),
+    0 2px 4px -2px var(--nav-link-shadow);
+  transition-property: all;
+  transition-duration: 200ms;
+}
+
+.tools-nav-link:hover {
+  transform: scale(1.05);
+  box-shadow:
+    0 10px 15px -3px var(--nav-link-shadow),
+    0 4px 6px -4px var(--nav-link-shadow);
+}
+
+.tools-nav-link:active {
+  opacity: 0.75;
+}
+
+/* =========================================================================
    5. Garis Pemisah Menyala
    ========================================================================= */
 .glowing-divider {
@@ -380,25 +407,47 @@ footer {
   color: var(--title-color);
 }
 
-/* Parallax */
-.parallax-section {
-  background-image: url("/assets/images/BG/bg-3.jpg");
-  min-height: 500px;
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+/* Animasi untuk transisi lebih halus */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
-/* Kartu */
-.card {
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
+@keyframes fadeIn-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 /* Spinner */
@@ -483,58 +532,6 @@ footer {
   pointer-events: none;
 }
 
-/* =========================================================================
-   6. Animasi & Keyframes
-   ========================================================================= */
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes fadeIn-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 .animate-fade-in-up {
   animation: fadeIn-up 0.6s ease-out;
 }
@@ -548,4 +545,23 @@ footer {
 .animate-fade-in {
   animation: fadeIn 0.8s ease-out 0.4s;
   animation-fill-mode: backwards;
+}
+
+/* =========================================================================
+    Pages About
+   ========================================================================= */
+
+@keyframes pulse-slow {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.6;
+  }
+}
+.animate-pulse-slow {
+  animation: pulse-slow 4s infinite ease-in-out;
 }

@@ -1,6 +1,6 @@
-// src/components/SubnetCalculator.tsx
 import React, { useState } from "react";
 
+// Interface for Subnet calculation results
 interface SubnetResult {
   networkAddress: string;
   firstHost: string;
@@ -11,6 +11,9 @@ interface SubnetResult {
   mask: string;
 }
 
+/**
+ * @description Component to calculate subnet details including network address, broadcast address, and host range.
+ */
 export default function SubnetCalculator() {
   const [ipAddress, setIpAddress] = useState<string>("");
   const [cidr, setCidr] = useState<string>("24");
@@ -18,6 +21,7 @@ export default function SubnetCalculator() {
   const [error, setError] = useState<string>("");
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
 
+  // Function to handle the calculation
   const calculateSubnet = () => {
     setError("");
     setResult(null);
@@ -113,19 +117,7 @@ export default function SubnetCalculator() {
   };
 
   return (
-    <div
-      className="p-8 rounded-2xl shadow-2xl w-full max-w-lg space-y-6 transform transition-transform duration-300 hover:scale-10"
-      style={{
-        boxShadow: "0 0 0px var(--shadow-color)",
-      }}
-    >
-      <h1
-        className="text-3xl font-bold text-center uppercase tracking-wider font-cinzel transition-colors duration-500"
-        style={{ color: "var(--title-color)" }}
-      >
-        Subnet Calculator
-      </h1>
-
+    <div className="p-4 rounded-2xl w-full max-w-lg space-y-6">
       {/* Input Section */}
       <div className="space-y-4 font-cinzel">
         <div className="flex flex-col sm:flex-row gap-4 items-center group">
@@ -180,15 +172,14 @@ export default function SubnetCalculator() {
       <button
         onClick={calculateSubnet}
         disabled={isCalculating}
-        className={`w-full px-6 py-3 rounded-lg border font-bold uppercase tracking-wider font-cinzel transition-all duration-200 shadow-md
-          ${isCalculating ? "opacity-70 cursor-not-allowed animate-pulse" : "hover:shadow-[0_0_15px_var(--title-color)]"}
-        `}
+        className="w-full p-3 rounded-lg font-bold font-cinzel text-center transition-all duration-300"
         style={{
-          backgroundImage:
-            "linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))",
-          borderColor: "var(--nav-link-border)",
-          borderWidth: "1px",
-          color: "var(--nav-link-text)",
+          backgroundColor: "var(--primary-button-bg)",
+          color: "var(--primary-button-text)",
+          boxShadow: isCalculating
+            ? "none"
+            : "0 4px 6px -1px var(--shadow-color)",
+          transform: isCalculating ? "translateY(2px)" : "none",
         }}
       >
         {isCalculating ? "Calculating..." : "Calculate"}
@@ -216,7 +207,7 @@ export default function SubnetCalculator() {
         <div
           className="mt-6 p-4 rounded-lg space-y-2 animate-fade-in font-cinzel transition-colors duration-500"
           style={{
-            backgroundColor: "var(--background-color)",
+            backgroundColor: "var(--pages-bg)",
             borderColor: "var(--border-bg)",
             borderWidth: "1px",
           }}

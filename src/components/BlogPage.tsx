@@ -1,6 +1,5 @@
-import React from "react";
 import "../styles/global.css";
-import { type Post, type PageData } from "../../types/blog";
+import { type Post, type PageData } from "../lib/db/types/blog";
 
 const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
   const postsToDisplay = posts || [];
@@ -15,49 +14,50 @@ const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
           No articles match.
         </p>
       ) : (
-        <div className="space-y-12">
+        <div>
           {postsToDisplay.map((post) => (
-            <a
-              key={post.slug}
-              href={`/blog/${post.slug}`}
-              className="group block"
-              aria-label={`Baca postingan tentang ${post.data.title}`}
-            >
-              <div className="flex flex-col sm:flex-row items-start gap-6 transition-all duration-300 ease-in-out transform group-hover:bg-zinc-800/70 rounded-xl p-4">
-                {/* Bagian Gambar */}
-                {post.data.image && (
-                  <div className="w-full sm:w-1/3 flex-shrink-0 relative h-48 sm:h-auto">
-                    <div className="relative w-full h-0 pb-[60%] overflow-hidden rounded-lg">
+            <div key={post.slug}>
+              <a
+                href={`/blog/${post.slug}`}
+                className="group block"
+                aria-label={`Baca postingan tentang ${post.data.title}`}
+              >
+                <div className="flex items-center gap-4 transition-all duration-300 ease-in-out transform group-hover:bg-zinc-800/70 rounded-xl p-3">
+                  {/* Bagian Gambar */}
+                  {post.data.image && (
+                    <div className="w-24 h-24 flex-shrink-0 relative">
                       <img
                         src={post.data.image}
                         alt={post.data.title}
-                        className="absolute top-0 left-0 w-full h-full object-cover object-center transition-transform duration-300 group-hover:scale-105"
+                        className="absolute top-0 left-0 w-full h-full object-cover object-center rounded-lg transition-transform duration-300 group-hover:scale-105"
                       />
                     </div>
-                  </div>
-                )}
+                  )}
 
-                {/* Bagian Konten */}
-                <div className="flex-1">
-                  <span className="text-sm text-yellow-400 font-cinzel">
-                    {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </span>
-                  <h3
-                    className="mt-1 text-xl font-extrabold font-cinzel leading-tight transition-colors duration-500 group-hover:text-yellow-300"
-                    style={{ color: "var(--title-color)" }}
-                  >
-                    {post.data.title}
-                  </h3>
-                  <p className="mt-2 text-xs font-cinzel text-zinc-300 transition-colors duration-500">
-                    {post.data.description}
-                  </p>
+                  {/* Bagian Konten */}
+                  <div className="flex-1">
+                    <h3
+                      className="mt-1 text-md font-extrabold font-cinzel leading-tight transition-colors duration-500 group-hover:text-yellow-300"
+                      style={{ color: "var(--title-color)" }}
+                    >
+                      {post.data.title}
+                    </h3>
+                    <span className="text-xs text-yellow-400 font-cinzel">
+                      {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                      })}
+                    </span>
+                    <p className="mt-1 text-xs font-cinzel text-zinc-300 transition-colors duration-500 line-clamp-2">
+                      {post.data.description}
+                    </p>
+                  </div>
                 </div>
-              </div>
-            </a>
+              </a>
+              {/* Pembatas Garis */}
+              <div className="w-full h-px bg-zinc-700/50 my-6 last:hidden"></div>
+            </div>
           ))}
         </div>
       )}

@@ -1,20 +1,22 @@
 ---
-title: "Dotfiles Automation Install"
-description: "Konfigurasi shell interaktif dan terminal environment untuk Linux (Debian/Ubuntu) dan macOS — termasuk `zsh`, `oh-my-zsh`, `powerlevel10k`, plugin, alias, `neofetch`, `nano`, dan `fastfetch`. Dirancang untuk produktivitas dan estetika maksimal."
+title: Dotfiles Automation Install
+description: "Konfigurasi shell interaktif dan terminal environment untuk Linux (Debian/Ubuntu) dan macOS "
 pubDate: 2024-08-15
-image: "/assets/images/Blog/dotfiles_1.png"
-category: "MacOS"
+image: /assets/images/Blog/dotfiles_1.png
+category: MacOS
 author:
-  name: "Mohamad Fachmi"
-  title: "Mr"
+  name: Mohamad Fachmi
+  title: Mr
+  image: /assets/images/Logo/font-logo.svg
+slug: dotfiles-automation-install
 ---
-# 🧪 Dotfiles by New8ie
+# Dotfiles 
 
-🛠️ Konfigurasi shell interaktif dan terminal environment untuk Linux (Debian/Ubuntu) dan macOS — termasuk `zsh`, `oh-my-zsh`, `powerlevel10k`, plugin, alias, `neofetch`, `nano`, dan `fastfetch`. Dirancang untuk produktivitas dan estetika maksimal.
+Konfigurasi shell interaktif dan terminal environment untuk Linux (Debian/Ubuntu) dan macOS — termasuk `zsh`, `oh-my-zsh`, `powerlevel10k`, plugin, alias, `neofetch`, `nano`, dan `fastfetch`. Dirancang untuk produktivitas dan estetika maksimal.
 
 ---
 
-## 🧬 Struktur Repositori
+# Struktur Repositori
 
 ```bash
 Dotfiles/
@@ -29,21 +31,21 @@ Dotfiles/
 │   └── Alias/
 │       └── alias.zsh             # Alias perintah untuk Linux/macOS
 ├── Nano/
-│   └── nanorc.nanorc             # Konfigurasi highlight Nano
+│   └── nanorc.nanorc              # Konfigurasi highlight Nano
 ├── Neofetch/
 │   ├── config.conf               # Konfigurasi neofetch
-│   ├── motd-script.sh           # Skrip MOTD bergambar
+│   ├── motd-script.sh            # Skrip MOTD bergambar
 │   └── *-logo.png                # Logo distro (macOS, Debian, Ubuntu, Raspberry Pi)
 ├── fastfetch/
 │   ├── config.conf               # Konfigurasi fastfetch horizontal
-│   ├── motd-fastfetch.sh        # Skrip MOTD untuk fastfetch
+│   ├── motd-fastfetch.sh         # Skrip MOTD untuk fastfetch
 │   └── logo/
 │       └── *-logo.png            # Logo distro untuk fastfetch
 ├── Iterm2/
 │   ├── bin/                      # Binary tools (imgcat, dll)
 │   └── iterm2_shell_integration.zsh
 ```
-````
+
 
 ---
 
@@ -73,8 +75,8 @@ bash ~/.dotfiles/Install/01-setup-zsh.sh
 
 ## 💡 Dukungan Sistem
 
-| OS         | Status    | Keterangan                    |
-| ---------- | --------- | ----------------------------- |
+| OS         | Status   | Keterangan                    |
+| ---------- | -------- | ----------------------------- |
 | Debian 11+ | ✅ Stabil | Paket diinstal via APT        |
 | Ubuntu 22+ | ✅ Stabil | eza fallback dari GitHub      |
 | macOS 13+  | ✅ Stabil | Menggunakan Homebrew & iTerm2 |
@@ -108,11 +110,6 @@ Dibuat dan dirawat oleh [New8ie](https://github.com/New8ie).
 Feel free untuk fork dan kirim pull request.
 
 ---
+[LICENSE](https://github.com/New8ie/Dotfiles/blob/main/LICENSE)
 
-## 📝 Lisensi
 
-MIT License. Gunakan, modifikasi, atau distribusikan dengan bebas.
-
-```
-
-```

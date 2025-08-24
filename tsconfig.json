@@ -1,5 +1,5 @@
 {
- "extends": "astro/tsconfigs/strict",
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "strict": true,
     "strictNullChecks": true,
@@ -8,19 +8,23 @@
     "lib": ["dom", "es2017"],
     "target": "es5",
     "baseUrl": ".",
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
     "paths": {
       "@components/*": ["src/components/*"],
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
+      "@/lib/db": ["src/lib/db.ts"],
       "@utils/*": ["src/utils/*"]
-    }
+    },
+    "ignoreDeprecations": "5.0"
   },
   "include": [
-    "src/pages/*",
-    "src/components/*",
-    "src/layouts/*",
-    "src/utils/*",
-    "astro.config.*"
+    ".astro/**/*",
+    "src/**/*",
+    "lib/**/**/*",
+    "astro.config.*",
+    "env.d.ts"
   ],
   "exclude": ["node_modules"]
 }

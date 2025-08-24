@@ -1,4 +1,5 @@
 ---
+import "../styles/global.css";
 import DefaultLayout from "../layouts/Default.astro";
 import { HeaderSection } from "../sections/Header";
 import { FooterSection } from "../sections/Footer";
@@ -6,154 +7,141 @@ import { FooterSection } from "../sections/Footer";
 
 <DefaultLayout title="About me & HomeLabs">
   <HeaderSection client:load />
-  <main class="relative py-16 min-h-[80vh] ">
-    <!-- Background Image with a subtle dark overlay for better text readability -->
+  <main class="relative py-16 min-h-[80vh]">
     <div class="absolute inset-0 z-0">
-        
-        <div class="absolute inset-0"></div>
+      <div class="absolute inset-0"></div>
     </div>
-    
-    <div class="relative z-10 max-w-5xl mx-auto px-6">
 
-      <!-- Hero Section dengan Animasi -->
-      <section class="flex flex-col items-center text-center mb-16 md:mb-20">
-        <!-- Profile Picture dengan animasi fade-in-up -->
-        <div class="relative w-40 h-40 md:w-48 md:h-48 mb-6 animate-fade-in-up">
-          <img
-            src="/assets/images/Items/fachmi.jpeg"
-            alt="Fachmi's profile picture"
-            class="rounded-full w-full h-full object-cover border-4 transition-colors"
-            style={{
-              borderColor: 'var(--title-color)',
-              boxShadow: '0 0 10px var(--title-color), 0 0 20px var(--title-color)'
-            }}
-          />
-          <!-- Subtle animated ring -->
-          <span
-            class="absolute inset-0 rounded-full ring-4 animate-pulse-slow transition-colors"
-            style={{
-              borderColor: 'var(--title-color)',
-              opacity: '0.2'
-            }}
-          ></span>
-        </div>
-
-        <!-- Title and Subtitle dengan animasi fade-in-up -->
-        <h1
-          class="text-4xl md:text-6xl font-extrabold font-cinzel mb-2 tracking-wider drop-shadow-lg animate-fade-in-up transition-colors"
+    <div
+      class="relative z-10 max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-[300px_1fr] gap-12"
+    >
+      <aside class="flex flex-col gap-6">
+        <section
+          class="p-8 backdrop-blur-md rounded-3xl shadow-2xl animate-fade-in-up"
           style={{
-            color: 'var(--title-color)',
-            textShadow: '0 0 10px var(--shadow-color)'
+            backgroundColor: "var(--pages-bg)",
+            border: "1px solid var(--border-bg)",
+            boxShadow: "0 0 20px var(--shadow-color)",
           }}
         >
-          About Me
-        </h1>
-        <p
-          class="text-lg font-cinzel md:text-2xl font-light animate-fade-in-up transition-colors"
-          style={{ color: 'var(--text-color)' }}
-        >
-          Build, Manage, and Learn.
-        </p>
-      </section>
+          <div class="relative w-full mb-6 flex flex-col items-center">
+            <img
+              src="/assets/images/Items/fachmi.jpeg"
+              alt="Fachmi's profile picture"
+              class="rounded-full w-40 h-40 object-cover border-4 transition-colors mb-4 **animate-pulse-slow**"
+              style={{
+                borderColor: "var(--title-color)",
+                boxShadow:
+                  "0 0 10px var(--title-color), 0 0 20px var(--title-color)",
+              }}
+            />
+            <h1
+              class="text-2xl font-extrabold font-cinzel mb-1 tracking-wider text-center transition-colors"
+              style={{ color: "var(--title-color)" }}
+            >
+              Fachmi
+            </h1>
+            <p
+              class="text-sm font-cinzel text-center transition-colors"
+              style={{ color: "var(--text-color)" }}
+            >
+              Build, Manage, and Learn.
+            </p>
+          </div>
+        </section>
+      </aside>
 
-      <!-- Who am I? Section dengan animasi slide-in-left -->
-      <section
-        class="mb-12 p-8 md:p-12 backdrop-blur-md rounded-3xl shadow-2xl transition-all duration-300 hover:scale-[1.01] animate-slide-in-left"
-        style={{
-          backgroundColor: 'var(--footer-bg)',
-          border: '1px solid var(--border-bg)',
-          boxShadow: '0 0 20px var(--shadow-color)'
-        }}
-      >
-        <h2
-          class="text-3xl font-bold font-cinzel mb-4 transition-colors"
-          style={{ color: 'var(--title-color)' }}
+      <div class="space-y-12">
+        <section
+          class="p-8 md:p-12 backdrop-blur-md rounded-3xl shadow-2xl transition-all duration-300 hover:scale-[1.01] animate-slide-in-left"
+          style={{
+            backgroundColor: "var(--pages-bg)",
+            border: "1px solid var(--border-bg)",
+            boxShadow: "0 0 20px var(--shadow-color)",
+          }}
         >
-          Who am I?
-        </h2>
-        <p
-          class="mb-4 font-cinzel leading-relaxed transition-colors"
-          style={{ color: 'var(--text-color)' }}
-        >
-          Hello! My name is Fachmi, and I am an enthusiast in the fields of <strong
-            class="transition-colors"
-            style={{ color: 'var(--title-color)' }}
+          <h2
+            class="text-3xl font-bold font-cinzel mb-4 transition-colors"
+            style={{ color: "var(--title-color)" }}
           >
-            HomeLabs
-          </strong> and <strong
-            class="transition-colors"
-            style={{ color: 'var(--title-color)' }}
+            Who am I?
+          </h2>
+          <p
+            class="mb-4 font-cinzel leading-relaxed transition-colors"
+            style={{ color: "var(--text-color)" }}
           >
-            Networking
-          </strong>.
-          From the beginning, I have enjoyed experimenting with different operating systems, virtualization, and network configurations at home.
-        </p>
-        <p
-          class="transition-colors italic text-center mb-4 font-cinzel leading-relaxed"
-          style={{ color: 'var(--title-color)' }}
-        >
-            "Find joy in your work, and your efforts will feel like a creative pursuit, not a chore. That's where true success begins."
-        </p>
-        <p
-          class="mb-4 font-cinzel leading-relaxed transition-colors"
-          style={{ color: 'var(--text-color)' }}
-        >
-          This website is where I document my journey, record the lessons I've learned, and share knowledge that might be useful to others.
-          My goal is to help you build and manage your own digital infrastructure with ease.
-        </p>
-      </section>
+            Hello! My name is Fachmi, and I am an enthusiast in the fields of <strong
+              class="transition-colors"
+              style={{ color: "var(--title-color)" }}
+            >
+              HomeLabs
+            </strong> and <strong
+              class="transition-colors"
+              style={{ color: "var(--title-color)" }}
+            >
+              Networking
+            </strong>. From the beginning, I have enjoyed experimenting with
+            different operating systems, virtualization, and network
+            configurations at home.
+          </p>
+          <p
+            class="transition-colors italic text-center mb-4 font-cinzel leading-relaxed"
+            style={{ color: "var(--title-color)" }}
+          >
+            "Find joy in your work, and your efforts will feel like a creative
+            pursuit, not a chore. That's where true success begins."
+          </p>
+          <p
+            class="mb-4 font-cinzel leading-relaxed transition-colors"
+            style={{ color: "var(--text-color)" }}
+          >
+            This website is where I document my journey, record the lessons I've
+            learned, and share knowledge that might be useful to others. My goal
+            is to help you build and manage your own digital infrastructure with
+            ease.
+          </p>
+        </section>
 
-      <!-- Benefits & Objectives Section dengan animasi slide-in-right -->
-      <section
-        class="p-8 md:p-12 backdrop-blur-md rounded-3xl shadow-2xl transition-all duration-300 hover:scale-[1.01] animate-slide-in-right"
-        style={{
-          backgroundColor: 'var(--footer-bg)',
-          border: '1px solid var(--border-bg)',
-          boxShadow: '0 0 20px var(--shadow-color)'
-        }}
-      >
-        <h2
-          class="text-3xl font-bold font-cinzel mb-4 transition-colors"
-          style={{ color: 'var(--title-color)' }}
+        <section
+          class="p-8 md:p-12 backdrop-blur-md rounded-3xl shadow-2xl transition-all duration-300 hover:scale-[1.01] animate-slide-in-right"
+          style={{
+            backgroundColor: "var(--pages-bg)",
+            border: "1px solid var(--border-bg)",
+            boxShadow: "0 0 20px var(--shadow-color)",
+          }}
         >
-          Benefits & Objectives
-        </h2>
-        <p
-          class="mb-4 font-cinzel leading-relaxed transition-colors"
-          style={{ color: 'var(--text-color)' }}
-        >
-          I believe that the most effective way to learn technology is through hands-on experience. Through this blog, I will share:
-        </p>
-        <ul
-          class="list-disc list-inside font-cinzel space-y-2 transition-colors"
-          style={{ color: 'var(--text-color)' }}
-        >
-          <li>Step-by-step guides for building a HomeLab.</li>
-          <li>Reviews of the hardware and software I use.</li>
-          <li>Solutions to common problems I often face.</li>
-          <li>Tips and tricks for optimizing your network.</li>
-        </ul>
-        <p
-          class="mt-4 font-cinzel leading-relaxed transition-colors"
-          style={{ color: 'var(--text-color)' }}
-        >
-          Thank you for visiting. Let's learn and create together!
-        </p>
-      </section>
-      
+          <h2
+            class="text-3xl font-bold font-cinzel mb-4 transition-colors"
+            style={{ color: "var(--title-color)" }}
+          >
+            Benefits & Objectives
+          </h2>
+          <p
+            class="mb-4 font-cinzel leading-relaxed transition-colors"
+            style={{ color: "var(--text-color)" }}
+          >
+            I believe that the most effective way to learn technology is through
+            hands-on experience. Through this blog, I will share:
+          </p>
+          <ul
+            class="list-disc list-inside font-cinzel space-y-2 transition-colors"
+            style={{ color: "var(--text-color)" }}
+          >
+            <li>Step-by-step guides for building a HomeLab.</li>
+            <li>Reviews of the hardware and software I use.</li>
+            <li>Solutions to common problems I often face.</li>
+            <li>Tips and tricks for optimizing your network.</li>
+          </ul>
+          <p
+            class="mt-4 font-cinzel leading-relaxed transition-colors"
+            style={{ color: "var(--text-color)" }}
+          >
+            Thank you for visiting. Let's learn and create together!
+          </p>
+        </section>
+      </div>
     </div>
-    
   </main>
 
-   <FooterSection client:load />
+  <FooterSection client:load />
 </DefaultLayout>
-
-<style>
-  @keyframes pulse-slow {
-    0%, 100% { transform: scale(1); opacity: 0.2; }
-    50% { transform: scale(1.1); opacity: 0.6; }
-  }
-  .animate-pulse-slow {
-    animation: pulse-slow 4s infinite ease-in-out;
-  }
-</style>

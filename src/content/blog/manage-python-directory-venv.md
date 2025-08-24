@@ -9,31 +9,35 @@ author:
   title: "SysAdmin"
   image: "/assets/images/Logo/font-logo.png"
 ---
+
+---
+
 # Merapihkan Directory venv
+
 ## 🎯 Tujuan Upgrade:
 
 1.  🔄 Auto-completion untuk mkvenv, workon, rmvenv
 2.  🧰 Installer skrip alias otomatis
 3.  📁 workon otomatis cd ke direktori proyek (jika ada folder ~/Projects/<nama>)
 
-* * *
+---
 
 ## ✅ STRUKTUR DIREKTORI
 
 Kita asumsikan struktur berikut:
 
-```
+```bash
 ~/.config/venv/         # venv disimpan di sini
-~/Projects/             # folder proyek real disimpan di sini 
+~/Projects/             # folder proyek real disimpan di sini
 ```
 
-* * *
+---
 
-## 🛠️ 1. Update alias: ~/.config/zsh/alias\_venv.zsh
+## 🛠️ 1. Update alias: ~/.config/zsh/alias_venv.zsh
 
 Ganti isi file menjadi seperti ini:
 
-```
+```zsh
 # ============================================
 # 🔁 Virtualenv Management with pyenv
 # ============================================
@@ -117,11 +121,11 @@ compdef _venv_complete rmvenv
 
 ```
 
-* * *
+---
 
 ## 🧰 2. Skrip Installer Alias Otomatis (sekali jalan)
 
-**File: ~/.config/zsh/install\_alias\_venv.zsh**
+**File: ~/.config/zsh/install_alias_venv.zsh**
 
 zsh
 
@@ -152,14 +156,14 @@ zsh ~/.config/zsh/install_alias_venv.zsh
 
 ```
 
-* * *
+---
 
 ## ✅ 3. Contoh Penggunaan
 
 ```
 mkvenv myproject 3.11   # Buat virtualenv + Python 3.11
 workon myproject        # Aktifkan venv & auto-cd ke ~/Projects/myproject (jika ada)
-rmvenv myproject        # Hapus venv 
+rmvenv myproject        # Hapus venv
 ```
 
 Otomatis akan ada auto-completion saat kamu tekan Tab untuk workon dan rmvenv 🎉

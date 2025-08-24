@@ -11,13 +11,19 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
+    "@astrojs/db": "^0.17.1",
     "@astrojs/mdx": "^4.3.3",
+    "@astrojs/node": "^9.4.3",
     "@astrojs/react": "^4.3.0",
+    "@astrojs/sitemap": "^3.5.1",
     "@astrojs/tailwind": "^5.1.0",
+    "@libsql/client": "^0.15.12",
     "@tailwindcss/typography": "^0.5.15",
     "aos": "^2.3.4",
     "astro": "^5.12.9",
     "astro-mermaid": "^1.0.4",
+    "better-sqlite3": "^12.2.0",
+    "drizzle-orm": "^0.44.4",
     "esbuild": "^0.25.8",
     "framer-motion": "^11.3.31",
     "lucide-react": "^0.536.0",
@@ -32,9 +38,11 @@
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",
+    "@types/better-sqlite3": "^7.6.13",
     "@types/react": "^19.1.9",
     "@types/react-dom": "^19.1.7",
     "@types/three": "^0.179.0",
+    "drizzle-kit": "^0.18.1",
     "playwright": "^1.54.2",
     "prettier": "^3.6.2"
   }

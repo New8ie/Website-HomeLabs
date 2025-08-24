@@ -3,34 +3,39 @@ import "./../styles/global.css";
 import IndexDefault from "../layouts/IndexDefault.astro";
 import { HeaderSection } from "../sections/Header";
 import { FooterSection } from "../sections/Footer";
-import ThreeDCanvas from "../components/ThreeDCanvas";
 ---
 
 <IndexDefault title="Main - HomeLabs">
-  {
-    /* The 3D canvas is placed here, so it is rendered behind the other content */
-  }
-  <ThreeDCanvas />
-
   <HeaderSection client:load />
+
   <section class="relative h-screen w-full">
     <div
-      class="relative z-20 flex flex-col items-center justify-center h-full pb-24 px-4 text-center animate-fade-in"
+      class="absolute inset-0 z-10 bg-fixed bg-cover bg-center"
+      style="background-image: url('/assets/images/BG/bg-3.jpg');"
+    ></div>
+
+    <div
+      class="relative z-20 flex h-full items-center justify-start pt-[25vh] px-8 md:px-16 lg:px-24"
     >
-      <h1 class="hero-title">HomeLabs</h1>
-      <p
-        class="mt-4 max-w-2xl text-base md:text-lg justify-center font-extrabold leading-relaxed font-cinzel dark:text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9) animate-fade-in-up"
-        style="color: var(--text-bg-color);"
+      <div
+        class="max-w-xl text-left animate-fade-in"
       >
-        Explore technology, AI, open source, and the digital world from the
-        comfort of your home lab. Discover new innovations, projects, and
-        inspiration every day. <span class="italic text-bold">homelab</span>.
-        Discover new innovations, projects, and inspiration every day.
-      </p>
-      <div class="mt-8 animate-fade-in-up">
-        <a href="/blog" class="primary-button"> Explore Blogs </a>
+        <h1 class="hero-title">HomeLabs</h1>
+        <p
+          class="mt-4 text-base md:text-lg justify-start leading-relaxed font-cinzel dark:text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9) animate-fade-in-up"
+          style="color: var(--text-bg-color);"
+        >
+          Explore technology, AI, open source, and the digital world from the
+          comfort of your home lab. Discover new innovations, projects, and
+          inspiration every day. <span class="italic text-bold">homelab</span>.
+          Discover new innovations, projects, and inspiration every day.
+        </p>
+        <div class="mt-8 animate-fade-in-up">
+          <a href="/blog" class="primary-button"> Explore Blogs </a>
+        </div>
       </div>
     </div>
-</section>
+  </section>
+
   <FooterSection client:load />
 </IndexDefault>

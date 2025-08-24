@@ -1,13 +1,16 @@
-import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
-import react from '@astrojs/react';
-import mdx from '@astrojs/mdx';
-import remarkMermaid from 'remark-mermaidjs';
+// astro.config.mjs
+import { defineConfig } from "astro/config";
+import tailwind from "@astrojs/tailwind";
+import react from "@astrojs/react";
+import mdx from "@astrojs/mdx";
+import remarkMermaid from "remark-mermaidjs";
+import sitemap from "@astrojs/sitemap";
+import path from "path"; // ✅ Tambahkan ini
 
-// https://astro.build/config
 export default defineConfig({
+  site: "https://thismydomains.com",
   redirects: {
-    '/blog': '/blog/1',
+    "/blog": "/blog/1",
   },
   integrations: [
     tailwind({
@@ -17,9 +20,18 @@ export default defineConfig({
     mdx({
       remarkPlugins: [remarkMermaid],
     }),
+    sitemap(),
   ],
   server: {
     host: true,
-    port: 3000,
+    port: 4321,
+  },
+  // ✅ Tambahkan blok Vite ini
+  vite: {
+    resolve: {
+      alias: {
+        '@': path.resolve('./src'),
+      },
+    },
   },
 });

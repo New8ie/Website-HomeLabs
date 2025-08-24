@@ -1,1 +1,1 @@
-/// <reference path="../.astro/types.d.ts" />
+/// <reference path="./src/types.ts" />

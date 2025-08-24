@@ -1,20 +1,21 @@
 ---
-title: "Install ASTRO Docker"
-description: "Install ASTRO Docker"
+title: Install ASTRO Docker
+description: Install ASTRO Docker
 pubDate: 2025-08-08
-category: "Docker"
-image: "/assets/images/Blog/docker.webp"
+category: Docker
+image: /assets/images/Blog/docker.webp
 author:
-  name: "Fachmi"
-  title: "SysAdmin"
-  image: "/assets/images/Logo/font-logo.png"
+  name: Fachmi
+  title: SysAdmin
+  image: /assets/images/Logo/font-logo.png
+slug: install-astro-docker
 ---
 # Install ASTRO Docker
 Berikut adalah **langkah-langkah instalasi Astro (website dengan komponen game) menggunakan Docker** beserta **komponen pendukungnya**. Langkah ini mencakup penggunaan **Docker Compose** untuk menjalankan frontend, backend, dan database secara terisolasi.
 
 * * *
 
-### **🛠 1. Persiapan Prasyarat**
+### ** 1. Persiapan Prasyarat**
 
 Pastikan Anda memiliki:
 
@@ -24,7 +25,7 @@ Pastikan Anda memiliki:
 
 * * *
 
-### **🧱 2. Struktur Proyek**
+### ** 2. Struktur Proyek**
 
 Struktur proyek akan terdiri dari beberapa folder dan file:
 
@@ -47,26 +48,26 @@ Struktur proyek akan terdiri dari beberapa folder dan file:
 
 * * *
 
-### **📁 3. Komponen Pendukung**
+### ** 3. Komponen Pendukung**
 
-#### **✅ Frontend:**
+#### **Frontend:**
 
 *   Aplikasi web sederhana (HTML/CSS/JS) untuk menampilkan game dan UI.
 *   Dibungkus dengan **Nginx** atau **Node.js static server**.
 
-#### **✅ Backend:**
+#### **Backend:**
 
 *   API untuk menangani logika game (misalnya leaderboard, skor).
 *   Menggunakan **Node.js + Express** sebagai backend.
 
-#### **✅ Database:**
+#### **Database:**
 
 *   Membuat database MongoDB untuk menyimpan skor pemain dan data game.
 *   Menggunakan **MongoDB** sebagai database.
 
 * * *
 
-### **🐳 4. Dockerfile dan Docker Compose**
+### ** 4. Dockerfile dan Docker Compose**
 
 #### **📄** `**docker-compose.yml**`
 
@@ -221,7 +222,7 @@ Pastikan folder `mongo_data` tidak dihapus saat build.
 
 * * *
 
-### **✅ Hasil Akhir**
+### **Hasil Akhir**
 
 Dengan langkah di atas, Anda akan memiliki:
 

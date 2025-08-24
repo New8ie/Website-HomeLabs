@@ -5,6 +5,9 @@ import { HeaderSection } from "../sections/Header";
 import { FooterSection } from "../sections/Footer";
 import SubnetCalculator from "../components/SubnetCalculator";
 import BandwidthConverter from "../components/BandwidthConverter";
+import PowerConverter from "../components/PowerCoverter";
+import RAIDCalculator from "../components/RAIDCalculator";
+import MacAddressLookup from "../components/MacAddressLookUp";
 ---
 
 <DefaultLayout title="Tools - HomeLabs">
@@ -18,32 +21,353 @@ import BandwidthConverter from "../components/BandwidthConverter";
         <h1
           class="hero-title uppercase tracking-widest font-cinzel leading-tight transition-colors duration-500"
         >
-          Networking Tools
+          Tools
         </h1>
-        <p
-          class="text-xl font-light font-cinzel transition-colors duration-500"
+      </div>
+
+      <div
+        class="p-8 space-y-8 tool-card animate-fade-in-up"
+        style={{
+          boxShadow: "0 0 10px var(--shadow-color)",
+          backgroundColor: "var(--pages-bg)",
+        }}
+      >
+        <nav
+          class="flex justify-center items-center gap-4 font-cinzel transition-colors duration-200"
         >
-          A collection of tools created to simplify tasks and development.
+          <ul
+            class="flex flex-wrap justify-center gap-4 text-center font-cinzel"
+          >
+            <li>
+              <a
+                href="#subnet-calculator"
+                class="px-4 py-2 rounded-md border-2 font-bold uppercase tracking-wider tools-nav-link text-center w-20"
+              >
+                Subnetting
+              </a>
+            </li>
+            <li>
+              <a
+                href="#bandwidth-converter"
+                class="px-4 py-2 rounded-md border-2 font-bold uppercase tracking-wider tools-nav-link text-center w-20"
+              >
+                Bandwidth
+              </a>
+            </li>
+            <li>
+              <a
+                href="#power-converter"
+                class="px-4 py-2 rounded-md border-2 font-bold uppercase tracking-wider tools-nav-link text-center w-20"
+              >
+                UPS Sizing
+              </a>
+            </li>
+            <li>
+              <a
+                href="#raid-calculator"
+                class="px-4 py-2 rounded-md border-2 font-bold uppercase tracking-wider tools-nav-link text-center w-20"
+              >
+                Disks
+              </a>
+            </li>
+            <li>
+              <a
+                href="#mac-address-lookup"
+                class="px-4 py-2 rounded-md border-2 font-bold uppercase tracking-wider tools-nav-link text-center w-20"
+              >
+                MAC Lookup
+              </a>
+            </li>
+          </ul>
+        </nav>
+
+        <p
+          class="text-sm font-light font-cinzel text-center transition-colors duration-500"
+          style={{ color: "var(--text-color)" }}
+        >
+          A collection of tools created to simplify your tasks and development.
         </p>
       </div>
 
-      <section class="grid md:grid-cols-2 gap-8">
+      <section class="space-y-16">
         <div
-          class="tool-card animate-slide-in-left"
+          id="subnet-calculator"
+          class="p-8 space-y-8 tool-card animate-fade-in-up"
           style={{
             boxShadow: "0 0 10px var(--shadow-color)",
+            backgroundColor: "var(--pages-bg)",
           }}
         >
+          <div class="flex flex-col sm:flex-row items-start gap-6">
+            <div class="space-y-4">
+              <h2
+                class="text-2xl font-bold font-cinzel transition-colors duration-500"
+                style={{ color: "var(--title-color)" }}
+              >
+                Subnet Calculator
+              </h2>
+              <p
+                class="text-sm leading-relaxed font-cinzel transition-colors duration-500"
+                style={{ color: "var(--text-color)" }}
+              >
+                Alat ini membantu Anda menghitung detail jaringan dari sebuah IP
+                address dan CIDR.
+              </p>
+              <div class="space-y-2">
+                <h3
+                  class="font-bold font-cinzel transition-colors duration-500"
+                  style={{ color: "var(--title-color)" }}
+                >
+                  Cara Penggunaan
+                </h3>
+                <ul
+                  class="list-disc list-inside text-sm font-cinzel leading-relaxed transition-colors duration-500"
+                  style={{ color: "var(--text-color)" }}
+                >
+                  <li>
+                    Masukkan **IP Address** yang valid, misalnya `192.168.1.1`.
+                  </li>
+                  <li>
+                    Pilih **CIDR** (Classless Inter-Domain Routing) yang sesuai
+                    untuk subnet Anda.
+                  </li>
+                  <li>
+                    Klik tombol **"Calculate"** untuk melihat detail jaringan
+                    seperti Network Address, Broadcast Address, dan jumlah host
+                    yang tersedia.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <img
+              src="/assets/images/Items/calculator.png"
+              alt="Subnet Calculator Icon"
+              class="w-full sm:w-1/3 object-contain"
+            />
+          </div>
           <SubnetCalculator client:load />
         </div>
 
         <div
-          class="tool-card animate-slide-in-right"
+          id="bandwidth-converter"
+          class="p-8 space-y-8 tool-card animate-fade-in-up"
           style={{
             boxShadow: "0 0 10px var(--shadow-color)",
+            backgroundColor: "var(--pages-bg)",
           }}
         >
+          <div class="flex flex-col sm:flex-row-reverse items-start gap-6">
+            <div class="space-y-4">
+              <h2
+                class="text-2xl font-bold font-cinzel transition-colors duration-500"
+                style={{ color: "var(--title-color)" }}
+              >
+                Bandwidth Converter
+              </h2>
+              <p
+                class="text-sm leading-relaxed font-cinzel transition-colors duration-500"
+                style={{ color: "var(--text-color)" }}
+              >
+                Alat untuk mengkonversi kecepatan bandwidth dari berbagai unit,
+                seperti Mbps ke MB/s.
+              </p>
+              <div class="space-y-2">
+                <h3
+                  class="font-bold font-cinzel transition-colors duration-500"
+                  style={{ color: "var(--title-color)" }}
+                >
+                  Cara Penggunaan
+                </h3>
+                <ul
+                  class="list-disc list-inside text-sm font-cinzel leading-relaxed transition-colors duration-500"
+                  style={{ color: "var(--text-color)" }}
+                >
+                  <li>
+                    Masukkan **nilai numerik** yang ingin Anda konversi ke dalam
+                    kotak input.
+                  </li>
+                  <li>
+                    Pilih unit **asal** (misalnya Mbps) dan unit **tujuan**
+                    (misalnya MBps) dari menu dropdown.
+                  </li>
+                  <li>
+                    Klik tombol **"Convert"** untuk melihat hasil konversinya.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <img
+              src="/assets/images/Items/tool-01.png"
+              alt="Bandwidth Converter Icon"
+              class="w-full sm:w-1/3 object-contain"
+            />
+          </div>
           <BandwidthConverter client:load />
+        </div>
+
+        <div
+          id="power-converter"
+          class="p-8 space-y-8 tool-card animate-fade-in-up"
+          style={{
+            boxShadow: "0 0 10px var(--shadow-color)",
+            backgroundColor: "var(--pages-bg)",
+          }}
+        >
+          <div class="flex flex-col sm:flex-row items-start gap-6">
+            <div class="space-y-4">
+              <h2
+                class="text-2xl font-bold font-cinzel transition-colors duration-500"
+                style={{ color: "var(--title-color)" }}
+              >
+                Power Converter
+              </h2>
+              <p
+                class="text-sm leading-relaxed font-cinzel transition-colors duration-500"
+                style={{ color: "var(--text-color)" }}
+              >
+                Alat untuk mengkonversi daya (Watt/kVA) dan mengukur kebutuhan
+                baterai untuk UPS Anda.
+              </p>
+              <div class="space-y-2">
+                <h3
+                  class="font-bold font-cinzel transition-colors duration-500"
+                  style={{ color: "var(--title-color)" }}
+                >
+                  Cara Penggunaan
+                </h3>
+                <ul
+                  class="list-disc list-inside text-sm font-cinzel leading-relaxed transition-colors duration-500"
+                  style={{ color: "var(--text-color)" }}
+                >
+                  <li>
+                    Masukkan **nilai daya** (Watt atau kVA) pada kolom input.
+                  </li>
+                  <li>
+                    Sesuaikan **Power Factor (PF)**. Nilai umum yang sering
+                    digunakan adalah 0.8.
+                  </li>
+                  <li>
+                    Untuk menghitung kapasitas baterai, masukkan **Waktu Operasi
+                    (Runtime)** dalam menit dan **Tegangan Baterai (V)**.
+                  </li>
+                  <li>
+                    Klik tombol **"Calculate"** untuk melihat hasil konversi dan
+                    kapasitas baterai yang dibutuhkan.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <img
+              src="/assets/images/Items/tool-02.png"
+              alt="Power Converter Icon"
+              class="w-full sm:w-1/3 object-contain"
+            />
+          </div>
+          <PowerConverter client:load />
+        </div>
+
+        <div
+          id="raid-calculator"
+          class="p-8 space-y-8 tool-card animate-fade-in-up"
+          style={{
+            boxShadow: "0 0 10px var(--shadow-color)",
+            backgroundColor: "var(--pages-bg)",
+          }}
+        >
+          <div class="flex flex-col sm:flex-row-reverse items-start gap-6">
+            <div class="space-y-4">
+              <h2
+                class="text-2xl font-bold font-cinzel transition-colors duration-500"
+                style={{ color: "var(--title-color)" }}
+              >
+                RAID Calculator
+              </h2>
+              <p
+                class="text-sm leading-relaxed font-cinzel transition-colors duration-500"
+                style={{ color: "var(--text-color)" }}
+              >
+                Alat ini membantu Anda menghitung kapasitas total dan yang dapat
+                digunakan untuk berbagai konfigurasi RAID dan ZFS.
+              </p>
+              <div class="space-y-2">
+                <h3
+                  class="font-bold font-cinzel transition-colors duration-500"
+                  style={{ color: "var(--title-color)" }}
+                >
+                  Cara Penggunaan
+                </h3>
+                <ul
+                  class="list-disc list-inside text-sm font-cinzel leading-relaxed transition-colors duration-500"
+                  style={{ color: "var(--text-color)" }}
+                >
+                  <li>Masukkan **Jumlah Disk** yang ingin Anda gunakan.</li>
+                  <li>Masukkan **Ukuran Disk** dalam Terabyte (TB).</li>
+                  <li>Pilih **Tipe RAID/ZFS** yang sesuai dari dropdown.</li>
+                  <li>
+                    Klik tombol **"Hitung Kapasitas"** untuk melihat hasilnya.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <img
+              src="/assets/images/Items/disk.png"
+              alt="RAID Calculator Icon"
+              class="w-full sm:w-1/3 object-contain"
+            />
+          </div>
+          <RAIDCalculator client:load />
+        </div>
+
+        <div
+          id="mac-address-lookup"
+          class="p-8 space-y-8 tool-card animate-fade-in-up"
+          style={{
+            boxShadow: "0 0 10px var(--shadow-color)",
+            backgroundColor: "var(--pages-bg)",
+          }}
+        >
+          <div class="flex flex-col sm:flex-row items-start gap-6">
+            <div class="space-y-4">
+              <h2
+                class="text-2xl font-bold font-cinzel transition-colors duration-500"
+                style={{ color: "var(--title-color)" }}
+              >
+                Mac Address Lookup
+              </h2>
+              <p
+                class="text-sm leading-relaxed font-cinzel transition-colors duration-500"
+                style={{ color: "var(--text-color)" }}
+              >
+                Alat untuk mencari produsen perangkat berdasarkan 3 oktet
+                pertama alamat MAC-nya (OUI) menggunakan database yang umum.
+              </p>
+              <div class="space-y-2">
+                <h3
+                  class="font-bold font-cinzel transition-colors duration-500"
+                  style={{ color: "var(--title-color)" }}
+                >
+                  Cara Penggunaan
+                </h3>
+                <ul
+                  class="list-disc list-inside text-sm font-cinzel leading-relaxed transition-colors duration-500"
+                  style={{ color: "var(--text-color)" }}
+                >
+                  <li>
+                    Masukkan **alamat MAC** yang valid ke dalam kotak input.
+                  </li>
+                  <li>
+                    Klik tombol **"Cari Produsen"** untuk melihat hasilnya.
+                  </li>
+                </ul>
+              </div>
+            </div>
+            <img
+              src="/assets/images/Items/mac.png"
+              alt="Mac Address Lookup Icon"
+              class="w-full sm:w-1/3 object-contain"
+            />
+          </div>
+          <MacAddressLookup client:load />
         </div>
       </section>
     </div>
@@ -52,19 +376,8 @@ import BandwidthConverter from "../components/BandwidthConverter";
 </DefaultLayout>
 
 <style>
-  /* Gaya untuk main content dan card. Pindahkan ke global.css jika diperlukan. */
-
+  .tool-card-desc,
   .tool-card {
-    position: relative;
-    padding: 2rem; /* p-8 di Tailwind */
-    border-radius: 1.5rem; /* rounded-3xl di Tailwind */
-    background-color: var(--footer-bg);
-    transition:
-      transform 0.2s,
-      box-shadow 0.2s;
-  }
-
-  .tool-card:hover {
-    transform: scale(1.01);
+    border-radius: 1.5rem;
   }
 </style>

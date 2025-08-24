@@ -5,6 +5,11 @@ import { HeaderSection } from "../../sections/Header";
 import { FooterSection } from "../../sections/Footer";
 import { getCollection } from "astro:content";
 
+// ✅ Impor objek db dari modul virtual
+import { db, PostLikes } from '../../lib/db/db';
+import { eq } from "drizzle-orm";
+import LikeButton from "../../components/LikeButton";
+
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
@@ -17,12 +22,17 @@ const allPosts = await getCollection("blog");
 const post = allPosts.find((p) => p.slug === slug);
 
 if (!post) {
-  throw new Error(`Post dengan slug "${slug}" tidak ditemukan`);
+  throw new Error(`Post with slug "${slug}" not found`);
 }
 
-// Render markdown menjadi komponen siap tampil
-const { Content } = await post.render();
+// ✅ Gunakan 'as any' untuk memaksa TypeScript menerima kueri
+const postLikes = await db
+  .select()
+  .from(PostLikes)
+  .where(eq(PostLikes.slug, slug));
 
+const initialLikes = postLikes.length > 0 ? (postLikes[0].likes ?? 0) : 0;
+const { Content } = await post.render();
 const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
 );
@@ -38,21 +48,23 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
     id="main-content"
     class="max-w-5xl mx-auto px-4 py-12 space-y-8 animate-fade-in-up"
   >
-    <h1
-      class="text-4xl sm:text-5xl font-cinzel text-center md:text-left font-extrabold tracking-tight leading-tight animate-slide-in-left transition-colors"
-      style={{
-        color: "var(--title-color)",
-      }}
-    >
-      {post.data.title}
-    </h1>
+    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+      <h1
+        class="text-4xl sm:text-5xl font-cinzel text-center md:text-left font-extrabold tracking-tight leading-tight animate-slide-in-left transition-colors"
+        style={{ color: "var(--title-color)" }}
+      >
+        {post.data.title}
+      </h1>
+
+      <LikeButton slug={post.slug} initialLikes={initialLikes} client:load />
+    </div>
 
     <div
       class="flex flex-wrap justify-center md:justify-start gap-4 text-sm backdrop-blur-sm p-4 rounded-lg shadow-lg animate-slide-in-right transition-colors"
       style={{
-        color: "var(--text-color)",
         backgroundColor: "var(--pages-bg)",
-        borderColor: "var(--border-bg)",
+        border: "1px solid var(--border-bg)",
+        boxShadow: "0px 4px 20px 0px var(--shadow-color)",
       }}
     >
       <span class="flex items-center gap-1.5 opacity-80 px-3 py-1">
@@ -95,6 +107,7 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
       style={{
         backgroundColor: "var(--pages-bg)",
         border: "1px solid var(--border-bg)",
+        boxShadow: "0px 4px 20px 0px var(--shadow-color)",
       }}
     >
       <article class="prose prose-invert max-w-none prose-yellow">
