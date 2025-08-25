@@ -15,14 +15,15 @@
       "@layouts/*": ["src/layouts/*"],
       "@pages/*": ["src/pages/*"],
       "@/lib/db": ["src/lib/db.ts"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@/*": ["src/*"]
     },
     "ignoreDeprecations": "5.0"
   },
   "include": [
     ".astro/**/*",
     "src/**/*",
-    "lib/**/**/*",
+    "/db/*.ts*",
     "astro.config.*",
     "env.d.ts"
   ],

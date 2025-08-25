@@ -54,15 +54,15 @@
 /* Tema Gelap: Horde */
 .dark {
   /* Warna Dasar */
-  --background-color: #0f0c0cf9;
+  --background-color: #080707f9;
   --text-color: #f6f1f2;
   --text-bg-color: #e3f2fd;
   --primary-button-bg: #ed0000;
   --primary-button-text: #e3f2fd;
   --card-hover-bg: rgba(255, 255, 255, 0.05);
   /* Bayangan & Glow */
-  --border-shadow: #ffffff1a;
-  --shadow-color: #ef0d0dd9;
+  --border-shadow: #ffffff12;
+  --shadow-color: #ffe0e0e6;
   --glow-color: #d4ac46;
   --glow-text-shadow: 0 0 2px #d4ac46;
 
@@ -72,19 +72,19 @@
   --link-bg-to: #ffecb3;
 
   /* Teks Utama */
-  --title-color: #b10e09;
+  --title-color: #d20d07;
   --title-shadow-color: #000000e6;
 
   /* Footer & Header */
-  --footer-bg: #0e0d0cef;
+  --footer-bg: #0d0c0efe;
   --footer-border: #d20e0e;
   --header-bg: #0a0a09d6;
   --header-border: #ff00009e;
   --header-footer-shadow: 0 4px 6px -1px #000000bb, 0 2px 4px -2px #00000033;
 
   /* Pages Blog List */
-  --pages-bg: #3f3e3e37;
-  --pages-border-shadow: #f7f5ef2b;
+  --pages-bg: #3e3e3e29;
+  --pages-border-shadow: #f7f5ef1b;
   /* Tombol Navigasi */
   --nav-link-from: #d20e0e;
   --nav-link-via: #d20e0e;
@@ -160,7 +160,7 @@ body.home-page:before {
 
 body:not(.home-page) {
   background-color: var(--background-color);
-  /*   background-image: url("/assets/images/BG/blue.jpg"); */
+  /* background-image: url("/assets/images/BG/blue.jpg"); */
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
@@ -219,7 +219,7 @@ body:not(.home-page):after {
 /* Gaya Header & Footer */
 header {
   @apply sticky top-0 z-50;
-  /*  background-image: url('/assets/images/BG/blue.jpg'); */
+  /* background-image: url('/assets/images/BG/blue.jpg'); */
   background-color: var(--footer-bg);
   background-size: cover;
   background-position: center;
@@ -249,43 +249,90 @@ footer {
 
 /* Aturan untuk Mode Gelap */
 .dark header {
-  /*   background-image: url('/assets/images/BG/black.jpg');  */
+  /* background-image: url('/assets/images/BG/black.jpg');  */
   background-color: var(--header-bg);
 }
 
 .dark footer {
-  /*  background-image: url('/assets/images/BG/black.jpg'); */
+  /* background-image: url('/assets/images/BG/black.jpg'); */
   background-color: var(--footer-bg);
 }
 
+
 /* =========================================================================
-   4. Navigasi Button
+   2. Navigasi Desktop
    ========================================================================= */
-/* Gaya Navigasi - Garis Bawah Fade-in */
+/* --- Gaya Navigasi Utama --- */
 .nav-link-style {
-  @apply relative inline-block px-4 py-2 font-bold uppercase tracking-wider;
+  @apply relative inline-flex items-center font-bold uppercase tracking-wide transition-colors duration-300;
+  font-family: 'Cinzel', serif;
   color: var(--text-color);
+  padding: 0.75rem 1rem;
+  text-shadow: 0 0 2px rgba(255, 255, 255, 0.2);
 }
 
 .nav-link-style:after {
   content: "";
   position: absolute;
   bottom: 0;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  width: 0;
   height: 2px;
   background-color: var(--nav-link-from);
-  transform: scaleX(0);
-  transform-origin: center;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.nav-link-style:hover:after {
-  transform: scaleX(1);
+.nav-link-style:hover:after,
+.nav-link-style.active:after {
+  width: 100%;
+  left: 0;
 }
 
-/* Gaya Mobile untuk Garis Bawah Fade-in */
+/* --- Gaya Sub-Navigasi (Desktop) --- */
+.sub-nav-link-style {
+  @apply block font-bold uppercase tracking-wider text-sm rounded-md transition-colors duration-300 ease-in-out;
+  color: var(--text-color);
+  padding: 0.5rem 1rem;
+}
+
+.sub-nav-link-style:hover {
+  background-color: var(--nav-link-from);
+  color: var(--nav-link-text);
+}
+
+/* --- Dropdown menu container (Desktop) --- */
+.dropdown-menu {
+  @apply absolute top-full left-1/2 -translate-x-1/2 w-max p-2 bg-zinc-900/95 border border-yellow-700 rounded-md shadow-lg opacity-0 invisible transition-all duration-300 ease-in-out z-50;
+  transform: translateY(10px);
+}
+
+.group:hover .dropdown-menu {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* =========================================================================
+   3. Navigasi Mobile
+   ========================================================================= */
+
+/* --- Gaya Navigasi Utama (Mobile) --- */
 .nav-mobile-style {
+  @apply block w-full px-4 py-3 text-center font-bold uppercase tracking-wider rounded-lg transition-colors duration-300 ease-in-out;
+  color: var(--text-color);
+  background: transparent;
+  border: 1px solid var(--nav-link-border);
+  font-family: 'Cinzel', serif;
+}
+
+.nav-mobile-style:hover {
+  background-color: var(--nav-link-from);
+  color: var(--nav-link-text);
+  box-shadow: 0 0 10px 1px var(--nav-link-from);
+}
+
+/* --- Gaya Sub-Navigasi (Mobile) --- */
+.sub-nav-mobile-style {
   @apply block w-full px-4 py-2 text-center font-bold uppercase tracking-wider rounded-lg;
   color: var(--text-color);
   background: transparent;
@@ -293,10 +340,21 @@ footer {
   transition: all 0.3s ease-in-out;
 }
 
-.nav-mobile-style:hover {
+.sub-nav-mobile-style:hover {
   background-color: var(--nav-link-from);
   color: var(--nav-link-text);
   box-shadow: 0 0 10px 1px var(--nav-link-from);
+}
+
+/* --- Dropdown menu container (Mobile) --- */
+.mobile-submenu-container {
+  max-height: 0;
+  transition: max-height 0.4s ease-in-out;
+  overflow: hidden;
+}
+
+.mobile-submenu-container.open {
+  max-height: 500px;
 }
 /* =========================================================================
    4. Navigasi Button Homepage
@@ -351,55 +409,10 @@ footer {
     0 0 40px var(--nav-link-to);
 }
 
-/* =========================================================================
-   4. Navigasi Button tools Pages
-   ========================================================================= */
-
-.tools-nav-link {
-  background-image: linear-gradient(
-    to top right,
-    var(--nav-link-from),
-    var(--nav-link-via),
-    var(--nav-link-to)
-  );
-  color: var(--nav-link-text);
-  border-color: var(--nav-link-border);
-  box-shadow:
-    0 4px 6px -1px var(--nav-link-shadow),
-    0 2px 4px -2px var(--nav-link-shadow);
-  transition-property: all;
-  transition-duration: 200ms;
-}
-
-.tools-nav-link:hover {
-  transform: scale(1.05);
-  box-shadow:
-    0 10px 15px -3px var(--nav-link-shadow),
-    0 4px 6px -4px var(--nav-link-shadow);
-}
-
-.tools-nav-link:active {
-  opacity: 0.75;
-}
 
 /* =========================================================================
    5. Garis Pemisah Menyala
    ========================================================================= */
-.glowing-divider {
-  width: 100%;
-  height: 2px;
-  background-color: var(--border-bg);
-  box-shadow: 0 0 10px 1px var(--border-bg);
-  filter: blur(0.5px);
-  opacity: 0.8;
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.dark .glowing-divider {
-  background-color: var(--border-bg);
-  box-shadow: 0 0 10px 1px var(--border-bg);
-}
 
 /* Teks Utama */
 .hero-title {
@@ -407,99 +420,10 @@ footer {
   color: var(--title-color);
 }
 
-/* Animasi untuk transisi lebih halus */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
-@keyframes fadeIn-up {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-/* Spinner */
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  border-left-color: var(--glow-color);
-  animation: spin 1s linear infinite;
-}
-
-/* Prose (Konten Markdown) */
-.prose-yellow h1,
-.prose-yellow h2,
-.prose-yellow h3,
-.prose-yellow h4,
-.prose-yellow strong {
-  color: var(--title-color);
-}
-.prose-yellow a {
-  color: var(--title-color);
-}
-.prose pre {
-  @apply bg-zinc-900 border border-yellow-700/50 rounded-lg p-4 overflow-x-auto shadow-inner;
-  position: relative;
-}
-.prose code {
-  @apply bg-zinc-800 text-yellow-300 text-sm px-1.5 py-0.5 rounded;
-  font-family:
-    "Inter", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
-}
-.prose table {
-  @apply w-full text-left table-auto border-collapse;
-}
-.prose thead {
-  @apply text-yellow-400 font-bold;
-}
-.prose th,
-.prose td {
-  @apply p-3 border border-yellow-800/50;
-}
-.prose tbody tr:nth-child(even) {
-  @apply bg-zinc-800;
-}
-.prose tbody tr:hover {
-  @apply bg-yellow-900/30 transition-colors duration-200;
-}
-.prose pre.mermaid {
-  @apply bg-transparent border-0 shadow-none text-zinc-100;
-}
+/* =========================================================================
+   Style Untuk Blog Slug Page
+   ========================================================================= */
 
 /* Tombol Salin */
 .copy-button {
@@ -515,14 +439,14 @@ footer {
   cursor: pointer;
   transition:
     background-color 0.2s,
-    opacity 0.2s;
-  opacity: 0.7;
+    transform 0.2s;
+  opacity: 1;
   z-index: 10;
 }
 
 .copy-button:hover {
   background-color: rgba(255, 255, 255, 0.2);
-  opacity: 1;
+  transform: scale(1.05);
 }
 
 .copy-button.copied {
@@ -530,38 +454,35 @@ footer {
   color: white;
   opacity: 1;
   pointer-events: none;
+  animation: copied-pulse 0.5s ease;
 }
 
-.animate-fade-in-up {
-  animation: fadeIn-up 0.6s ease-out;
-}
-.animate-slide-in-left {
-  animation: slideInLeft 0.7s ease-out;
-}
-.animate-slide-in-right {
-  animation: slideInRight 0.7s ease-out 0.2s;
-  animation-fill-mode: backwards;
-}
-.animate-fade-in {
-  animation: fadeIn 0.8s ease-out 0.4s;
-  animation-fill-mode: backwards;
+@keyframes copied-pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
 }
 
-/* =========================================================================
-    Pages About
-   ========================================================================= */
+pre {
+  position: relative;
+}
 
-@keyframes pulse-slow {
-  0%,
-  100% {
-    transform: scale(1);
-    opacity: 0.2;
+@layer utilities {
+  .animate-fade-in-up {
+    animation: fadeIn-up 0.6s ease-out;
   }
-  50% {
-    transform: scale(1.1);
-    opacity: 0.6;
+  .animate-slide-in-left {
+    animation: slideInLeft 0.7s ease-out;
   }
-}
-.animate-pulse-slow {
-  animation: pulse-slow 4s infinite ease-in-out;
+  .animate-slide-in-right {
+    animation: slideInRight 0.7s ease-out 0.2s;
+    animation-fill-mode: backwards;
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.8s ease-out 0.4s;
+    animation-fill-mode: backwards;
+  }
+  .animate-pulse-slow {
+    animation: pulse-slow 4s infinite ease-in-out;
+  }
 }
