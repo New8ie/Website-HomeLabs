@@ -1,6 +1,6 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
-import '../styles/global.css';
+import { ViewTransitions } from "astro:transitions";
+import "../styles/global.css";
 
 interface Props {
   title: string;
@@ -9,27 +9,58 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<html lang="en" class="dark">
-<head>
-  <link rel="sitemap" href="/sitemap-index.xml" />
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="generator" content={Astro.generator} />
-  <title>{title}</title>
-  <!-- Menambahkan tag link untuk favicon -->
-  <link rel="icon" type="image/png" href="/assets/images/favicon/favicon-96x96.png" sizes="96x96" />
-  <link rel="icon" type="image/svg+xml" href="/assets/images/favicon/favicon.svg" />
-  <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico" />
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/favicon/apple-touch-icon.png" />
-  <meta name="apple-mobile-web-app-title" content="HomeLabs" />
-  <link rel="manifest" href="/assets/images/favicon/site.webmanifest" />
-  <!-- Add the ViewTransitions component for smooth page transitions -->
-  <ViewTransitions />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-</head>
-<body class=blog-pages-background bg-zinc-950 text-zinc-200 font-inter>
-  <slot />
-</body>
+<html lang="id">
+  <head>
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/images/favicon/favicon-96x96.png"
+      sizes="96x96"
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="/assets/images/favicon/favicon.svg"
+    />
+    <link rel="shortcut icon" href="/assets/images/favicon/favicon.ico" />
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="/assets/images/favicon/apple-touch-icon.png"
+    />
+    <meta name="apple-mobile-web-app-title" content="HomeLabs" />
+    <link rel="manifest" href="/assets/images/favicon/site.webmanifest" />
+
+    <ViewTransitions />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;800&family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <script is:inline>
+      const storedTheme = localStorage.getItem("theme");
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      const initialTheme =
+        storedTheme === "dark" || (!storedTheme && prefersDark)
+          ? "dark"
+          : "light";
+      document.documentElement.classList.add(
+        initialTheme === "dark" ? "dark" : "light"
+      );
+    </script>
+  </head>
+  <body class="blog-pages-background font-inter">
+    <slot />
+  </body>
 </html>

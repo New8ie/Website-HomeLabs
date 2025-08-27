@@ -32,9 +32,9 @@ const isFirstPage = page.currentPage === 1;
 <DefaultLayout title={`Blog - Halaman ${page.currentPage}`}>
   <HeaderSection client:load />
 
-  <main class="py-12 px-4">
+  <div class="py-12 px-4">
     <div
-      class="relative z-10 max-w-7xl mx-auto space-y-12 p-6 rounded-2xl shadow-lg"
+      class="relative z-10 max-w-7xl mx-auto space-y-12 p-6 rounded-2xl shadow-lg backdrop-blur-sm"
       style={{
         backgroundColor: "var(--pages-bg)",
         border: "1px solid var(--border-bg)",
@@ -87,11 +87,10 @@ const isFirstPage = page.currentPage === 1;
           </div>
         )
       }
-      
+
       {/* ✅ Teruskan data yang di-paginate langsung ke BlogManager */}
       <BlogManager allPosts={page.data} pageData={page} client:load />
     </div>
-  </main>
-
+  </div>
   <FooterSection client:load />
 </DefaultLayout>

@@ -1,12 +1,11 @@
+// drizzle.config.ts
 import { defineConfig } from "drizzle-kit";
 
 export default defineConfig({
-  schema: "./schema.ts",
-  out: "../../drizzle", // Sesuaikan jalur output jika perlu
-  driver: "better-sqlite",
+  schema: "./src/lib/db/schema.ts",
+  out: "./src/lib/db/migrations",
+  dialect: "sqlite",
   dbCredentials: {
-    url: "./local.sqlite",
+    url: "sqlite.db", // Sesuaikan dengan path file database Anda
   },
-  verbose: true,
-  strict: true,
 });
