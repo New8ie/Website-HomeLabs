@@ -1,5 +1,6 @@
 import "../styles/global.css";
 import { type Post, type PageData } from "../lib/db/types/blog";
+import { Heart } from "lucide-react"; // ✅ Impor ikon Heart
 
 const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
   const postsToDisplay = posts || [];
@@ -36,12 +37,21 @@ const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
 
                   {/* Bagian Konten */}
                   <div className="flex-1">
-                    <h3
-                      className="mt-1 text-md font-extrabold font-cinzel leading-tight transition-colors duration-500 group-hover:text-yellow-300"
-                      style={{ color: "var(--title-color)" }}
-                    >
-                      {post.data.title}
-                    </h3>
+                    <div className="flex items-center gap-2">
+                      <h3
+                        className="mt-1 text-md font-extrabold font-cinzel leading-tight transition-colors duration-500 group-hover:text-yellow-300"
+                        style={{ color: "var(--title-color)" }}
+                      >
+                        {post.data.title}
+                      </h3>
+                      {/* ✅ Tampilkan jumlah like di sini */}
+                      {post.likes > 0 && (
+                        <span className="flex items-center gap-1 text-xs text-yellow-400 font-cinzel ml-auto">
+                          <Heart fill="currentColor" size={12} />
+                          {post.likes}
+                        </span>
+                      )}
+                    </div>
                     <span className="text-xs text-yellow-400 font-cinzel">
                       {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
                         year: "numeric",

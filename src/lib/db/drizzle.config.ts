@@ -1,11 +1,11 @@
-// drizzle.config.ts
-import { defineConfig } from "drizzle-kit";
+// src/lib/db/drizzle.config.ts
+import type { Config } from "drizzle-kit";
 
-export default defineConfig({
-  schema: "./src/lib/db/schema.ts",
-  out: "./src/lib/db/migrations",
+export default {
+  schema: "./src/lib/db/schema.ts", // ✅ cukup relatif dari lokasi file config
+  out: "./migrations", // ✅ otomatis ke src/lib/db/migrations
   dialect: "sqlite",
   dbCredentials: {
-    url: "sqlite.db", // Sesuaikan dengan path file database Anda
+    url: "file:./src/lib/db/local.sqlite", // ✅ relatif dari src/lib/db/
   },
-});
+} satisfies Config;

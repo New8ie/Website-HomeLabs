@@ -4,11 +4,11 @@ import DefaultLayout from "../../layouts/Default.astro";
 import { HeaderSection } from "../../sections/Header";
 import { FooterSection } from "../../sections/Footer";
 import { getCollection } from "astro:content";
-
 import { db, PostLikes } from "../../lib/db/db";
-import { eq } from "drizzle-orm";
+import { eq, count } from "drizzle-orm"; // ✅ Pastikan Anda mengimpor 'count'
 import LikeButton from "../../components/LikeButton";
 
+// Ini tetap sama, tidak ada perubahan
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
@@ -24,12 +24,14 @@ if (!post) {
   throw new Error(`Post with slug "${slug}" not found`);
 }
 
-const postLikes = await db
-  .select()
+// ✅ KODE YANG DIPERBAIKI: Menggunakan count() untuk mendapatkan jumlah total like
+const likesCountResult = await db
+  .select({ count: count() })
   .from(PostLikes)
   .where(eq(PostLikes.slug, slug));
 
-const initialLikes = postLikes.length > 0 ? (postLikes[0].likes ?? 0) : 0;
+const initialLikes = likesCountResult[0]?.count ?? 0;
+
 const { Content } = await post.render();
 const sortedPosts = allPosts.sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -41,195 +43,62 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
 
 <DefaultLayout title={post.data.title}>
   <HeaderSection client:load />
-
-  <main
-    id="main-content"
-    class="max-w-5xl mx-auto px-4 py-12 space-y-8 animate-fade-in-up"
-  >
-    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-      <h1
-        class="text-4xl sm:text-5xl font-cinzel text-center md:text-left font-extrabold tracking-tight leading-tight animate-slide-in-left transition-colors"
-        style={{ color: "var(--title-color)" }}
-      >
+  <main class="max-w-4xl mx-auto px-4 py-8 lg:py-16 space-y-8">
+    <div class="text-zinc-400 font-cinzel flex items-center space-x-2">
+      <a href="/blog" class="hover:underline transition-all duration-300">Blog</a>
+      <span>/</span>
+      <span class="text-white">{post.data.title}</span>
+    </div>
+    <div class="space-y-4">
+      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-cinzel text-white leading-tight">
         {post.data.title}
       </h1>
-
-      <LikeButton slug={post.slug} initialLikes={initialLikes} client:load />
-    </div>
-
-    <div
-      class="flex flex-wrap justify-center md:justify-start gap-4 text-sm backdrop-blur-sm p-4 rounded-lg shadow-lg animate-slide-in-right transition-colors"
-      style={{
-        backgroundColor: "var(--pages-bg)",
-        border: "1px solid var(--border-bg)",
-        boxShadow: "0px 4px 20px 0px var(--shadow-color)",
-      }}
-    >
-      <span class="flex items-center gap-1.5 opacity-80 px-3 py-1">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-4 w-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-          ></path>
-        </svg>
-        {
-          new Date(post.data.pubDate).toLocaleDateString("id-ID", {
+      <div class="flex items-center gap-4 text-sm text-zinc-400 font-inter">
+        <span class="font-bold">
+          {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
             year: "numeric",
             month: "long",
             day: "numeric",
-          })
-        }
-      </span>
-      <span
-        class="px-3 py-1 rounded-full font-semibold font-cinzel text-xs tracking-wide transform hover:scale-105 transition-transform duration-200"
-        style={{
-          backgroundColor: "var(--tag-bg)",
-          color: "var(--tag-text)",
-          border: "1px solid var(--tag-border)",
-        }}
-      >
-        {post.data.category}
-      </span>
+          })}
+        </span>
+        <LikeButton initialLikes={initialLikes} slug={post.slug} client:load />
+      </div>
     </div>
+    <article
+      class="prose dark:prose-invert prose-p:text-lg prose-ul:text-lg prose-li:text-lg prose-headings:font-cinzel"
+    >
+      <Content />
+    </article>
 
     <div
-      class="backdrop-blur-sm p-6 rounded-lg shadow-lg animate-fade-in font-cinzel transition-colors"
-      style={{
-        backgroundColor: "var(--pages-bg)",
-        border: "1px solid var(--border-bg)",
-        boxShadow: "0px 4px 20px 0px var(--shadow-color)",
-      }}
+      class="flex justify-between items-center border-t border-zinc-700 pt-8 mt-12"
     >
-      <article class="prose prose-invert max-w-none prose-yellow">
-        <Content />
-      </article>
-    </div>
-
-    <nav
-      class="flex flex-col sm:flex-row justify-between mt-12 pt-6 text-yellow-400 gap-4 sm:gap-0 animate-fade-in-up"
-      style={{ borderTop: "1px solid var(--border-bg)" }}
-    >
-      <a
-        href="/blog"
-        class="block w-fit px-4 py-2 rounded-md transition-all duration-200 shadow-md text-sm font-bold uppercase tracking-wider group"
-        style={{
-          backgroundImage:
-            "linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))",
-          borderColor: "var(--nav-link-border)",
-          borderWidth: "1px",
-          color: "var(--nav-link-text)",
-        }}
-      >
-        <span class="flex items-center gap-2">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-4 w-4 transform group-hover:-translate-x-1 transition-transform duration-200"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
+      {
+        prevPost ? (
+          <a
+            href={`/blog/${prevPost.slug}`}
+            class="flex items-center gap-2 text-yellow-400 hover:underline transition-all duration-300"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
-          </svg>
-          Back
-        </span>
-      </a>
-
-      <div class="flex items-center gap-6">
-        {
-          prevPost && (
-            <a
-              href={`/blog/${prevPost.slug}`}
-              class="block w-fit px-4 py-2 rounded-md transition-all duration-200 shadow-md text-sm font-bold uppercase tracking-wider"
-              aria-label="Previous post"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))",
-                borderColor: "var(--nav-link-border)",
-                borderWidth: "1px",
-                color: "var(--nav-link-text)",
-              }}
-            >
-              <span class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 transform hover:-translate-x-1 transition-transform duration-200"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M15 19l-7-7 7-7"
-                  />
-                </svg>
-              </span>
-            </a>
-          )
-        }
-        {
-          nextPost && (
-            <a
-              href={`/blog/${nextPost.slug}`}
-              class="block w-fit px-4 py-2 rounded-md transition-all duration-200 shadow-md text-sm font-bold uppercase tracking-wider"
-              aria-label="Next post"
-              style={{
-                backgroundImage:
-                  "linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))",
-                borderColor: "var(--nav-link-border)",
-                borderWidth: "1px",
-                color: "var(--nav-link-text)",
-              }}
-            >
-              <span class="flex items-center gap-2">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  class="h-6 w-6 transform hover:translate-x-1 transition-transform duration-200"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 5l7 7-7 7"
-                  />
-                </svg>
-              </span>
-            </a>
-          )
-        }
-      </div>
-    </nav>
-  </main>
-
-  <FooterSection client:load />
-
-  <script
-    src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"
-    is:inline></script>
-  <script is:inline>
-    document.addEventListener("DOMContentLoaded", (event) => {
-      if (typeof mermaid !== "undefined") {
-        mermaid.initialize({ startOnLoad: true, theme: "dark" });
+            ← Previous Post
+          </a>
+        ) : (
+          <div></div>
+        )
       }
-    });
-  </script>
-  <script is:inline>
+      {
+        nextPost && (
+          <a
+            href={`/blog/${nextPost.slug}`}
+            class="flex items-center gap-2 text-yellow-400 hover:underline transition-all duration-300"
+          >
+            Next Post →
+          </a>
+        )
+      }
+    </div>
+  </main>
+  <FooterSection client:load />
+  <script>
     document.addEventListener("DOMContentLoaded", () => {
       const codeBlocks = document.querySelectorAll("pre");
 
@@ -268,7 +137,7 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
         });
       });
 
-      function fallbackCopyText(text) {
+      function fallbackCopyText(text: string) {
         const textarea = document.createElement("textarea");
         textarea.value = text;
         textarea.style.position = "fixed";
@@ -283,5 +152,4 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
       }
     });
   </script>
-
 </DefaultLayout>

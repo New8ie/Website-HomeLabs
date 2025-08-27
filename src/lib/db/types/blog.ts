@@ -1,11 +1,13 @@
-// src/types/blog.ts
+// src/lib/db/types/blog.ts
 
-// ✅ Gunakan tipe yang disediakan oleh Astro
 import type { CollectionEntry } from 'astro:content';
+// ✅ PERBAIKI: Mengubah jalur impor dari '../db/db' menjadi '../db'
+import type { PostLikes } from '../db'; 
 
-// `Post` sekarang adalah alias untuk tipe yang disediakan oleh Astro.
-// Ini secara otomatis akan mencakup properti seperti `slug`, `data`, `body`, dan `draft`.
-export type Post = CollectionEntry<'blog'>;
+// ✅ Perbarui tipe 'Post' untuk menyertakan properti 'likes'
+export type Post = CollectionEntry<'blog'> & {
+    likes: number;
+};
 
 // `PageData` tidak memerlukan properti `first` dan `last` di `url`
 // karena Astro Pagination tidak menyediakannya.

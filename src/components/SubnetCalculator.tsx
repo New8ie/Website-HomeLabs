@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 // Interface for Subnet calculation results
 interface SubnetResult {

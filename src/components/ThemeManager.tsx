@@ -36,7 +36,7 @@ const ThemeManager = () => {
 
   // Fungsi untuk beralih tema
   const toggleTheme = () => {
-    setTheme(currentTheme => (currentTheme === "dark" ? "light" : "dark"));
+    setTheme((currentTheme) => (currentTheme === "dark" ? "light" : "dark"));
   };
 
   return (
@@ -56,4 +56,3 @@ const ThemeManager = () => {
 };
 
 export default ThemeManager;
-

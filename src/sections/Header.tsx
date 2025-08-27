@@ -1,9 +1,6 @@
 // src/sections/Header.tsx
 import { useState, useEffect, useRef } from "react";
 import {
-  Sun,
-  Moon,
-  Globe2,
   Menu,
   X,
   ChevronDown,

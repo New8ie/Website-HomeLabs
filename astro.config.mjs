@@ -10,7 +10,7 @@ import node from "@astrojs/node";
 
 export default defineConfig({
   site: "https://thismydomains.com",
-
+  output: "server",
   redirects: {
     "/blog": "/blog/1",
   },

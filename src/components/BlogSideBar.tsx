@@ -46,32 +46,6 @@ const BlogSideBar = ({
         boxShadow: "0 0 10px var(--shadow-color)",
       }}
     >
-      {/* Bagian Kategori */}
-      <div className="mb-6">
-        <h2
-          className="text-xl font-extrabold text-center mb-4 tracking-wider transition-colors duration-500"
-          style={{ color: "var(--title-color)" }}
-        >
-          Category
-        </h2>
-        <div className="flex flex-wrap justify-center gap-2">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              onClick={() => handleCategoryClick(cat)}
-              className={`px-4 py-1 rounded-full text-xs font-semibold uppercase transition-all duration-200
-                          ${
-                            selectedCategory === cat
-                              ? "bg-yellow-700/80 text-white shadow-md"
-                              : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50"
-                          }`}
-            >
-              {cat}
-            </button>
-          ))}
-        </div>
-      </div>
-
       {/* Bagian Tombol Pencarian */}
       <h2
         className="text-xl font-extrabold text-center mb-4 tracking-wider transition-colors duration-500"
@@ -166,6 +140,32 @@ const BlogSideBar = ({
           </div>
         </div>
       )}
+
+      {/* Bagian Kategori, dipindahkan ke bawah */}
+      <div className="mt-6">
+        <h2
+          className="text-xl font-extrabold text-center mb-4 tracking-wider transition-colors duration-500"
+          style={{ color: "var(--title-color)" }}
+        >
+          Category
+        </h2>
+        <div className="flex flex-wrap justify-center gap-2">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => handleCategoryClick(cat)}
+              className={`px-4 py-1 rounded-full text-xs font-semibold uppercase transition-all duration-200
+                          ${
+                            selectedCategory === cat
+                              ? "bg-yellow-700/80 text-white shadow-md"
+                              : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50"
+                          }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

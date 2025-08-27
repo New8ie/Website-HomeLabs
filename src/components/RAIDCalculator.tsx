@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 
 // Defines the interface for RAID calculation results
 interface RaidResult {

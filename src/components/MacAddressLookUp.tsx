@@ -1,5 +1,5 @@
 // src/components/MacAddressLookup.tsx
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // Defines the interface for the CircleNotch component props.
 interface CircleNotchProps {

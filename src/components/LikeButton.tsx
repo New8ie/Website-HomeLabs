@@ -1,5 +1,4 @@
-// src/components/LikeButton.tsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { Heart } from "lucide-react";
 
 type LikeButtonProps = {
@@ -25,7 +24,9 @@ export default function LikeButton({ initialLikes, slug }: LikeButtonProps) {
       });
 
       if (response.ok) {
-        setLikes((prevLikes) => prevLikes + 1);
+        const data = await response.json();
+        // ✅ Perbarui jumlah like dengan data yang dikirim oleh server
+        setLikes(data.likes);
       }
     } catch (error) {
       console.error("Gagal menambahkan like:", error);
@@ -43,13 +44,11 @@ export default function LikeButton({ initialLikes, slug }: LikeButtonProps) {
         backgroundColor: "var(--pages-bg)",
         color: likes > 0 ? "var(--accent-color)" : "var(--text-color)",
         border: "1px solid var(--border-bg)",
-        boxShadow: "0px 4px 20px 0px var(--shadow-color)",
+        boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
       }}
     >
-      <Heart fill={likes > 0 ? "currentColor" : "none"} />
-      <span className="text-sm">
-        {likes} Like{likes > 1 ? "s" : ""}
-      </span>
+      <Heart fill="currentColor" strokeWidth={1} />
+      <span>{likes}</span>
     </button>
   );
 }

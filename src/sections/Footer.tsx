@@ -57,8 +57,8 @@ export const FooterSection = () => {
       updateMailboxIcon();
 
       // Buat MutationObserver untuk memantau perubahan atribut 'class' pada <html>
-      const observer = new MutationObserver(mutations => {
-        mutations.forEach(mutation => {
+      const observer = new MutationObserver((mutations) => {
+        mutations.forEach((mutation) => {
           if (mutation.attributeName === "class") {
             updateMailboxIcon();
           }
@@ -85,7 +85,11 @@ export const FooterSection = () => {
                 Navigasi
               </h3>
               {navLinks.map(({ title, href }) => (
-                <a key={title} href={href} className="hover:text-yellow-400 font-cinzel transition">
+                <a
+                  key={title}
+                  href={href}
+                  className="hover:text-yellow-400 font-cinzel transition"
+                >
                   {title}
                 </a>
               ))}
@@ -107,7 +111,7 @@ export const FooterSection = () => {
           </div>
 
           {/* Kolom Kanan: Hubungi & Sosial */}
-          <div className="flex flex-col items-center md:items-end font-cinzel gap-4"> 
+          <div className="flex flex-col items-center md:items-end font-cinzel gap-4">
             {/* Tautan email dengan gambar asli */}
             <a
               href="mailto:webadmin@thismydomains.com"
