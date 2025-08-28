@@ -1,13 +1,13 @@
 ---
-title: "Proxmox Cluster Ring Topologi"
-description: "Membangun routing dinamis berbasis OSPFv2 (IPv4-only)"
+title: Powershell Profile
+description: Create Powershell Profile
 pubDate: 2025-08-08
-category: "Virtual"
-image: "/assets/images/Blog/Brands/windows.png"
+category: Windows
 author:
-  name: "Fachmi"
-  title: "Admin"
-  image: "/assets/images/Logo/font-logo.png"
+    name: Fachmi
+    title: Admin
+    image: /assets/images/Logo/font-logo.png
+image: /assets/images/Blog/topologi-ring.png
 ---
 
 # Create PROFILE Powershell

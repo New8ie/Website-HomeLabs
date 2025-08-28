@@ -5,10 +5,10 @@ import { HeaderSection } from "../../sections/Header";
 import { FooterSection } from "../../sections/Footer";
 import { getCollection } from "astro:content";
 import { db, PostLikes } from "../../lib/db/db";
-import { eq, count } from "drizzle-orm"; // ✅ Pastikan Anda mengimpor 'count'
+import { eq, count } from "drizzle-orm";
 import LikeButton from "../../components/LikeButton";
 
-// Ini tetap sama, tidak ada perubahan
+export const prerender = true;
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({
@@ -24,12 +24,10 @@ if (!post) {
   throw new Error(`Post with slug "${slug}" not found`);
 }
 
-// ✅ KODE YANG DIPERBAIKI: Menggunakan count() untuk mendapatkan jumlah total like
 const likesCountResult = await db
   .select({ count: count() })
   .from(PostLikes)
   .where(eq(PostLikes.slug, slug));
-
 const initialLikes = likesCountResult[0]?.count ?? 0;
 
 const { Content } = await post.render();
@@ -43,113 +41,127 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
 
 <DefaultLayout title={post.data.title}>
   <HeaderSection client:load />
-  <main class="max-w-4xl mx-auto px-4 py-8 lg:py-16 space-y-8">
-    <div class="text-zinc-400 font-cinzel flex items-center space-x-2">
-      <a href="/blog" class="hover:underline transition-all duration-300">Blog</a>
-      <span>/</span>
-      <span class="text-white">{post.data.title}</span>
-    </div>
-    <div class="space-y-4">
-      <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-cinzel text-white leading-tight">
-        {post.data.title}
-      </h1>
-      <div class="flex items-center gap-4 text-sm text-zinc-400 font-inter">
-        <span class="font-bold">
-          {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
-            year: "numeric",
-            month: "long",
-            day: "numeric",
-          })}
-        </span>
-        <LikeButton initialLikes={initialLikes} slug={post.slug} client:load />
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16 space-y-12">
+    <div class="border border-zinc-700 rounded-lg p-6 sm:p-8 lg:p-12 space-y-8">
+      <div class="text-zinc-400 font-cinzel flex items-center space-x-2">
+        <a href="/blog" class="hover:underline transition-all duration-300">Blog</a>
+        <span>/</span>
+        <span class="text-white">{post.data.title}</span>
       </div>
-    </div>
-    <article
-      class="prose dark:prose-invert prose-p:text-lg prose-ul:text-lg prose-li:text-lg prose-headings:font-cinzel"
-    >
-      <Content />
-    </article>
+      <div class="space-y-4">
+        <h1
+          class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-cinzel leading-tight"
+          style={{ color: "var(--title-color)" }}
+        >
+          {post.data.title}
+        </h1>
+        <div
+          class="flex items-center gap-4 text-sm font-inter"
+          style={{ color: "var(--text-color)" }}
+        >
+          <span class="font-bold">
+            {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </span>
+          <LikeButton initialLikes={initialLikes} slug={post.slug} client:load />
+        </div>
+      </div>
+      
+      <article
+        class="prose dark:prose-invert max-w-none prose-p:text-lg prose-ul:text-lg prose-li:text-lg prose-headings:font-cinzel"
+      >
+        <Content />
+      </article>
 
-    <div
-      class="flex justify-between items-center border-t border-zinc-700 pt-8 mt-12"
-    >
-      {
-        prevPost ? (
-          <a
-            href={`/blog/${prevPost.slug}`}
-            class="flex items-center gap-2 text-yellow-400 hover:underline transition-all duration-300"
-          >
-            ← Previous Post
-          </a>
-        ) : (
-          <div></div>
-        )
-      }
-      {
-        nextPost && (
-          <a
-            href={`/blog/${nextPost.slug}`}
-            class="flex items-center gap-2 text-yellow-400 hover:underline transition-all duration-300"
-          >
-            Next Post →
-          </a>
-        )
-      }
+      <div
+        class="flex justify-between items-center border-t border-zinc-700 pt-8 mt-12"
+      >
+        {
+          prevPost ? (
+            <a
+              href={`/blog/${prevPost.slug}`}
+              class="flex items-center gap-2 text-yellow-400 hover:underline transition-all duration-300"
+            >
+              ← Previous Post
+            </a>
+          ) : (
+            <div></div>
+          )
+        }
+        {
+          nextPost && (
+            <a
+              href={`/blog/${nextPost.slug}`}
+              class="flex items-center gap-2 text-yellow-400 hover:underline transition-all duration-300"
+            >
+              Next Post →
+            </a>
+          )
+        }
+      </div>
     </div>
   </main>
   <FooterSection client:load />
+  
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const codeBlocks = document.querySelectorAll("pre");
+  function attachCopyButtons() {
+    const article = document.querySelector("article");
+    if (!article) {
+      return;
+    }
+    const codeBlocks = article.querySelectorAll("pre");
 
-      codeBlocks.forEach((codeBlock) => {
-        if (codeBlock.classList.contains("mermaid")) {
-          return;
-        }
-
-        const textToCopy = codeBlock.textContent;
-        if (!textToCopy) {
-          return;
-        }
-
-        codeBlock.style.position = "relative";
-
-        const button = document.createElement("button");
-        button.className = "copy-button";
-        button.innerText = "Copy";
-        codeBlock.appendChild(button);
-
-        button.addEventListener("click", () => {
-          navigator.clipboard
-            .writeText(textToCopy.trim())
-            .then(() => {
-              button.innerText = "Copied!";
-              button.classList.add("copied");
-              setTimeout(() => {
-                button.innerText = "Copy";
-                button.classList.remove("copied");
-              }, 2000);
-            })
-            .catch((err) => {
-              console.error("Failed to copy text: ", err);
-              fallbackCopyText(textToCopy.trim());
-            });
-        });
-      });
-
-      function fallbackCopyText(text: string) {
-        const textarea = document.createElement("textarea");
-        textarea.value = text;
-        textarea.style.position = "fixed";
-        document.body.appendChild(textarea);
-        textarea.select();
-        try {
-          document.execCommand("copy");
-        } catch (err) {
-          console.error("Fallback copy failed:", err);
-        }
-        document.body.removeChild(textarea);
+    codeBlocks.forEach((codeBlock) => {
+      // Pastikan elemennya adalah HTMLElement untuk validasi TypeScript
+      if (!(codeBlock instanceof HTMLElement)) {
+        return;
       }
+      
+      if (codeBlock.querySelector(".copy-button")) {
+        return;
+      }
+      if (codeBlock.classList.contains("mermaid")) {
+        return;
+      }
+
+      const textToCopy = codeBlock.textContent;
+      if (!textToCopy) {
+        return;
+      }
+
+      codeBlock.style.position = "relative";
+      const button = document.createElement("button");
+      button.className = "copy-button";
+      button.innerText = "Copy";
+      codeBlock.appendChild(button);
+
+      button.addEventListener("click", () => {
+        navigator.clipboard
+          .writeText(textToCopy.trim())
+          .then(() => {
+            button.innerText = "Copied!";
+            button.classList.add("copied");
+            setTimeout(() => {
+              button.innerText = "Copy";
+              button.classList.remove("copied");
+            }, 2000);
+          })
+          .catch((err) => {
+            console.error("Failed to copy text: ", err);
+            // Fallback menggunakan navigator.clipboard juga, karena document.execCommand sudah usang
+            alert("Gagal menyalin. Silakan coba salin secara manual.");
+          });
+      });
     });
-  </script>
+  }
+  
+  // Karena navigator.clipboard sudah didukung secara luas, fallback execCommand tidak lagi diperlukan
+  // dan dapat dihapus untuk membersihkan kode.
+  
+  attachCopyButtons();
+  document.addEventListener("astro:after-swap", attachCopyButtons);
+</script>
 </DefaultLayout>

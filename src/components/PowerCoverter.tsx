@@ -108,7 +108,7 @@ export default function PowerConverter() {
       }}
     >
       <h1
-        className="text-3xl font-bold text-center uppercase tracking-wider font-cinzel transition-colors duration-500"
+        className="text-3xl font-bold text-center uppercase tracking-wider font-cinzel transition-colors duration-500 "
         style={{ color: "var(--title-color)" }}
       >
         W / kVA Converter
@@ -154,7 +154,7 @@ export default function PowerConverter() {
             id="inputUnit"
             value={inputUnit}
             onChange={(e) => setInputUnit(e.target.value as "W" | "kVA")}
-            className="w-full px-4 py-2 rounded-lg focus:outline-none font-cinzel transition-all duration-300"
+            className="w-full px-4 py-2 rounded-lg focus:outline-none font-cinzel appearance-none transition-all duration-300"
             style={{
               backgroundColor: "var(--background-color)",
               borderColor: "var(--border-bg)",

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { type Post, type PageData } from "../lib/db/types/blog";
 import BlogSideBar from "./BlogSideBar";
 import BlogPage from "./BlogPage";
@@ -47,7 +47,7 @@ export default function BlogManager({
   }, [searchQuery, selectedCategory]);
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-16 gap-y-16">
+    <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-16 gap-y-16 mt-8">
       {/* Kolom untuk Konten Blog Utama */}
       <div className="lg:col-span-3 order-2 lg:order-1 transition-opacity duration-1000 ease-out animate-fade-in-up">
         {/* ✅ Pastikan BlogPage menerima array `filteredPosts` */}

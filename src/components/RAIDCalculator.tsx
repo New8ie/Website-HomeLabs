@@ -257,7 +257,7 @@ export default function RAIDCalculator() {
             id="raidType"
             value={raidType}
             onChange={(e) => setRaidType(e.target.value)}
-            className="w-full px-4 py-2 rounded-lg focus:outline-none transition-all duration-300"
+            className="w-full px-4 py-2 rounded-lg focus:outline-none transition-all duration-300 appearance-none"
             style={{
               backgroundColor: "var(--background-color)",
               borderColor: "var(--border-bg)",

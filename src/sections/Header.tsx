@@ -1,11 +1,6 @@
 // src/sections/Header.tsx
 import { useState, useEffect, useRef } from "react";
-import {
-  Menu,
-  X,
-  ChevronDown,
-  ChevronUp,
-} from "lucide-react";
+import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
 
 // Data untuk tautan navigasi utama
 const navLinks = [
@@ -44,7 +39,9 @@ export const HeaderSection = () => {
     const currentMenu = menuRef.current;
     if (isMenuOpen && currentMenu) {
       // Perbarui tinggi setiap kali state isMenuOpen atau isToolsDropdownOpen berubah
-      const toolsHeight = isToolsDropdownOpen ? toolsDropdownRef.current?.scrollHeight || 0 : 0;
+      const toolsHeight = isToolsDropdownOpen
+        ? toolsDropdownRef.current?.scrollHeight || 0
+        : 0;
       const calculatedHeight = currentMenu.scrollHeight + toolsHeight;
       setMaxHeight(`${calculatedHeight}px`);
     } else {
@@ -119,11 +116,21 @@ export const HeaderSection = () => {
                   >
                     {link.title}
                     {link.subLinks && (
-                      <ChevronDown size={16} className="ml-1 transition-transform duration-300 group-hover:rotate-180" />
+                      <ChevronDown
+                        size={16}
+                        className="ml-1 transition-transform duration-300 group-hover:rotate-180"
+                      />
                     )}
                   </a>
                   {link.subLinks && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 w-max p-2 bg-zinc-900/95 border border-yellow-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto">
+                    <div
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-max p-2 rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto"
+                      style={{
+                        backgroundColor: "var(--footer-bg)",
+                        border: "1px solid var(--footer-border)",
+                      }}
+                    >
+                      {" "}
                       <ul className="space-y-2">
                         {link.subLinks.map((subLink) => (
                           <li key={subLink.title}>
@@ -187,7 +194,7 @@ export const HeaderSection = () => {
               {link.subLinks ? (
                 // Tombol dropdown untuk mobile
                 <button
-                  className="nav-mobile-style font-bold w-full text-left"
+                  className="nav-mobile-style font-bold w-full text-center"
                   style={{
                     fontFamily: "'Cinzel', serif",
                     textShadow: "0 0 2px gold",
@@ -224,8 +231,12 @@ export const HeaderSection = () => {
               {link.subLinks && (
                 <div
                   ref={toolsDropdownRef}
-                  className="pl-4 pt-2 overflow-hidden transition-[max-height] duration-300 ease-in-out"
-                  style={{ maxHeight: isToolsDropdownOpen ? toolsDropdownRef.current?.scrollHeight + 'px' : '0px' }}
+                  className="pl-4 pt-2 overflow-hidden items-center text-center transition-[max-height] duration-300 ease-in-out"
+                  style={{
+                    maxHeight: isToolsDropdownOpen
+                      ? toolsDropdownRef.current?.scrollHeight + "px"
+                      : "0px",
+                  }}
                 >
                   <ul className="space-y-1">
                     {link.subLinks.map((subLink) => (

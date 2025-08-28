@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { db, PostLikes } from "../../lib/db/db";
-import { eq, and, count, sql } from "drizzle-orm";
+import { eq, and, count } from "drizzle-orm";
 
 export const POST: APIRoute = async ({ request }) => {
   const { slug } = await request.json();
@@ -32,12 +32,15 @@ export const POST: APIRoute = async ({ request }) => {
         .select({ count: count() })
         .from(PostLikes)
         .where(eq(PostLikes.slug, slug));
-        
+
       const likesCount = totalLikes[0]?.count ?? 0;
 
-      return new Response(JSON.stringify({ message: "Already liked", likes: likesCount }), {
-        status: 200,
-      });
+      return new Response(
+        JSON.stringify({ message: "Already liked", likes: likesCount }),
+        {
+          status: 200,
+        }
+      );
     }
 
     // Tambahkan like baru dan rekam IP dengan nilai eksplisit
@@ -59,11 +62,8 @@ export const POST: APIRoute = async ({ request }) => {
     );
   } catch (error) {
     console.error(error);
-    return new Response(
-      JSON.stringify({ message: "Internal Server Error" }),
-      {
-        status: 500,
-      }
-    );
+    return new Response(JSON.stringify({ message: "Internal Server Error" }), {
+      status: 500,
+    });
   }
 };

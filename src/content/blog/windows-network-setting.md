@@ -1,13 +1,13 @@
 ---
-title: "Windows Server Bridge External Network"
-description: "Create Bridge Network Hyper-V"
+title: Windows Server Bridge External Network
+description: Create Bridge Network Hyper-V
 pubDate: 2025-08-08
-category: "Windows"
-image: "/assets/images/Blog/Brands/windows.png"
+category: Windows
 author:
-  name: "Fachmi"
-  title: "Admin"
-  image: "/assets/images/Logo/font-logo.png"
+  name: Fachmi
+  title: Admin
+  image: /assets/images/Logo/font-logo.png
+image: /assets/images/Blog/ActiveDirectory.png
 ---
 
 # Network Setting

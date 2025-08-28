@@ -1,13 +1,13 @@
 ---
-title: "Windows Server AD Replication"
-description: "Create Server AD Replication"
+title: Windows Server AD Replication
+description: Create Server AD Replication
 pubDate: 2025-08-08
-category: "Windows"
-image: "/assets/images/Blog/Brands/windows.png"
+category: Windows
 author:
-  name: "Fachmi"
-  title: "Admin"
-  image: "/assets/images/Logo/font-logo.png"
+  name: Fachmi
+  title: Admin
+  image: /assets/images/Logo/font-logo.png
+image: /assets/images/Blog/ActiveDirectory.png
 ---
 
 # Panduan DC Replika di WinSer 2025

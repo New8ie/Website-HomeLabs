@@ -7,32 +7,39 @@ import { HeaderSection } from "../../sections/Header";
 import { FooterSection } from "../../sections/Footer";
 import BlogManager from "../../components/BlogManager";
 import { db, PostLikes } from "../../lib/db/db";
-import { eq, count } from "drizzle-orm"; // ✅ Import 'db', 'PostLikes', dan 'count'
+import { eq, count } from "drizzle-orm";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const posts = await getCollection("blog");
-  posts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  const allPosts = await getCollection("blog");
 
-  const paginatedPosts = posts.slice(1);
+  // Pilih satu postingan secara acak sebagai "unggulan"
+  const randomIndex = Math.floor(Math.random() * allPosts.length);
+  const featuredPost = allPosts[randomIndex];
 
-  // ✅ Panggil database untuk setiap postingan untuk mendapatkan jumlah like
-  const postsWithLikes = await Promise.all(
-    paginatedPosts.map(async (post) => {
-      const likesCountResult = await db
-        .select({ count: count() })
-        .from(PostLikes)
-        .where(eq(PostLikes.slug, post.slug));
+  // Saring postingan unggulan dari daftar semua postingan
+  const otherPosts = allPosts.filter((post) => post.slug !== featuredPost.slug);
 
-      const likes = likesCountResult[0]?.count ?? 0;
+  // Urutkan sisa postingan berdasarkan tanggal untuk pagination
+  otherPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-      return {
-        ...post,
-        likes, // ✅ Tambahkan jumlah like ke objek postingan
-      };
-    })
-  );
+  // Gabungkan postingan unggulan dengan data like-nya
+  const likesCountResult = await db
+    .select({ count: count() })
+    .from(PostLikes)
+    .where(eq(PostLikes.slug, featuredPost.slug));
+  const featuredPostLikes = likesCountResult[0]?.count ?? 0;
+  
+  const featuredPostWithLikes = {
+    ...featuredPost,
+    likes: featuredPostLikes,
+  };
 
-  return paginate(postsWithLikes, { pageSize: 9 });
+  // Buat array baru untuk pagination yang dimulai dengan postingan unggulan,
+  // lalu diikuti oleh sisa postingan
+  const postsForPagination = [featuredPostWithLikes, ...otherPosts];
+
+  // Gunakan array yang telah diurutkan dan digabungkan untuk pagination
+  return paginate(postsForPagination, { pageSize: 9 });
 };
 
 export const prerender = true;
@@ -40,6 +47,8 @@ export const prerender = true;
 const { page } = Astro.props as {
   page: Page<CollectionEntry<"blog"> & { likes: number }>;
 };
+
+// Ambil postingan pertama dari data halaman, yang merupakan postingan acak yang kita masukkan
 const newestPost = page.data[0];
 
 ---
@@ -56,7 +65,7 @@ const newestPost = page.data[0];
       <h1
         class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-cinzel text-white  leading-tight transition-colors duration-500"
       >
-        My Journal
+        My Blog
       </h1>
       {
         newestPost && (

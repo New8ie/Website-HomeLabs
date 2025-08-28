@@ -2,7 +2,7 @@
 
 import type { CollectionEntry } from 'astro:content';
 // ✅ PERBAIKI: Mengubah jalur impor dari '../db/db' menjadi '../db'
-import type { PostLikes } from '../db'; 
+
 
 // ✅ Perbarui tipe 'Post' untuk menyertakan properti 'likes'
 export type Post = CollectionEntry<'blog'> & {

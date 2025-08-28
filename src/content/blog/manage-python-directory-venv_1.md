@@ -1,13 +1,13 @@
 ---
-title: "Manage python directory venv"
-description: "Manage python directory venvt"
+title: Manage python directory venv
+description: Manage python directory venvt
 pubDate: 2025-08-08
-category: "MacOS"
-image: "/assets/images/Blog/Brands/python.jpeg"
+category: MacOS
 author:
-  name: "Fachmi"
-  title: "SysAdmin"
-  image: "/assets/images/Logo/font-logo.png"
+  name: Fachmi
+  title: SysAdmin
+  image: /assets/images/Logo/font-logo.png
+image: /assets/images/Blog/python.jpg
 ---
 # Merapihkan Directory venv
 ## 🎯 Tujuan Upgrade:

@@ -1,4 +1,3 @@
-// astro.config.mjs
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import react from "@astrojs/react";
@@ -7,6 +6,7 @@ import remarkMermaid from "remark-mermaidjs";
 import sitemap from "@astrojs/sitemap";
 import path from "path";
 import node from "@astrojs/node";
+import remarkShikiTwoslash from "remark-shiki-twoslash";
 
 export default defineConfig({
   site: "https://thismydomains.com",
@@ -21,14 +21,18 @@ export default defineConfig({
     }),
     react(),
     mdx({
-      remarkPlugins: [remarkMermaid],
+      // Gabungkan semua plugin di sini
+      remarkPlugins: [
+        remarkMermaid,
+        [remarkShikiTwoslash, { theme: "github-dark-dimmed" }],
+      ],
     }),
     sitemap(),
   ],
 
   server: {
     host: true,
-    port: 4321,
+    port: 80,
   },
 
   vite: {

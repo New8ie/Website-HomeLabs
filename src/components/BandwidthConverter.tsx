@@ -8,7 +8,7 @@ export default function BandwidthConverter() {
   const [result, setResult] = useState<number | null>(null);
   const [error, setError] = useState<string>("");
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
-  const [value, setValue] = useState("");
+
   // Array of available units with their labels
   const units = [
     { value: "bps", label: "b/s" },
