@@ -1,43 +1,39 @@
 ---
-title: "Manage python directory venv"
-description: "Manage python directory venvt"
+title: Manage python directory venv
+description: Manage python directory venvt
 pubDate: 2025-08-08
-category: "MacOS"
-image: "/assets/images/Blog/Brands/python.jpeg"
+category: MacOS
 author:
-  name: "Fachmi"
-  title: "SysAdmin"
-  image: "/assets/images/Logo/font-logo.png"
+  name: Fachmi
+  title: SysAdmin
+  image: /assets/images/Logo/font-logo.png
+image: /assets/images/Blog/python.jpg
 ---
-
----
-
 # Merapihkan Directory venv
-
 ## 🎯 Tujuan Upgrade:
 
-1.  🔄 Auto-completion untuk mkvenv, workon, rmvenv
-2.  🧰 Installer skrip alias otomatis
-3.  📁 workon otomatis cd ke direktori proyek (jika ada folder ~/Projects/<nama>)
+1.  Auto-completion untuk mkvenv, workon, rmvenv
+2.  Installer skrip alias otomatis
+3.  Workon otomatis cd ke direktori proyek (jika ada folder ~/Projects/<nama>)
 
----
+* * *
 
-## ✅ STRUKTUR DIREKTORI
+## STRUKTUR DIREKTORI
 
 Kita asumsikan struktur berikut:
 
-```bash
+```
 ~/.config/venv/         # venv disimpan di sini
-~/Projects/             # folder proyek real disimpan di sini
+~/Projects/             # folder proyek real disimpan di sini 
 ```
 
----
+* * *
 
-## 🛠️ 1. Update alias: ~/.config/zsh/alias_venv.zsh
+## 1. Update alias: ~/.config/zsh/alias\_venv.zsh
 
 Ganti isi file menjadi seperti ini:
 
-```zsh
+```bash
 # ============================================
 # 🔁 Virtualenv Management with pyenv
 # ============================================
@@ -45,6 +41,7 @@ export VENV_HOME="$HOME/.config/venv"
 export PROJECTS_HOME="$HOME/Projects"
 
 # Membuat virtualenv: mkvenv nama_venv [3.10|3.11]
+
 mkvenv() {
   local name="$1"
   local version="${2:-3.10}"
@@ -121,15 +118,15 @@ compdef _venv_complete rmvenv
 
 ```
 
----
+* * *
 
-## 🧰 2. Skrip Installer Alias Otomatis (sekali jalan)
+## 2. Skrip Installer Alias Otomatis (sekali jalan)
 
-**File: ~/.config/zsh/install_alias_venv.zsh**
+**File: ~/.config/zsh/install\_alias\_venv.zsh**
 
-zsh
 
-```
+
+```bash
 #!/bin/zsh
 
 mkdir -p ~/.config/zsh
@@ -141,12 +138,12 @@ EOF
 # Tambah ke .zshrc jika belum ada
 if ! grep -q "alias_venv.zsh" ~/.zshrc; then
   echo '[[ -f "$HOME/.config/zsh/alias_venv.zsh" ]] && source "$HOME/.config/zsh/alias_venv.zsh"' >> ~/.zshrc
-  echo "✅ alias_venv.zsh sudah ditambahkan ke ~/.zshrc"
+  echo " ✅ alias_venv.zsh sudah ditambahkan ke ~/.zshrc"
 else
-  echo "ℹ️ alias_venv.zsh sudah ada di ~/.zshrc"
+  echo " ℹ️ alias_venv.zsh sudah ada di ~/.zshrc"
 fi
 
-echo "✅ Selesai. Jalankan 'source ~/.zshrc' untuk memuat ulang."
+echo " ✅ Selesai. Jalankan 'source ~/.zshrc' untuk memuat ulang."
 ```
 
 Jalankan installer:
@@ -156,14 +153,14 @@ zsh ~/.config/zsh/install_alias_venv.zsh
 
 ```
 
----
+* * *
 
-## ✅ 3. Contoh Penggunaan
+## 3. Contoh Penggunaan
 
 ```
 mkvenv myproject 3.11   # Buat virtualenv + Python 3.11
 workon myproject        # Aktifkan venv & auto-cd ke ~/Projects/myproject (jika ada)
-rmvenv myproject        # Hapus venv
+rmvenv myproject        # Hapus venv 
 ```
 
 Otomatis akan ada auto-completion saat kamu tekan Tab untuk workon dan rmvenv 🎉

@@ -1,6 +1,5 @@
-import "../styles/global.css";
 import { type Post, type PageData } from "../lib/db/types/blog";
-import { Heart } from "lucide-react"; // ✅ Impor ikon Heart
+import { Heart } from "lucide-react";
 
 const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
   const postsToDisplay = posts || [];
@@ -15,58 +14,61 @@ const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
           No articles match.
         </p>
       ) : (
-        <div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {postsToDisplay.map((post) => (
-            <div key={post.slug}>
+            <div
+              key={post.slug}
+              className="group transition-all duration-300 transform hover:-translate-y-1"
+            >
               <a
                 href={`/blog/${post.slug}`}
-                className="group block"
+                className="block w-full h-full"
                 aria-label={`Baca postingan tentang ${post.data.title}`}
               >
-                <div className="flex items-center gap-4 transition-all duration-300 ease-in-out transform group-hover:bg-zinc-800/70 rounded-xl p-3">
-                  {/* Bagian Gambar */}
+                <div className="flex flex-col h-full bg-zinc-800/80 rounded-xl shadow-lg border border-zinc-700 overflow-hidden transition-shadow duration-300 group-hover:shadow-2xl">
+                  {/* Gambar sebagai cover card */}
                   {post.data.image && (
-                    <div className="w-24 h-24 flex-shrink-0 relative">
+                    <div className="w-full h-48 lg:h-56 relative overflow-hidden">
                       <img
                         src={post.data.image}
                         alt={post.data.title}
-                        className="absolute top-0 left-0 w-full h-full object-cover object-center rounded-lg transition-transform duration-300 group-hover:scale-105"
+                        className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                       />
                     </div>
                   )}
 
-                  {/* Bagian Konten */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-2">
-                      <h3
-                        className="mt-1 text-md font-extrabold font-cinzel leading-tight transition-colors duration-500 group-hover:text-yellow-300"
-                        style={{ color: "var(--title-color)" }}
-                      >
-                        {post.data.title}
-                      </h3>
-                      {/* ✅ Tampilkan jumlah like di sini */}
-                      {post.likes > 0 && (
-                        <span className="flex items-center gap-1 text-xs text-yellow-400 font-cinzel ml-auto">
-                          <Heart fill="currentColor" size={12} />
-                          {post.likes}
-                        </span>
-                      )}
-                    </div>
-                    <span className="text-xs text-yellow-400 font-cinzel">
+                  {/* Bagian Konten Kartu */}
+                  <div className="p-6 flex flex-col flex-grow">
+                    <span className="text-xs text-yellow-400 font-cinzel mb-2">
                       {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
                         year: "numeric",
                         month: "short",
                         day: "numeric",
                       })}
                     </span>
-                    <p className="mt-1 text-xs font-cinzel text-zinc-300 transition-colors duration-500 line-clamp-2">
+                    <h3
+                      className="text-lg font-extrabold font-cinzel leading-tight transition-colors duration-500 group-hover:text-yellow-300"
+                      style={{ color: "var(--title-color)" }}
+                    >
+                      {post.data.title}
+                    </h3>
+                    <p className="mt-2 text-sm font-cinzel text-zinc-300 transition-colors duration-500 line-clamp-3 flex-grow">
                       {post.data.description}
                     </p>
+                    <div className="mt-4 flex justify-between items-center">
+                      <span className="text-xs text-zinc-500 font-semibold uppercase tracking-wider transition-all duration-300 group-hover:tracking-widest">
+                        Read More &rarr;
+                      </span>
+                      {post.likes > 0 && (
+                        <span className="flex items-center gap-1 text-xs text-yellow-400 font-cinzel">
+                          <Heart fill="currentColor" size={12} />
+                          {post.likes}
+                        </span>
+                      )}
+                    </div>
                   </div>
                 </div>
               </a>
-              {/* Pembatas Garis */}
-              <div className="w-full h-px bg-zinc-700/50 my-6 last:hidden"></div>
             </div>
           ))}
         </div>

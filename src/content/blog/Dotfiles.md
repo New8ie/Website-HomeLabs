@@ -110,6 +110,6 @@ Dibuat dan dirawat oleh [New8ie](https://github.com/New8ie).
 Feel free untuk fork dan kirim pull request.
 
 ---
-[LICENSE](https://github.com/New8ie/Dotfiles/blob/main/LICENSE)
+Git [License](https://github.com/New8ie/Dotfiles/blob/main/LICENSE)
 
 

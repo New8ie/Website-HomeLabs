@@ -7,7 +7,7 @@ author:
     name: Fachmi
     title: Admin
     image: /assets/images/Logo/font-logo.png
-image: /assets/images/Blog/topologi-ring.png
+image: /assets/images/Blog/Brands/powershell.jpg
 ---
 
 # Create PROFILE Powershell
@@ -28,7 +28,7 @@ C:\Users\Administrator\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.
 
 ---
 
-## ✅ 2. Buat File Profile (Jika Belum Ada)
+## 2. Buat File Profile (Jika Belum Ada)
 
 ```powershell
 if (!(Test-Path -Path $PROFILE)) {
@@ -39,7 +39,7 @@ if (!(Test-Path -Path $PROFILE)) {
 
 ---
 
-## ✅ 3. Edit File Profile
+## 3. Edit File Profile
 
 Kamu bisa buka profil menggunakan Notepad:
 
@@ -97,7 +97,7 @@ Write-Host "✔ PowerShell profile loaded. Ready for Hyper-V admin." -Foreground
 
 ---
 
-## ✅ 4. Reload Profile
+## 4. Reload Profile
 
 Setelah simpan, jalankan:
 
@@ -108,6 +108,6 @@ Setelah simpan, jalankan:
 
 ---
 
-## 🚀 Alias yang Bisa Kamu Gunakan
+## Alias yang Bisa Kamu Gunakan
 
 <figure class="table"><table><thead><tr><th>Alias/Fungsi</th><th>Deskripsi</th></tr></thead><tbody><tr><td>ll</td><td>List direktori (mirip ls -l)</td></tr><tr><td>gs</td><td>Get-Service</td></tr><tr><td>pingtest</td><td>Ping test (Test-Connection)</td></tr><tr><td>ipconfig</td><td>Get IP info</td></tr><tr><td>reload</td><td>Reload profil</td></tr><tr><td>gvm</td><td>Get-VM</td></tr><tr><td>svm &lt;vm&gt;</td><td>Start-VM</td></tr><tr><td>stvm &lt;vm&gt;</td><td>Stop-VM</td></tr><tr><td>rvm &lt;vm&gt;</td><td>Restart-VM</td></tr><tr><td>svmrc &lt;vm&gt;</td><td>Show console (butuh tambahan jika pakai GUI)</td></tr><tr><td>vmstatus</td><td>Menampilkan status ringkas semua VM</td></tr><tr><td>vmip</td><td>Menampilkan IP dari VM</td></tr><tr><td>hvrefresh</td><td>Refresh info VM dan network adapter</td></tr></tbody></table></figure>

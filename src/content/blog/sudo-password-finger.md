@@ -9,9 +9,10 @@ author:
   title: "SysAdmin"
   image: "/assets/images/Logo/font-logo.png"
 ---
-# Sudo-password-With-Finger
-### Switch to the root user.
+# Sudo password Finger Print
 
+
+### Switch to the root user.
 Switch to the root user by typing the command `sudo su -` and enter the password:  
  
 

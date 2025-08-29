@@ -8,6 +8,7 @@ author:
   title: Admin
   image: /assets/images/Logo/font-logo.png
 image: /assets/images/Blog/ActiveDirectory.png
+slug: windows-server-ad-replication
 ---
 
 # Panduan DC Replika di WinSer 2025

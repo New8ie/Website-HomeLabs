@@ -47,18 +47,63 @@ const { title } = Astro.props;
     />
 
     <script is:inline>
-      const storedTheme = localStorage.getItem("theme");
-      const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
-      ).matches;
-      const initialTheme =
-        storedTheme === "dark" || (!storedTheme && prefersDark)
-          ? "dark"
-          : "light";
-      document.documentElement.classList.add(
-        initialTheme === "dark" ? "dark" : "light"
-      );
+      const applyTheme = () => {
+        const storedTheme = localStorage.getItem("theme");
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        const initialTheme =
+          storedTheme === "dark" || (!storedTheme && prefersDark)
+            ? "dark"
+            : "light";
+
+        // Hapus kelas yang ada sebelum menambahkan yang baru
+        document.documentElement.classList.remove("light", "dark");
+        document.documentElement.classList.add(initialTheme);
+      };
+
+      // Jalankan skrip saat halaman dimuat pertama kali
+      applyTheme();
+
+      // Jalankan skrip setelah setiap transisi halaman
+      document.addEventListener("astro:after-swap", applyTheme);
     </script>
+
+    <style is:global>
+      /* Animasi untuk halaman baru (masuk) */
+      ::view-transition-new(root) {
+        animation: fadeIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      }
+
+      /* Animasi untuk halaman lama (keluar) */
+      ::view-transition-old(root) {
+        animation: fadeOut 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+      }
+
+      /* Keyframes untuk efek fade-in dari bawah */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Keyframes untuk efek fade-out ke atas */
+      @keyframes fadeOut {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+      }
+    </style>
   </head>
   <body class="blog-pages-background font-inter">
     <slot />

@@ -2,7 +2,7 @@
 title: Windows Server Bridge External Network
 description: Create Bridge Network Hyper-V
 pubDate: 2025-08-08
-category: Windows
+category: "Networking"
 author:
   name: Fachmi
   title: Admin
@@ -23,9 +23,9 @@ image: /assets/images/Blog/ActiveDirectory.png
 
 **Membuat VMswitch NIC Team Hanya bisa melalui Powershell**
 
-How to Fix the issue of creating Hyper-V switch with NIC Teaming on Windows Server How to Fix the issue of creating Hyper-V switch with NIC Teaming on Windows Server 2022 or 2025
+How to Fix the issue of creating Hyper-V switch with NIC Teaming on Windows Server 2022 or 2025
 
-```
+```powershell
 PS C:\Users\Administrator> New-VMSwitch -Name "SET-Switch" -NetAdapterName ether01,ether02,ether03 -EnableEmbeddedTeaming $true
 ```
 

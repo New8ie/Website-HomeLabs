@@ -1,28 +1,28 @@
 ---
-title: "Proxmox Cluster Ring Topologi"
-description: "Membangun routing dinamis berbasis OSPFv2 (IPv4-only)"
+title: Proxmox Cluster Ring Topologi
+description: Membangun routing dinamis berbasis OSPFv2 (IPv4-only)
 pubDate: 2025-08-08
-category: "Virtual"
-image: "/assets/images/Blog/topologi-ring.png"
+category: Virtual
 author:
-  name: "Fachmi"
-  title: "Admin"
-  image: "/assets/images/Blog/Brands/proxmox-logo.png"
+  name: Fachmi
+  title: Admin
+  image: /assets/images/Blog/Brands/proxmox-logo.png
+image: /assets/images/Blog/networking.jpeg
 ---
 
 # OSPFv2 (IPv4-only) untuk Proxmox Cluster Ring Topologi
 
-**Dokumentasi Implementasi OSPFv2 (IPv4-only) untuk Proxmox Cluster Ring Topologi**
+Dokumentasi Implementasi OSPFv2 (IPv4-only) untuk Proxmox Cluster Ring Topologi
 
 ---
 
-## 📁 Tujuan
+##  Tujuan
 
 Membangun routing dinamis berbasis **OSPFv2 (IPv4-only)** untuk jaringan **cluster dan Ceph Proxmox** pada topologi ring antar tiga node dengan interface Thunderbolt point-to-point.
 
 ---
 
-## 📁 Topologi Ring Thunderbolt
+##  Topologi Ring Thunderbolt
 
     NODE1["NODE1<br/>10.1.20.3<br/><span style='color:red'>10.10.10.1 en06tb1<br/>10.10.30.2 en05tb0</span>"]
     NODE2["NODE2<br/>10.1.20.4<br/><span style='color:red'>10.10.10.2 en05tb0<br/>10.10.20.1 en06tb1</span>"]
@@ -32,6 +32,7 @@ Membangun routing dinamis berbasis **OSPFv2 (IPv4-only)** untuk jaringan **clust
     NODE2 -- "20 Gbps" --> NODE3
     NODE3 -- "20 Gbps" --> NODE1
 
+![Ring](/assets/images/Blog/topologi-ring.png)
 ### IP Plan
 
 <figure class="table"><table><thead><tr><th>Link</th><th>Interface Node A</th><th>Interface Node B</th><th>Subnet</th></tr></thead><tbody><tr><td>Node1 &lt;-&gt; Node2</td><td><code>thunder0</code></td><td><code>thunder1</code></td><td>10.10.10.0/30</td></tr><tr><td>Node2 &lt;-&gt; Node3</td><td><code>thunder0</code></td><td><code>thunder1</code></td><td>10.10.20.0/30</td></tr><tr><td>Node3 &lt;-&gt; Node1</td><td><code>thunder0</code></td><td><code>thunder1</code></td><td>10.10.30.0/30</td></tr></tbody></table></figure>
@@ -50,7 +51,7 @@ Membangun routing dinamis berbasis **OSPFv2 (IPv4-only)** untuk jaringan **clust
 
 ---
 
-## ⚙️ Instalasi FRR (Routing Engine)
+## Instalasi FRR (Routing Engine)
 
 ### Debian/Proxmox (pada semua node)
 
@@ -65,7 +66,7 @@ apt install frr frr-pythontools -y
 
 Edit `/etc/frr/daemons`:
 
-```bash
+```conf
 
 osfpd=yes
 zebra=yes
@@ -256,7 +257,7 @@ vtysh -c "show ip ospf neighbor"
 
 ### Debug log OSPF:
 
-```
+```bash
 
 tail -f /var/log/frr/frr.log
 
@@ -264,7 +265,7 @@ tail -f /var/log/frr/frr.log
 
 ---
 
-## 🌐 Integrasi dengan Proxmox
+## Integrasi dengan Proxmox
 
 ### `/etc/pve/datacenter.cfg`
 
@@ -288,7 +289,7 @@ mon host = 10.10.10.1,10.10.20.1,10.10.30.1
 
 ---
 
-## 🔒 Firewall (Opsional)
+## Firewall (Opsional)
 
 Pastikan protokol OSPF (IP Proto 89) diizinkan di semua antarmuka Thunderbolt:
 
@@ -300,7 +301,7 @@ iptables -A INPUT -i thunder+ -p ospf -j ACCEPT
 
 ---
 
-## 📊 Monitoring
+## Monitoring
 
 ```bash
 
@@ -312,19 +313,21 @@ vtysh -c "show ip ospf database"
 
 ---
 
-## 🔄 Replikasi dan Live Migration
+## Replikasi dan Live Migration
 
 Dengan OSPF aktif, antar node akan otomatis mengetahui route terbaik untuk migrasi dan storage Ceph, termasuk fallback jika salah satu link mati.
 
 ---
 
-## 👍 Penutup
+## Penutup
 
 - Implementasi OSPFv2 ini stabil untuk homelab.
 - Tidak memerlukan IPv6.
 - Mudah di-maintain dan diperluas.
 
 Bisa ditingkatkan ke dual-stack OSPFv2 + OSPFv3 di masa depan jika diperlukan.
+
+## Bonus Sample Config
 
 Node 1
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Heart } from "lucide-react";
+import { ThumbsUp } from "lucide-react";
 
 type LikeButtonProps = {
   initialLikes: number;
@@ -11,7 +11,7 @@ export default function LikeButton({ initialLikes, slug }: LikeButtonProps) {
   const [isLiking, setIsLiking] = useState(false);
 
   const handleLike = async () => {
-    if (isLiking) return; // Mencegah klik ganda
+    if (isLiking) return;
     setIsLiking(true);
 
     try {
@@ -20,12 +20,11 @@ export default function LikeButton({ initialLikes, slug }: LikeButtonProps) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ slug }), // ✅ Kirim slug di body permintaan
+        body: JSON.stringify({ slug }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        // ✅ Perbarui jumlah like dengan data yang dikirim oleh server
         setLikes(data.likes);
       }
     } catch (error) {
@@ -42,12 +41,15 @@ export default function LikeButton({ initialLikes, slug }: LikeButtonProps) {
       className="flex items-center gap-2 p-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105"
       style={{
         backgroundColor: "var(--pages-bg)",
-        color: likes > 0 ? "var(--accent-color)" : "var(--text-color)",
-        border: "1px solid var(--border-bg)",
+        color: "var(--text-color)",
+        border: "1px solid var(--pages-border-shadow)",
         boxShadow: "0px 2px 4px rgba(0,0,0,0.1)",
       }}
     >
-      <Heart fill="currentColor" strokeWidth={1} />
+      <ThumbsUp
+        fill={likes > 0 ? "var(--nav-link-from)" : "var(--title-color)"}
+        strokeWidth={1}
+      />
       <span>{likes}</span>
     </button>
   );

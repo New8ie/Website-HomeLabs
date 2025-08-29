@@ -20,21 +20,21 @@ Dokumen ini ditujukan untuk setup **Trilium Notes Server** secara manual, termas
 
 ### 1.1. Install Dependencies
 
-```
+```bash
 sudo apt update
 sudo apt install -y curl wget sqlite3 unzip nano systemd
 ```
 
 ### 1.2. Tambahkan User `trilium`
 
-```
+```bash
 sudo useradd -r -s /bin/bash -m -d /opt/trilium trilium
 sudo passwd trilium  # (opsional, hanya jika ingin login manual)
 ```
 
 ### 1.3. Install Node.js (via NVM dengan user `trilium`)
 
-```
+```bash
 sudo -u trilium bash -c '
   # Download and install nvm:
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash
@@ -59,7 +59,7 @@ sudo -u trilium bash -c '
 
 ### 2.1. Unduh dan Ekstrak Trilium
 
-```
+```bash
 cd /opt
 sudo wget https://github.com/zadam/trilium/releases/download/v0.63.7/trilium-linux-x64-server.tar.xz
 sudo tar -xvf trilium-linux-x64-server.tar.xz
@@ -69,7 +69,7 @@ sudo chown -R trilium:trilium /opt/trilium
 
 ### 2.2. Buat Script Startup: `/opt/trilium/trilium.sh`
 
-```
+```bash
 #!/usr/bin/env bash
 source /opt/trilium/.nvm/nvm.sh
 export PATH="/opt/trilium/.nvm/versions/node/v22.16.0/bin:$PATH"
@@ -77,7 +77,7 @@ cd /opt/trilium
 exec node main.cjs -- --port 8080
 ```
 
-```
+```bash
 sudo chmod +x /opt/trilium/trilium.sh
 sudo chown trilium:trilium /opt/trilium/trilium.sh
 ```
@@ -86,7 +86,7 @@ sudo chown trilium:trilium /opt/trilium/trilium.sh
 
 **/etc/systemd/system/trilium.service**
 
-```
+```conf
 [Unit]
 Description=Trilium Notes Server
 After=network.target
@@ -104,7 +104,7 @@ WantedBy=multi-user.target
 
 ### 2.4. Start Service
 
-```
+```bash
 sudo systemctl daemon-reexec
 sudo systemctl daemon-reload
 sudo systemctl enable --now trilium
@@ -114,7 +114,7 @@ sudo systemctl enable --now trilium
 
 ## 3\. Struktur Direktori Penting
 
-```
+```bash
 /opt/trilium/                # Binary dan skrip Trilium
 /opt/trilium-data/           # Data dan konfigurasi Trilium
 ```
@@ -125,7 +125,7 @@ sudo systemctl enable --now trilium
 
 ### 4.1. Stop Service Trilium
 
-```
+```bash
 sudo systemctl stop trilium
 ```
 
@@ -148,7 +148,7 @@ sudo chown trilium:trilium /opt/trilium-data/*
 
 ### 4.3. Jalankan Kembali
 
-```
+```bash
 sudo systemctl start trilium
 ```
 
@@ -158,7 +158,7 @@ sudo systemctl start trilium
 
 Akses melalui browser:
 
-```
+```bash
 http://<ip-server>:8080
 ```
 
@@ -168,7 +168,7 @@ http://<ip-server>:8080
 
 Contoh `backup.sh`:
 
-```
+```bash
 #!/bin/bash
 LOG_FILE="/opt/trilium/backup.log"
 DATA_DIR="/opt/trilium-data"
@@ -193,7 +193,4 @@ echo "[$NOW] Backup finished." >> "$LOG_FILE"
 
 ## ![Tampilan Dashboard Trilium Notes](/assets/images/Blog/trilium-notes_2.png)
 
-[github][def]
-
-
-[def]: https://github.com/TriliumNext/Trilium.git
+Github: https://github.com/TriliumNext/Trilium.git

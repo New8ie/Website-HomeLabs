@@ -40,13 +40,15 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
 ---
 
 <DefaultLayout title={post.data.title}>
-  <HeaderSection client:load />
+  <HeaderSection client:load transition:persist />
   <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16 space-y-12">
     <div class="border border-zinc-700 rounded-lg p-6 sm:p-8 lg:p-12 space-y-8">
       <div class="text-zinc-400 font-cinzel flex items-center space-x-2">
-        <a href="/blog" class="hover:underline transition-all duration-300">Blog</a>
+        <a href="/blog" class="hover:underline transition-all duration-300">
+          Blog
+        </a>
         <span>/</span>
-        <span class="text-white">{post.data.title}</span>
+        <span class="text-white font-cinzel">{post.data.title}</span>
       </div>
       <div class="space-y-4">
         <h1
@@ -56,20 +58,25 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
           {post.data.title}
         </h1>
         <div
-          class="flex items-center gap-4 text-sm font-inter"
+          class="flex items-center gap-4 text-sm font-cinzel"
           style={{ color: "var(--text-color)" }}
         >
           <span class="font-bold">
-            {new Date(post.data.pubDate).toLocaleDateString("id-ID", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-            })}
+            {
+              new Date(post.data.pubDate).toLocaleDateString("id-ID", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })
+            }
           </span>
-          <LikeButton initialLikes={initialLikes} slug={post.slug} client:load />
+          <LikeButton
+            initialLikes={initialLikes}
+            slug={post.slug}
+            client:load
+          />
         </div>
       </div>
-      
       <article
         class="prose dark:prose-invert max-w-none prose-p:text-lg prose-ul:text-lg prose-li:text-lg prose-headings:font-cinzel"
       >
@@ -88,7 +95,7 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
               ← Previous Post
             </a>
           ) : (
-            <div></div>
+            <div />
           )
         }
         {
@@ -104,64 +111,56 @@ const nextPost = sortedPosts[currentIndex - 1] || null;
       </div>
     </div>
   </main>
-  <FooterSection client:load />
-  
+  <FooterSection client:load transition:persist />
   <script>
-  function attachCopyButtons() {
-    const article = document.querySelector("article");
-    if (!article) {
-      return;
-    }
-    const codeBlocks = article.querySelectorAll("pre");
-
-    codeBlocks.forEach((codeBlock) => {
-      // Pastikan elemennya adalah HTMLElement untuk validasi TypeScript
-      if (!(codeBlock instanceof HTMLElement)) {
+    function attachCopyButtons() {
+      const article = document.querySelector("article");
+      if (!article) {
         return;
       }
-      
-      if (codeBlock.querySelector(".copy-button")) {
-        return;
-      }
-      if (codeBlock.classList.contains("mermaid")) {
-        return;
-      }
+      const codeBlocks = article.querySelectorAll("pre");
 
-      const textToCopy = codeBlock.textContent;
-      if (!textToCopy) {
-        return;
-      }
+      codeBlocks.forEach((codeBlock) => {
+        if (!(codeBlock instanceof HTMLElement)) {
+          return;
+        }
+        if (codeBlock.querySelector(".copy-button")) {
+          return;
+        }
+        if (codeBlock.classList.contains("mermaid")) {
+          return;
+        }
 
-      codeBlock.style.position = "relative";
-      const button = document.createElement("button");
-      button.className = "copy-button";
-      button.innerText = "Copy";
-      codeBlock.appendChild(button);
+        const textToCopy = codeBlock.textContent;
+        if (!textToCopy) {
+          return;
+        }
 
-      button.addEventListener("click", () => {
-        navigator.clipboard
-          .writeText(textToCopy.trim())
-          .then(() => {
+        codeBlock.style.position = "relative";
+        const button = document.createElement("button");
+        button.className = "copy-button";
+        button.innerText = "Copy";
+        codeBlock.appendChild(button);
+
+        button.addEventListener("click", async () => {
+          try {
+            await navigator.clipboard.writeText(textToCopy.trim());
             button.innerText = "Copied!";
             button.classList.add("copied");
+
             setTimeout(() => {
               button.innerText = "Copy";
               button.classList.remove("copied");
             }, 2000);
-          })
-          .catch((err) => {
-            console.error("Failed to copy text: ", err);
-            // Fallback menggunakan navigator.clipboard juga, karena document.execCommand sudah usang
+          } catch (err) {
+            console.error("Gagal menyalin teks: ", err);
             alert("Gagal menyalin. Silakan coba salin secara manual.");
-          });
+          }
+        });
       });
-    });
-  }
-  
-  // Karena navigator.clipboard sudah didukung secara luas, fallback execCommand tidak lagi diperlukan
-  // dan dapat dihapus untuk membersihkan kode.
-  
-  attachCopyButtons();
-  document.addEventListener("astro:after-swap", attachCopyButtons);
-</script>
+    }
+
+    attachCopyButtons();
+    document.addEventListener("astro:after-swap", attachCopyButtons);
+  </script>
 </DefaultLayout>

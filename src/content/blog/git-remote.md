@@ -50,7 +50,7 @@ git remote -v
 
 Contoh Output:
 
-```
+```bash
 origin  https://github.com/New8ie/Website-HomeLabs.git (fetch)
 origin  https://github.com/New8ie/Website-HomeLabs.git (push)
 ```
@@ -141,7 +141,7 @@ git branch -M main
 
 Gunakan git pull --rebase agar commit kamu disusun di atas commit yang ada di remote (lebih rapi dari merge biasa):
 
-```
+```bash
 git pull --rebase origin main
 git push origin main
 
@@ -149,7 +149,7 @@ git push origin main
 
 Kalau ada konflik, Git akan berhenti di file yang konflik, kamu harus menyelesaikan lalu lanjutkan rebase dengan:
 
-```
+```bash
 git add <file-yang-dikonflik>
 git rebase --continue
 ```
@@ -161,7 +161,7 @@ git rebase --continue
 > [!CAUTION]
 > ⚠️ Ini akan menghapus commit yang ada di GitHub tapi belum ada di lokal
 
-```
+```bash
 git push --force origin main
 
 ```
@@ -172,7 +172,7 @@ Gunakan ini hanya jika kamu yakin tidak butuh commit yang ada di remote.
 
 Kalau mau aman, saya sarankan jalankan dulu:
 
-```cmake
+```bash
 git fetch origin
 git log --oneline origin/main
 
@@ -184,7 +184,6 @@ Biar kamu bisa lihat commit yang ada di remote sebelum memutuskan mau rebase ata
 
 Kalau mau hapus file mulai dari commit berikutnya saja:
 
-bash
 
 ```cmake
 git rm path/ke/file.txt

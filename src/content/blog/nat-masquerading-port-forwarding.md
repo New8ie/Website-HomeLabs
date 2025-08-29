@@ -16,7 +16,7 @@ Agar klien di jaringan lokal (LAN) dapat mengakses internet melalui satu IP publ
 
 ---
 
-## 🛠️ Prasyarat
+## Prasyarat
 
 - Sistem operasi: Debian (10/11/12)
 - Akses root atau sudo
@@ -26,7 +26,7 @@ Agar klien di jaringan lokal (LAN) dapat mengakses internet melalui satu IP publ
 
 ---
 
-## 1. 🔧 Aktifkan IP Forwarding
+## 1. Aktifkan IP Forwarding
 
 Edit file `/etc/sysctl.conf`:
 
@@ -50,7 +50,7 @@ sudo sysctl -p
 
 ---
 
-## 2. 🔥 Konfigurasi NAT Masquerade (SNAT)
+## 2. Konfigurasi NAT Masquerade (SNAT)
 
 Jalankan perintah berikut:
 
@@ -76,7 +76,7 @@ sudo iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source 203.0.113.2
 
 ---
 
-## 3. 🌐 Port Forwarding (DNAT)
+## 3. Port Forwarding (DNAT)
 
 Contoh: Meneruskan trafik dari port 80 publik ke server internal `192.168.1.100` port 80.
 
@@ -103,7 +103,7 @@ sudo iptables -A FORWARD -p tcp -d 192.168.1.100 --dport 80 -m state \
 
 ---
 
-## 4. 📥 Forwarding Lalu Lintas
+## 4. Forwarding Lalu Lintas
 
 Untuk semua lalu lintas yang masuk dari internet dan menuju server LAN, izinkan forwarding:
 
@@ -114,7 +114,7 @@ sudo iptables -A FORWARD -i eth0 -o eth1 -p tcp --dport 80 -d 192.168.1.100 -j A
 
 ---
 
-## 5. 💾 Menyimpan Konfigurasi iptables (Agar Persisten)
+## 5. Menyimpan Konfigurasi iptables (Agar Persisten)
 
 Debian tidak menyimpan iptables secara default. Untuk menyimpan konfigurasi:
 
@@ -138,7 +138,7 @@ sudo systemctl enable netfilter-persistent
 
 ---
 
-## 🔍 Cek & Debug
+## Cek & Debug
 
 - Lihat aturan NAT:
 
@@ -154,7 +154,7 @@ sudo iptables -L FORWARD -n -v
 
 ---
 
-## 🛡️ Tips Keamanan
+## Tips Keamanan
 
 - Jangan lupa mengatur firewall yang memblokir koneksi tidak sah dari luar.
 - Gunakan fail2ban atau IDS jika port terbuka ke internet.
@@ -162,7 +162,7 @@ sudo iptables -L FORWARD -n -v
 
 ---
 
-## 📌 Contoh Kasus Nyata
+## Contoh Kasus Nyata
 
 **Topologi:**
 
@@ -197,7 +197,7 @@ iptables -A FORWARD -p tcp -d 192.168.1.100 --dport 80 -j ACCEPT
 
 ---
 
-## 📚 Referensi Tambahan
+## Referensi Tambahan
 
 - `man iptables`
 - [Debian iptables Wiki](https://wiki.debian.org/iptables)

@@ -22,7 +22,7 @@ Router standar seringkali memiliki fitur terbatas. Dengan OpenWrt, firmware open
 
 ## Proses Instalasi
 
-1. Periksa kompatibilitas router di [situs resmi OpenWrt](https://openwrt.org/toh/start).
+1. Periksa kompatibilitas router di situs resmi [OpenWrt](https://openwrt.org/toh/start).
 2. Unduh firmware yang sesuai untuk model router kamu.
 3. Akses antarmuka web router dan cari opsi "Firmware Upgrade".
 4. Unggah file firmware OpenWrt dan ikuti instruksi.

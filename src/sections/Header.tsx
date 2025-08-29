@@ -1,6 +1,6 @@
 // src/sections/Header.tsx
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown, ChevronUp } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronUp, Sun, Moon } from "lucide-react";
 
 // Data untuk tautan navigasi utama
 const navLinks = [
@@ -20,10 +20,6 @@ const navLinks = [
   { title: "About", href: "/about" },
 ];
 
-// Definisikan URL gambar untuk setiap mode
-const darkLogoUrl = "/assets/images/Logo/horde-logo.png";
-const lightLogoUrl = "/assets/images/Logo/ally-logo.png";
-
 // Komponen utama Header
 export const HeaderSection = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,14 +27,12 @@ export const HeaderSection = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const toolsDropdownRef = useRef<HTMLDivElement>(null);
   const [maxHeight, setMaxHeight] = useState("0px");
-  const [smallLogoSrc, setSmallLogoSrc] = useState(darkLogoUrl);
   const [isDarkMode, setIsDarkMode] = useState(true);
 
   // Efek untuk mengelola tinggi menu geser ke bawah secara dinamis
   useEffect(() => {
     const currentMenu = menuRef.current;
     if (isMenuOpen && currentMenu) {
-      // Perbarui tinggi setiap kali state isMenuOpen atau isToolsDropdownOpen berubah
       const toolsHeight = isToolsDropdownOpen
         ? toolsDropdownRef.current?.scrollHeight || 0
         : 0;
@@ -54,19 +48,15 @@ export const HeaderSection = () => {
     if (typeof window !== "undefined") {
       const savedTheme = localStorage.getItem("theme");
       const htmlElement = document.documentElement;
-
-      if (
-        savedTheme === "dark" ||
-        (!savedTheme &&
-          window.matchMedia("(prefers-color-scheme: dark)").matches)
-      ) {
+      const prefersDark = window.matchMedia(
+        "(prefers-color-scheme: dark)"
+      ).matches;
+      if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
         htmlElement.classList.add("dark");
         setIsDarkMode(true);
-        setSmallLogoSrc(darkLogoUrl);
       } else {
         htmlElement.classList.remove("dark");
         setIsDarkMode(false);
-        setSmallLogoSrc(lightLogoUrl);
       }
     }
   }, []);
@@ -76,14 +66,11 @@ export const HeaderSection = () => {
     const htmlElement = document.documentElement;
     const newIsDarkMode = !isDarkMode;
     setIsDarkMode(newIsDarkMode);
-
     if (newIsDarkMode) {
       htmlElement.classList.add("dark");
-      setSmallLogoSrc(darkLogoUrl);
       localStorage.setItem("theme", "dark");
     } else {
       htmlElement.classList.remove("dark");
-      setSmallLogoSrc(lightLogoUrl);
       localStorage.setItem("theme", "light");
     }
   };
@@ -116,21 +103,17 @@ export const HeaderSection = () => {
                   >
                     {link.title}
                     {link.subLinks && (
-                      <ChevronDown
-                        size={16}
-                        className="ml-1 transition-transform duration-300 group-hover:rotate-180"
-                      />
+                      <ChevronDown size={16} className="ml-1" />
                     )}
                   </a>
                   {link.subLinks && (
                     <div
-                      className="absolute top-full left-1/2 -translate-x-1/2 w-max p-2 rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible transition-all duration-300 ease-in-out z-50 pointer-events-none group-hover:pointer-events-auto"
+                      className="absolute top-full left-1/2 -translate-x-1/2 w-max p-2 rounded-md shadow-lg opacity-0 group-hover:opacity-100 group-hover:visible z-50 pointer-events-none group-hover:pointer-events-auto"
                       style={{
                         backgroundColor: "var(--footer-bg)",
                         border: "1px solid var(--footer-border)",
                       }}
                     >
-                      {" "}
                       <ul className="space-y-2">
                         {link.subLinks.map((subLink) => (
                           <li key={subLink.title}>
@@ -155,25 +138,25 @@ export const HeaderSection = () => {
             <button
               title="Toggle Dark Mode"
               onClick={handleDarkModeToggle}
-              className="p-1 rounded-full bg-transparent transition-transform duration-300 transform hover:scale-110"
+              className="p-2 rounded-full bg-zinc-800 hover:bg-zinc-600 text-white border border-yellow-300 shadow transition-transform duration-300 transform hover:scale-110"
             >
-              <img
-                src={smallLogoSrc}
-                alt="Logo kecil"
-                className="w-16 h-16 rounded-full shadow-lg md:w-20 md:h-20"
-              />
+              {isDarkMode ? (
+                <Sun size={20} className="text-yellow-400" />
+              ) : (
+                <Moon size={20} className="text-white" />
+              )}
             </button>
             <button
-              className="md:hidden p-2 rounded-full bg-yellow-700 hover:bg-yellow-500 text-black border border-yellow-300 shadow"
+              className="md:hidden p-2 rounded-full bg-zinc-800 hover:bg-zinc-600 text-white border border-yellow-300 shadow transition-transform duration-300 transform hover:scale-110"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
               aria-expanded={isMenuOpen}
               aria-controls="mobile-menu"
             >
               {isMenuOpen ? (
-                <X className="h-5 w-5" />
+                <X size={20} className="h-5 w-5" />
               ) : (
-                <Menu className="h-5 w-5" />
+                <Menu size={20} className="h-5 w-5" />
               )}
             </button>
           </div>
