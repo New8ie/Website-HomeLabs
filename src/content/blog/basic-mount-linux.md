@@ -7,8 +7,8 @@ author:
     name: Fachmi
     title: Admin
     image: /assets/images/Logo/font-logo.png
-image: /assets/images/Blog/mount3.png
 slug: basic-mount-linux
+image: /assets/images/Blog/mount-thumb.jpg
 ---
 # Mount Disk
 ## **📦 NFS**

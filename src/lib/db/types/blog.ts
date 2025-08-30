@@ -1,12 +1,8 @@
-// src/lib/db/types/blog.ts
-
 import type { CollectionEntry } from 'astro:content';
-// ✅ PERBAIKI: Mengubah jalur impor dari '../db/db' menjadi '../db'
 
-
-// ✅ Perbarui tipe 'Post' untuk menyertakan properti 'likes'
+// ✅ Perbarui tipe 'Post' untuk membuat properti 'likes' menjadi opsional
 export type Post = CollectionEntry<'blog'> & {
-    likes: number;
+    likes?: number;
 };
 
 // `PageData` tidak memerlukan properti `first` dan `last` di `url`

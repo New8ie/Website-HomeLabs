@@ -1,12 +1,70 @@
+import { useState, useEffect } from "react";
 import { type Post, type PageData } from "../lib/db/types/blog";
 import { Heart } from "lucide-react";
 
 const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
-  const postsToDisplay = posts || [];
+  const [postsWithLikes, setPostsWithLikes] = useState(posts);
+
+  // Fungsi untuk mengambil jumlah likes dari API
+  const fetchLikes = async (slug: string) => {
+    try {
+      const response = await fetch(`/api/likes/${slug}`, {
+        cache: "no-store", // Penting: Memastikan data terbaru selalu diambil
+      });
+      if (!response.ok) {
+        throw new Error("Failed to fetch likes");
+      }
+      const data = await response.json();
+      return data.likes;
+    } catch (error) {
+      console.error("Error fetching likes:", error);
+      return 0;
+    }
+  };
+
+  // Fungsi untuk menambah likes dan memperbarui state
+  const handleLike = async (slug: string) => {
+    try {
+      const response = await fetch(`/api/likes/${slug}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) {
+        throw new Error("Failed to like post");
+      }
+      const data = await response.json();
+
+      // Perbarui state postsWithLikes dengan jumlah likes terbaru dari respons API
+      setPostsWithLikes((prevPosts) =>
+        prevPosts.map((post) =>
+          post.slug === slug ? { ...post, likes: data.likes } : post
+        )
+      );
+    } catch (error) {
+      console.error("Error liking post:", error);
+    }
+  };
+
+  // Efek untuk mengambil data likes saat komponen dimuat
+  useEffect(() => {
+    const fetchInitialLikes = async () => {
+      const updatedPosts = await Promise.all(
+        posts.map(async (post) => {
+          const likes = await fetchLikes(post.slug);
+          return { ...post, likes };
+        })
+      );
+      setPostsWithLikes(updatedPosts);
+    };
+
+    fetchInitialLikes();
+  }, [posts]);
 
   return (
     <main>
-      {postsToDisplay.length === 0 ? (
+      {postsWithLikes.length === 0 ? (
         <p
           className="text-center mt-10 font-cinzel animate-fade-in-up transition-colors duration-500"
           style={{ color: "var(--text-color)" }}
@@ -15,7 +73,7 @@ const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
         </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {postsToDisplay.map((post) => (
+          {postsWithLikes.map((post) => (
             <div
               key={post.slug}
               className="group transition-all duration-300 transform hover:-translate-y-1"
@@ -56,15 +114,22 @@ const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
                       {post.data.description}
                     </p>
                     <div className="mt-4 flex justify-between items-center">
-                      <span className="text-xs text-zinc-500 font-semibold uppercase tracking-wider transition-all duration-300 group-hover:tracking-widest">
+                      <span className="text-xs text-yellow-500 font-semibold uppercase tracking-wider transition-all duration-300 group-hover:tracking-widest">
                         Read More &rarr;
                       </span>
-                      {post.likes > 0 && (
-                        <span className="flex items-center gap-1 text-xs text-yellow-400 font-cinzel">
-                          <Heart fill="currentColor" size={12} />
-                          {post.likes}
-                        </span>
-                      )}
+                      {/* Tombol likes yang memicu pembaruan state */}
+                      <span
+                        className="flex items-center gap-1 text-xs text-yellow-400 font-cinzel cursor-pointer"
+                        onClick={(e) => {
+                          e.preventDefault();
+                          e.stopPropagation();
+                          handleLike(post.slug);
+                        }}
+                        title="Click to like this post"
+                      >
+                        <Heart fill="currentColor" size={12} />
+                        {post.likes}
+                      </span>
                     </div>
                   </div>
                 </div>
