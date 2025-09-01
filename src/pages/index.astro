@@ -1,40 +1,211 @@
 ---
-import "./../styles/global.css";
+import "../styles/global.css";
 import IndexDefault from "../layouts/IndexDefault.astro";
 import { HeaderSection } from "../sections/Header";
 import { FooterSection } from "../sections/Footer";
+import { getCollection } from "astro:content";
+
+// Ambil artikel terbaru (3 terakhir)
+const latestPosts = (await getCollection("blog"))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+// List tools
+const usefulTools = [
+  {
+    title: "Subnet Calculator",
+    description:
+      "Hitung detail jaringan dari sebuah IP address dan CIDR untuk konfigurasi yang efisien.",
+    image: "/assets/images/Items/subnet-calculator.png",
+    link: "/tools#subnet-calculator",
+  },
+  {
+    title: "Bandwidth Converter",
+    description:
+      "Alat untuk mengkonversi kecepatan bandwidth dari berbagai unit, seperti Mbps ke MB/s.",
+    image: "/assets/images/Items/tool-01.png",
+    link: "/tools#bandwidth-converter",
+  },
+  {
+    title: "Power Converter",
+    description:
+      "Alat untuk mengkonversi daya (Watt/kVA) dan mengukur kebutuhan baterai untuk UPS Anda.",
+    image: "/assets/images/Items/tool-02.png",
+    link: "/tools#power-converter",
+  },
+];
+
+// Teks biasa, tanpa animasi
+const animatedText =
+  "Explore technology, AI, open source, and the digital world from the comfort of your home lab. Discover new innovations, projects, and inspiration every day.";
 ---
 
 <IndexDefault title="Main - HomeLabs">
   <HeaderSection client:load />
 
-  <section class="relative h-screen w-full">
-    <div
-      class="absolute inset-0 z-10 bg-fixed bg-cover bg-center"
-      style="background-image: var( --home-page);"
-    >
-    </div>
+  <div class="main-content-container">
+    <section class="blog-pages-background relative h-screen w-full">
+      <div
+        class="absolute inset-0 z-10 bg-cover bg-center"
+        style="background-image: var(--blog-pages-background);"
+      >
+      </div>
 
-    <div
-      class="relative z-20 flex h-full items-center justify-start pt-[25vh] px-8 md:px-16 lg:px-24"
-    >
-      <div class="max-w-xl text-left animate-fade-in">
-        <h1 class="hero-title">HomeLabs</h1>
-        <p
-          class="mt-4 text-base md:text-lg justify-start leading-relaxed font-cinzel dark:text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9) animate-fade-in-up"
-          style="color: var(--text-index-color;"
-        >
-          Explore technology, AI, open source, and the digital world from the
-          comfort of your home lab. Discover new innovations, projects, and
-          inspiration every day. <span class="italic text-bold">homelab</span>.
-          Discover new innovations, projects, and inspiration every day.
-        </p>
-        <div class="mt-8 animate-fade-in-up">
-          <a href="/blog" class="primary-button"> Explore Blogs </a>
+      <div
+        class="relative z-20 flex h-full items-center justify-start pt-[25vh] px-8 md:px-16 lg:px-24"
+      >
+        <div class="max-w-xl text-left">
+          <h1 class="hero-title">HomeLabs</h1>
+          <p
+            class="mt-4 text-base md:text-lg justify-start leading-relaxed font-cinzel dark:text-yellow-300 drop-shadow-[0_2px_6px_rgba(0,0,0,0.9)]"
+            style="color: var(--text-index-color);"
+          >
+            {animatedText}
+          </p>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <section class="py-16 md:py-24 lg:py-32 bg-gradient-1">
+      <div class="container mx-auto px-4">
+        <h2
+          class="fade-in-on-scroll text-3xl md:text-4xl lg:text-5xl font-extrabold font-cinzel text-white leading-tight text-center mb-12"
+        >
+          Latest Articles
+        </h2>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
+        >
+          {
+            latestPosts.map((post) => (
+              <div class="homelabs-card-container">
+                <a
+                  href={`/blog/${post.slug}`}
+                  class="homelabs-card-link group block w-full h-full"
+                >
+                  <div class="homelabs-card-content">
+                    <div class="homelabs-card-inner">
+                      <div class="w-full h-48 relative overflow-hidden">
+                        <img
+                          src={
+                            post.data.image ||
+                            "https://placehold.co/600x400/18181b/ffffff?text=No+Image"
+                          }
+                          alt={post.data.title}
+                          class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                      <div class="p-6 flex flex-col flex-grow text-white">
+                        <h3 class="text-lg font-extrabold font-cinzel mb-2 group-hover:text-yellow-300 transition-colors">
+                          {post.data.title}
+                        </h3>
+                        <p class="text-sm font-cinzel text-zinc-300 line-clamp-2 flex-grow">
+                          {post.data.description}
+                        </p>
+                        <div class="mt-4 text-xs font-semibold font-cinzel text-yellow-500 uppercase">
+                          Read More &rarr;
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 lg:py-32 bg-gradient-2">
+      <div class="container mx-auto px-4">
+        <h2
+          class="fade-in-on-scroll text-3xl md:text-4xl lg:text-5xl font-extrabold font-cinzel text-white text-center mb-6"
+        >
+          Useful Tools
+        </h2>
+        <p
+          class="text-lg md:text-xl text-center text-zinc-300 font-cinzel max-w-3xl mx-auto mb-12"
+        >
+          Alat-alat praktis yang saya gunakan untuk mempermudah pekerjaan
+          HomeLab.
+        </p>
+
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
+        >
+          {
+            usefulTools.map((tool) => (
+              <div class="homelabs-card-container">
+                <a
+                  href={tool.link}
+                  class="homelabs-card-link group block w-full h-full"
+                >
+                  <div class="homelabs-card-content">
+                    <div class="homelabs-card-inner">
+                      <div class="w-full h-48 relative overflow-hidden">
+                        <img
+                          src={tool.image}
+                          alt={tool.title}
+                          class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                        />
+                      </div>
+                      <div class="p-6 flex flex-col flex-grow text-white">
+                        <h3 class="text-lg font-extrabold font-cinzel mb-2 group-hover:text-yellow-300 transition-colors">
+                          {tool.title}
+                        </h3>
+                        <p class="mt-2 text-sm font-cinzel text-zinc-300 line-clamp-3 flex-grow">
+                          {tool.description}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            ))
+          }
+        </div>
+
+        <div class="mt-12 text-center">
+          <a href="/tools" class="primary-button-inverted">
+            Lihat Semua Tools &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <FooterSection client:load />
 </IndexDefault>
+
+<script>
+  function setupScrollAnimation() {
+    const elements = document.querySelectorAll(".fade-in-on-scroll");
+
+    const options = {
+      root: null,
+      rootMargin: "0px",
+      threshold: 0.1,
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+        } else {
+          entry.target.classList.remove("is-visible");
+        }
+      });
+    }, options);
+
+    elements.forEach((element) => {
+      observer.observe(element);
+    });
+  }
+
+  // Jalankan skrip saat halaman pertama kali dimuat
+  document.addEventListener("DOMContentLoaded", setupScrollAnimation);
+
+  // Jalankan skrip setelah setiap navigasi Astro
+  document.addEventListener("astro:page-load", setupScrollAnimation);
+</script>

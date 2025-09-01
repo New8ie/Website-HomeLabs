@@ -9,12 +9,10 @@ import BlogManager from "../../components/BlogManager";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const allPosts = await getCollection("blog");
-  allPosts.sort(
-    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
-  );
-  
+  allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
   const remainingPosts = allPosts.slice(9);
-  
+
   return paginate(remainingPosts, { pageSize: 9 });
 };
 
@@ -23,7 +21,6 @@ export const prerender = true;
 const { page } = Astro.props as {
   page: Page<CollectionEntry<"blog"> & { likes?: number }>;
 };
-
 ---
 
 <DefaultLayout title="Blog Page">

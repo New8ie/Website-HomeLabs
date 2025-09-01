@@ -11,17 +11,12 @@ import remarkShikiTwoslash from "remark-shiki-twoslash";
 export default defineConfig({
   site: "https://thismydomains.com",
   output: "server",
-  redirects: {
-    "/blog": "/blog/1",
-  },
-
   integrations: [
     tailwind({
       applyBaseStyles: false,
     }),
     react(),
     mdx({
-      // Gabungkan semua plugin di sini
       remarkPlugins: [
         remarkMermaid,
         [remarkShikiTwoslash, { theme: "github-dark-dimmed" }],
