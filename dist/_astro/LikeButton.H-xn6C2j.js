@@ -1,6 +1,0 @@
-import{j as o}from"./jsx-runtime.ClP7wGfN.js";import{r as s}from"./index.DK-fsZOb.js";import{c as p}from"./createLucideIcon.BunyXY8S.js";/**
- * @license lucide-react v0.536.0 - ISC
- *
- * This source code is licensed under the ISC license.
- * See the LICENSE file in the root directory of this source tree.
- */const m=[["path",{d:"M7 10v12",key:"1qc93n"}],["path",{d:"M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2a3.13 3.13 0 0 1 3 3.88Z",key:"emmmcr"}]],h=p("thumbs-up",m);function x({initialLikes:n,slug:i}){const[t,l]=s.useState(n),[a,r]=s.useState(!1),c=async()=>{if(!a){r(!0);try{const e=await fetch("/api/like-post",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({slug:i})});if(e.ok){const d=await e.json();l(d.likes)}}catch(e){console.error("Gagal menambahkan like:",e)}finally{r(!1)}}};return o.jsxs("button",{onClick:c,disabled:a,className:"flex items-center gap-2 p-2 rounded-lg font-bold transition-all duration-300 transform hover:scale-105",style:{backgroundColor:"var(--pages-bg)",color:"var(--text-color)",border:"1px solid var(--pages-border-shadow)",boxShadow:"0px 2px 4px rgba(0,0,0,0.1)"},children:[o.jsx(h,{fill:t>0?"var(--nav-link-from)":"var(--title-color)",strokeWidth:1}),o.jsx("span",{children:t})]})}export{x as default};
