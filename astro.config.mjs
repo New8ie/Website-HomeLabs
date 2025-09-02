@@ -5,16 +5,14 @@ import mdx from "@astrojs/mdx";
 import remarkMermaid from "remark-mermaidjs";
 import sitemap from "@astrojs/sitemap";
 import path from "path";
-import node from "@astrojs/node";
 import remarkShikiTwoslash from "remark-shiki-twoslash";
+import cloudflare from "@astrojs/cloudflare";
 
 export default defineConfig({
   site: "https://thismydomains.com",
   output: "server",
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
+    tailwind({ applyBaseStyles: false }),
     react(),
     mdx({
       remarkPlugins: [
@@ -25,11 +23,6 @@ export default defineConfig({
     sitemap(),
   ],
 
-  server: {
-    host: true,
-    port: 8080,
-  },
-
   vite: {
     resolve: {
       alias: {
@@ -38,7 +31,5 @@ export default defineConfig({
     },
   },
 
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: cloudflare(), // <— ganti ini
 });

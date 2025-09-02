@@ -26,5 +26,6 @@ pnpm-debug.log*
 .idea/
 .continue/
 .vscode/
-
-components/ThreeDCanvas.tsx
+.package-lock.json
+.wrangler.toml
+.wrangler.jsonc
