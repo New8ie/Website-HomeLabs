@@ -1,3 +1,5 @@
+// /src/pages/api/clear-likes.ts
+
 import type { APIRoute } from "astro";
 import { db, PostLikes } from "../../lib/db/db";
 

@@ -1,46 +1,29 @@
 ---
 import "../../styles/global.css";
 import { getCollection, type CollectionEntry } from "astro:content";
-import type { GetStaticPaths, Page } from "astro";
-import DefaultLayout from "../../layouts/Default.astro";
-import { HeaderSection } from "../../sections/Header";
-import { FooterSection } from "../../sections/Footer";
+import type { Page, GetStaticPaths } from "astro";
 import BlogManager from "../../components/BlogManager";
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const allPosts = await getCollection("blog");
   allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-  const remainingPosts = allPosts.slice(9);
-
-  return paginate(remainingPosts, { pageSize: 9 });
+  return paginate(allPosts, { pageSize: 10 });
 };
 
-export const prerender = true;
-
 const { page } = Astro.props as {
-  page: Page<CollectionEntry<"blog"> & { likes?: number }>;
+  page: Page<CollectionEntry<"blog">>;
 };
 ---
 
-<DefaultLayout title="Blog Page">
-  <HeaderSection client:load />
-  <div class="px-4 py-8 mx-auto lg:py-16">
-    <div class="max-w-7xl mx-auto space-y-12">
-      <div class="flex items-center space-x-2 text-zinc-400 font-cinzel">
-        <a href="/" class="hover:underline transition-all duration-300">Home</a>
-        <span>/</span>
-        <span class="text-white font-cinzel">Blog</span>
-        <span>/</span>
-        <span class="text-white font-cinzel">Page {page.currentPage}</span>
-      </div>
-      <h1
-        class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-cinzel text-white leading-tight transition-colors duration-500"
-      >
-        My Blog
-      </h1>
-      <BlogManager allPosts={page.data} pageData={page} client:load />
+<div class="px-4 py-8 mx-auto lg:py-16">
+  <div class="max-w-7xl mx-auto space-y-12">
+    <div class="flex items-center space-x-2 text-zinc-400 font-cinzel">
+      <a href="/" class="hover:underline transition-all duration-300">Home</a>
+      <span>/</span>
+      <span class="text-white font-cinzel">Blog</span>
     </div>
+
+    <BlogManager allPosts={page.data} pageData={page} client:load />
   </div>
-  <FooterSection client:load />
-</DefaultLayout>
+</div>

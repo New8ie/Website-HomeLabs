@@ -12,15 +12,18 @@ const categories = [
   "Networking",
 ];
 
+// Mendefinisikan tipe data untuk props
+interface BlogSideBarProps {
+  onSearch: (query: string, category: string | null) => void;
+  searchQuery: string;
+  selectedCategory: string | null;
+}
+
 const BlogSideBar = ({
   onSearch,
   searchQuery,
   selectedCategory,
-}: {
-  onSearch: (query: string, category: string | null) => void;
-  searchQuery: string;
-  selectedCategory: string | null;
-}) => {
+}: BlogSideBarProps) => {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
 
   const handleCategoryClick = (category: string) => {
@@ -39,31 +42,26 @@ const BlogSideBar = ({
   };
 
   return (
-    <a href="#" className="homelabs-card-link">
+    <>
       <div
-        className="homelabs-card-content p-6 rounded-xl text-zinc-200 sticky top-28 z-10 font-cinzel transition-colors duration-500 gradient-border-container"
-        style={{
-          backgroundColor: "var(--footer-bg)",
-        }}
+        className="sidebar-card-content p-6 rounded-xl text-zinc-200 sticky top-28 z-10 font-cinzel transition-colors duration-500 sb-gradient-border-container"
+        style={{ backgroundColor: "var(--footer-bg)" }}
       >
-        {/* Bagian Tombol Pencarian */}
-        <h2
-          className="homelabs-card-link group block w-full h-full text-xl font-extrabold text-center mb-4 tracking-wider"
-          style={{ color: "var(--title-color)" }}
-        ></h2>
         <div className="flex justify-center">
+          <h2
+            className="group block w-full h-full text-xl font-extrabold text-center mb-4 tracking-wider"
+            style={{ color: "var(--title-color)" }}
+          ></h2>
           <button
             onClick={() => setIsSearchModalOpen(true)}
             className="flex-shrink-0 p-3 rounded-md border font-cinzel transition-all duration-200 shadow-md font-extrabold uppercase tracking-wider text-lg transform hover:scale-110 active:opacity-75"
-            aria-label="Cari"
+            aria-label="Search"
             style={{
               backgroundImage:
                 "linear-gradient(to top right, var(--nav-link-from), var(--nav-link-via), var(--nav-link-to))",
               color: "var(--nav-link-text)",
               borderColor: "var(--nav-link-border)",
               borderWidth: "1px",
-              boxShadow:
-                "0 4px 6px -1px var(--nav-link-shadow), 0 2px 4px -2px var(--nav-link-shadow)",
             }}
           >
             <Search
@@ -72,11 +70,8 @@ const BlogSideBar = ({
             />
           </button>
         </div>
-
-        {/* Modal Pencarian Profesional */}
         {isSearchModalOpen && (
           <div className="fixed inset-0 z-50 flex justify-center items-center pt-10 px-4 sm:px-0 backdrop-blur-sm bg-black/60 transition-opacity duration-300 ease-in-out">
-            {/* Tambahkan div ini untuk menangani klik di luar modal */}
             <div
               className="absolute inset-0"
               onClick={() => setIsSearchModalOpen(false)}
@@ -90,7 +85,6 @@ const BlogSideBar = ({
                   <X className="w-6 h-6" />
                 </button>
               </div>
-              {/* Wrapper untuk input dan tombol */}
               <div className="flex flex-row space-x-2">
                 <div className="relative flex-1">
                   <input
@@ -107,7 +101,6 @@ const BlogSideBar = ({
                       borderWidth: "1px",
                     }}
                   />
-                  {/* Tombol clear teks, hanya terlihat jika ada teks */}
                   {searchQuery && (
                     <button
                       onClick={clearSearch}
@@ -140,8 +133,6 @@ const BlogSideBar = ({
             </div>
           </div>
         )}
-
-        {/* Bagian Kategori, dipindahkan ke bawah */}
         <div className="mt-6">
           <h2
             className="text-xl font-extrabold text-center mb-4 tracking-wider transition-colors duration-500"
@@ -155,11 +146,11 @@ const BlogSideBar = ({
                 key={cat}
                 onClick={() => handleCategoryClick(cat)}
                 className={`px-4 py-1 rounded-full text-xs font-semibold uppercase transition-all duration-200
-                          ${
-                            selectedCategory === cat
-                              ? "bg-yellow-700/80 text-white shadow-md"
-                              : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50"
-                          }`}
+                              ${
+                                selectedCategory === cat
+                                  ? "bg-yellow-700/80 text-white shadow-md"
+                                  : "bg-zinc-800/50 text-zinc-400 hover:bg-zinc-700/50"
+                              }`}
               >
                 {cat}
               </button>
@@ -167,7 +158,7 @@ const BlogSideBar = ({
           </div>
         </div>
       </div>
-    </a>
+    </>
   );
 };
 
