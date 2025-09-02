@@ -1,0 +1,13 @@
+User-agent: *
+Allow: /
+
+Disallow: /admin/
+Disallow: /private/
+Disallow: /checkout/
+Disallow: /thank-you/
+Disallow: /search/
+Disallow: /cdn-cgi/
+Disallow: /_astro/
+
+
+Sitemap: https://thismydomains.com/sitemap-index.xml
