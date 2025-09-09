@@ -9,11 +9,13 @@ author:
   title: "SysAdmin"
   image: "/assets/images/Logo/font-logo.png"
 ---
+
 # Sudo password Finger Print
 
-
 ### Switch to the root user.
-Switch to the root user by typing the command `sudo su -` and enter the password:  
+
+Switch to the root user by typing the command `sudo su -` and enter the password:
+
  
 
 ```bash
@@ -24,7 +26,8 @@ sudo su -
 
 ### Edit `/etc/pam.d/sudo`:
 
-Open the `/etc/pam.d/sudo` file with you favorite editor such as `vim` or `nano`:  
+Open the `/etc/pam.d/sudo` file with you favorite editor such as `vim` or `nano`:
+
  
 
 ```bash
@@ -34,12 +37,14 @@ nano /etc/pam.d/sudo
 
 <figure class="image image_resized" style="width:25%;"><img style="aspect-ratio:800/557;" src="/assets/images/Blog/3_Sudo-password-With-Finger.webp" alt="Open /etc/pam.d/sudo" width="800" height="557"></figure>
 
-The contents of this file should look like one of the following example:  
+The contents of this file should look like one of the following example:
+
  
 
 <figure class="image image_resized" style="width:25%;"><img style="aspect-ratio:800/557;" src="/assets/images/Blog/Sudo-password-With-Finger.webp" alt="/etc/pam.d/sudo file contents" width="800" height="557"></figure>
 
-Add the following line to the top of the file:  
+Add the following line to the top of the file:
+
  
 
 ```bash
@@ -47,22 +52,23 @@ auth       sufficient     pam_tid.so
 
 ```
 
-The modified contents of `/etc/pam.d/sudo` file should look like following example:  
+The modified contents of `/etc/pam.d/sudo` file should look like following example:
+
  
 
 <figure class="image image_resized" style="width:25%;"><img style="aspect-ratio:800/539;" src="/assets/images/Blog/1_Sudo-password-With-Finger.webp" alt="Modified /etc/pam.d/sudo file contents" width="800" height="539"></figure>
 
 ### Save the file:
 
-*   for nano, press the specified combination (with sign “+”) of keys simultaneously:
+- for nano, press the specified combination (with sign “+”) of keys simultaneously:
 
 ```bash
-CTRL+o 
+CTRL+o
 CTRL+x
 
 ```
 
-*   for vim:
+- for vim:
 
 ```bash
 <ESC>
@@ -72,18 +78,20 @@ CTRL+x
 
 ### Allow the system to save the changes.
 
-Press OK button:  
+Press OK button:
+
  
 
 <figure class="image image_resized" style="width:25%;"><img style="aspect-ratio:744/744;" src="/assets/images/Blog/Sudo-password-With-Finger.webp" alt="Allow to modify system settings" width="744" height="744"></figure>
 
-> Also note that pam\_smartcard.so may not be present on older MacOS versions. Tested with macOS Ventura (13.1).
+> Also note that pam_smartcard.so may not be present on older MacOS versions. Tested with macOS Ventura (13.1).
 
 ### Exit from the shell.
 
 Exit from the `root` shell by typing command: `exit`.
 
-Try to use `sudo`, and you should be prompted to authenticate with **Touch ID** as shown below.  
+Try to use `sudo`, and you should be prompted to authenticate with **Touch ID** as shown below.
+
  
 
 ```bash

@@ -39,7 +39,7 @@ export const POST: APIRoute = async ({ request }) => {
         JSON.stringify({ message: "Already liked", likes: likesCount }),
         {
           status: 200,
-        }
+        },
       );
     }
 
@@ -58,7 +58,7 @@ export const POST: APIRoute = async ({ request }) => {
         message: "Post liked!",
         likes: likesCount,
       }),
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error(error);

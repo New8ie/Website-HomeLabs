@@ -4,9 +4,9 @@ description: Create Powershell Profile
 pubDate: 2025-08-08
 category: Windows
 author:
-    name: Fachmi
-    title: Admin
-    image: /assets/images/Logo/font-logo.png
+  name: Fachmi
+  title: Admin
+  image: /assets/images/Logo/font-logo.png
 image: /assets/images/Blog/Brands/powershell.jpg
 ---
 

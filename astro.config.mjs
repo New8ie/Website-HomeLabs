@@ -6,7 +6,7 @@ import remarkMermaid from "remark-mermaidjs";
 import sitemap from "@astrojs/sitemap";
 import path from "path";
 import remarkShikiTwoslash from "remark-shiki-twoslash";
-import cloudflare from "@astrojs/cloudflare";
+import node from "@astrojs/node";
 
 export default defineConfig({
   site: "https://thismydomains.com",
@@ -29,7 +29,18 @@ export default defineConfig({
         "@": path.resolve("./src"),
       },
     },
+    server: {
+      port: 8080, // hanya berlaku di dev
+    },
   },
 
-  adapter: cloudflare(), // <— ganti ini
+  // 👇 tambahkan ini agar hasil build listen ke semua interface
+  server: {
+    host: "0.0.0.0",
+    port: 4321, // bebas, asal konsisten
+  },
+
+  adapter: node({
+    mode: "standalone",
+  }),
 });

@@ -39,8 +39,8 @@ const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
       // Perbarui state postsWithLikes dengan jumlah likes terbaru dari respons API
       setPostsWithLikes((prevPosts) =>
         prevPosts.map((post) =>
-          post.slug === slug ? { ...post, likes: data.likes } : post
-        )
+          post.slug === slug ? { ...post, likes: data.likes } : post,
+        ),
       );
     } catch (error) {
       console.error("Error liking post:", error);
@@ -54,7 +54,7 @@ const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
         posts.map(async (post) => {
           const likes = await fetchLikes(post.slug);
           return { ...post, likes };
-        })
+        }),
       );
       setPostsWithLikes(updatedPosts);
     };
@@ -119,7 +119,7 @@ const BlogPage = ({ posts, page }: { posts: Post[]; page: PageData }) => {
                       </span>
                       {/* Tombol likes yang memicu pembaruan state */}
                       <span
-                        className="flex items-center gap-1 text-xs text-yellow-400 font-cinzel cursor-pointer"
+                        className="flex items-center  gap-1 text-xs text-yellow-400 font-cinzel cursor-pointer"
                         onClick={(e) => {
                           e.preventDefault();
                           e.stopPropagation();

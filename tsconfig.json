@@ -16,6 +16,7 @@
       "@pages/*": ["src/pages/*"],
       "@/lib/db": ["src/lib/db.ts"],
       "@utils/*": ["src/utils/*"],
+      "@scripts/*": ["src/scripts/*"],
       "@/*": ["src/*"]
     },
     "ignoreDeprecations": "5.0"

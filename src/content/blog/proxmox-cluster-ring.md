@@ -16,13 +16,13 @@ Dokumentasi Implementasi OSPFv2 (IPv4-only) untuk Proxmox Cluster Ring Topologi
 
 ---
 
-##  Tujuan
+## Tujuan
 
 Membangun routing dinamis berbasis **OSPFv2 (IPv4-only)** untuk jaringan **cluster dan Ceph Proxmox** pada topologi ring antar tiga node dengan interface Thunderbolt point-to-point.
 
 ---
 
-##  Topologi Ring Thunderbolt
+## Topologi Ring Thunderbolt
 
     NODE1["NODE1<br/>10.1.20.3<br/><span style='color:red'>10.10.10.1 en06tb1<br/>10.10.30.2 en05tb0</span>"]
     NODE2["NODE2<br/>10.1.20.4<br/><span style='color:red'>10.10.10.2 en05tb0<br/>10.10.20.1 en06tb1</span>"]
@@ -33,6 +33,7 @@ Membangun routing dinamis berbasis **OSPFv2 (IPv4-only)** untuk jaringan **clust
     NODE3 -- "20 Gbps" --> NODE1
 
 ![Ring](/assets/images/Blog/topologi-ring.png)
+
 ### IP Plan
 
 <figure class="table"><table><thead><tr><th>Link</th><th>Interface Node A</th><th>Interface Node B</th><th>Subnet</th></tr></thead><tbody><tr><td>Node1 &lt;-&gt; Node2</td><td><code>thunder0</code></td><td><code>thunder1</code></td><td>10.10.10.0/30</td></tr><tr><td>Node2 &lt;-&gt; Node3</td><td><code>thunder0</code></td><td><code>thunder1</code></td><td>10.10.20.0/30</td></tr><tr><td>Node3 &lt;-&gt; Node1</td><td><code>thunder0</code></td><td><code>thunder1</code></td><td>10.10.30.0/30</td></tr></tbody></table></figure>
@@ -473,5 +474,3 @@ exit
 !
 
 ```
-
-

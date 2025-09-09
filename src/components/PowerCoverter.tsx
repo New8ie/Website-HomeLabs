@@ -21,7 +21,7 @@ export default function PowerConverter() {
   const [powerFactor, setPowerFactor] = useState<string>("0.8");
   const [result, setResult] = useState<ConversionResult | null>(null);
   const [batteryResult, setBatteryResult] = useState<BatteryResult | null>(
-    null
+    null,
   );
   const [error, setError] = useState<string>("");
   const [isCalculating, setIsCalculating] = useState<boolean>(false);
@@ -53,7 +53,7 @@ export default function PowerConverter() {
       powerFactorNum > 1
     ) {
       setError(
-        "Invalid input. Please enter a valid number and Power Factor (0-1)."
+        "Invalid input. Please enter a valid number and Power Factor (0-1).",
       );
       setIsCalculating(false);
       return;

@@ -1,29 +1,31 @@
 ---
-title: Install ASTRO Docker
-description: Install ASTRO Docker
-pubDate: 2025-08-08
+title: Build Astro Docker
+description: Create Astro Docker Image
+pubDate: 2025-09-03T16:20:23.448Z
 category: Docker
-image: /assets/images/Blog/docker.webp
 author:
   name: Fachmi
-  title: SysAdmin
+  title: Admin
   image: /assets/images/Logo/font-logo.png
 slug: install-astro-docker
+image: /assets/images/Blog/Brands/Install-astro-docker.jpeg
 ---
+
 # Install ASTRO Docker
+
 Berikut adalah **langkah-langkah instalasi Astro (website dengan komponen game) menggunakan Docker** beserta **komponen pendukungnya**. Langkah ini mencakup penggunaan **Docker Compose** untuk menjalankan frontend, backend, dan database secara terisolasi.
 
-* * *
+---
 
 ### ** 1. Persiapan Prasyarat**
 
 Pastikan Anda memiliki:
 
-*   Docker ([https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop))
-*   Docker Compose (sudah termasuk dalam Docker Desktop)
-*   Kode sumber aplikasi (frontend, backend, database) yang sudah disiapkan.
+- Docker ([https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop))
+- Docker Compose (sudah termasuk dalam Docker Desktop)
+- Kode sumber aplikasi (frontend, backend, database) yang sudah disiapkan.
 
-* * *
+---
 
 ### ** 2. Struktur Proyek**
 
@@ -46,33 +48,33 @@ Struktur proyek akan terdiri dari beberapa folder dan file:
 
 ```
 
-* * *
+---
 
-### 3. Komponen Pendukung 
+### 3. Komponen Pendukung
 
 #### **Frontend:**
 
-*   Aplikasi web sederhana (HTML/CSS/JS) untuk menampilkan game dan UI.
-*   Dibungkus dengan **Nginx** atau **Node.js static server**.
+- Aplikasi web sederhana (HTML/CSS/JS) untuk menampilkan game dan UI.
+- Dibungkus dengan **Nginx** atau **Node.js static server**.
 
 #### **Backend:**
 
-*   API untuk menangani logika game (misalnya leaderboard, skor).
-*   Menggunakan **Node.js + Express** sebagai backend.
+- API untuk menangani logika game (misalnya leaderboard, skor).
+- Menggunakan **Node.js + Express** sebagai backend.
 
 #### **Database:**
 
-*   Membuat database MongoDB untuk menyimpan skor pemain dan data game.
-*   Menggunakan **MongoDB** sebagai database.
+- Membuat database MongoDB untuk menyimpan skor pemain dan data game.
+- Menggunakan **MongoDB** sebagai database.
 
-* * *
+---
 
 ### 4. Dockerfile dan Docker Compose
 
 #### **📄** `**docker-compose.yml**`
 
 ```yaml
-version: '3.8'
+version: "3.8"
 
 services:
   frontend:
@@ -132,24 +134,24 @@ CMD ["node", "server.js"]
 
 ```
 
-* * *
+---
 
 ### **🔧 5. Contoh Backend (Node.js + Express)**
 
 ```js
 // backend/server.js
-const express = require('express');
-const mongoose = require('mongoose');
+const express = require("express");
+const mongoose = require("mongoose");
 const app = express();
 const PORT = 3000;
 
 // Koneksikan MongoDB
 mongoose.connect(process.env.MONGO_URI, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
 });
 
-app.get('/api/score', async (req, res) => {
+app.get("/api/score", async (req, res) => {
   // Contoh endpoint untuk mengambil skor
   res.json({ score: "100" });
 });
@@ -159,7 +161,7 @@ app.listen(PORT, () => {
 });
 ```
 
-* * *
+---
 
 ### **📁 6. File .env (Opsional)**
 
@@ -168,7 +170,7 @@ MONGO_URI=mongodb://mongodb:27017/astro-game
 
 ```
 
-* * *
+---
 
 ### **🚀 7. Build dan Run dengan Docker Compose**
 
@@ -179,27 +181,26 @@ MONGO_URI=mongodb://mongodb:27017/astro-game
 docker-compose up --build
 ```
 
-*   Aplikasi frontend akan tersedia di `http://localhost`.
-*   Backend akan tersedia di `http://localhost:3000`.
-*   MongoDB akan berjalan di dalam container.
+- Aplikasi frontend akan tersedia di `http://localhost`.
+- Backend akan tersedia di `http://localhost:3000`.
+- MongoDB akan berjalan di dalam container.
 
-* * *
+---
 
 ### **📌 8. Verifikasi**
 
 1.  **Frontend**:
-    
-    *   Buka browser dan akses `http://localhost`.
-    *   Pastikan UI game terlihat.
-2.  **Backend**:
-    
-    *   Gunakan Postman atau curl untuk mengakses endpoint `/api/score`.
-    *   Contoh: `curl http://localhost:3000/api/score`.
-3.  **Database**:
-    
-    *   Akses MongoDB via `mongo` di terminal (jika diperlukan).
+    - Buka browser dan akses `http://localhost`.
+    - Pastikan UI game terlihat.
 
-* * *
+2.  **Backend**:
+    - Gunakan Postman atau curl untuk mengakses endpoint `/api/score`.
+    - Contoh: `curl http://localhost:3000/api/score`.
+
+3.  **Database**:
+    - Akses MongoDB via `mongo` di terminal (jika diperlukan).
+
+---
 
 ### **📌 9. Penyimpanan Data yang Berkelanjutan**
 
@@ -212,22 +213,22 @@ volumes:
 
 Pastikan folder `mongo_data` tidak dihapus saat build.
 
-* * *
+---
 
 ### **🧠 10.Tambahan**
 
-*   Untuk lingkungan produksi, gunakan **reverse proxy** (Nginx) dan **Docker Swarm**.
-*   Pastikan semua port terbuka di firewall (misalnya: 80, 3000, 27017).
-*   Gunakan **docker-compose.override.yml** untuk mengatur konfigurasi berbeda di lingkungan produksi.
+- Untuk lingkungan produksi, gunakan **reverse proxy** (Nginx) dan **Docker Swarm**.
+- Pastikan semua port terbuka di firewall (misalnya: 80, 3000, 27017).
+- Gunakan **docker-compose.override.yml** untuk mengatur konfigurasi berbeda di lingkungan produksi.
 
-* * *
+---
 
 ### **Hasil Akhir**
 
 Dengan langkah di atas, Anda akan memiliki:
 
-*   Aplikasi frontend yang menjalankan game.
-*   Backend yang menangani logika dan API.
-*   Database MongoDB untuk menyimpan data pemain.
+- Aplikasi frontend yang menjalankan game.
+- Backend yang menangani logika dan API.
+- Database MongoDB untuk menyimpan data pemain.
 
 Semua komponen berjalan dalam container Docker yang terisolasi dan dapat di-scaling.

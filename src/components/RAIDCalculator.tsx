@@ -38,7 +38,7 @@ export default function RAIDCalculator() {
       sizePerDisk <= 0
     ) {
       setError(
-        "Please enter a valid number of disks and a positive disk size."
+        "Please enter a valid number of disks and a positive disk size.",
       );
       setIsCalculating(false);
       return;
@@ -93,7 +93,7 @@ export default function RAIDCalculator() {
       case "raid10":
         if (numDisks < 4 || numDisks % 2 !== 0) {
           setError(
-            "RAID 10 requires a minimum of 4 disks and must be an even number."
+            "RAID 10 requires a minimum of 4 disks and must be an even number.",
           );
           setIsCalculating(false);
           return;
@@ -105,7 +105,7 @@ export default function RAIDCalculator() {
       case "raid01":
         if (numDisks < 4 || numDisks % 2 !== 0) {
           setError(
-            "RAID 0+1 requires a minimum of 4 disks and must be an even number."
+            "RAID 0+1 requires a minimum of 4 disks and must be an even number.",
           );
           setIsCalculating(false);
           return;
@@ -117,7 +117,7 @@ export default function RAIDCalculator() {
       case "raid50":
         if (numDisks < 6 || numDisks % 3 !== 0) {
           setError(
-            "RAID 50 requires a minimum of 6 disks and must be a multiple of 3."
+            "RAID 50 requires a minimum of 6 disks and must be a multiple of 3.",
           );
           setIsCalculating(false);
           return;
@@ -131,7 +131,7 @@ export default function RAIDCalculator() {
       case "raid60":
         if (numDisks < 8 || numDisks % 4 !== 0) {
           setError(
-            "RAID 60 requires a minimum of 8 disks and must be a multiple of 4."
+            "RAID 60 requires a minimum of 8 disks and must be a multiple of 4.",
           );
           setIsCalculating(false);
           return;

@@ -1,29 +1,78 @@
 ---
 import "../../styles/global.css";
-import { getCollection, type CollectionEntry } from "astro:content";
-import type { Page, GetStaticPaths } from "astro";
+import { getCollection } from "astro:content";
+import DefaultLayout from "../../layouts/Default.astro";
+import { HeaderSection } from "../../sections/Header";
+import { FooterSection } from "../../sections/Footer";
 import BlogManager from "../../components/BlogManager";
+import { db, PostLikes } from "../../lib/db/db";
+import { eq, count } from "drizzle-orm";
 
-export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const allPosts = await getCollection("blog");
-  allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+// Mengambil semua postingan dari koleksi "blog" dan mengurutkannya.
+const allPosts = await getCollection("blog");
+allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-  return paginate(allPosts, { pageSize: 10 });
-};
+// Mengambil 9 postingan pertama (halaman pertama) dari daftar yang sudah diurutkan.
+const firstPagePosts = allPosts.slice(0, 10);
 
-const { page } = Astro.props as {
-  page: Page<CollectionEntry<"blog">>;
+
+// Menggabungkan data "likes" untuk setiap postingan di halaman pertama ini.
+const postsWithLikes = await Promise.all(
+  firstPagePosts.map(async (post) => {
+    // Mengambil jumlah likes dari database.
+    const likesCountResult = await db
+      .select({ count: count() })
+      .from(PostLikes)
+      .where(eq(PostLikes.slug, post.slug));
+    const likes = likesCountResult[0]?.count ?? 0;
+    return { ...post, likes };
+  })
+);
+
+// Menyiapkan objek "pageData" secara manual untuk diserahkan ke BlogManager.
+// Ini mensimulasikan data yang disediakan oleh fungsi paginate Astro.
+const pageData = {
+  data: postsWithLikes,
+  currentPage: 1,
+  lastPage: Math.ceil(allPosts.length / 10),
+  size: 10,
+  total: allPosts.length,
+  url: {
+    current: "/blog",
+    // Menentukan URL halaman sebelumnya. Pada halaman pertama, tidak ada URL sebelumnya.
+    prev: undefined,
+    // Menentukan URL halaman berikutnya jika ada lebih dari 9 postingan.
+    next: allPosts.length > 10 ? "/blog/2" : undefined,
+  },
+  // Menambahkan properti 'start' dan 'end' untuk memperbaiki kesalahan tipe
+  start: 0,
+  end: postsWithLikes.length,
 };
 ---
 
-<div class="px-4 py-8 mx-auto lg:py-16">
-  <div class="max-w-7xl mx-auto space-y-12">
-    <div class="flex items-center space-x-2 text-zinc-400 font-cinzel">
-      <a href="/" class="hover:underline transition-all duration-300">Home</a>
-      <span>/</span>
-      <span class="text-white font-cinzel">Blog</span>
+<DefaultLayout title="HomeLabs - Blog">
+  <HeaderSection client:load />
+  <div class="px-4 py-8 mx-auto lg:py-16">
+    <div class="max-w-7xl mx-auto space-y-12">
+      {/* Breadcrumb Navigation */}
+      <div class="flex items-center space-x-2 text-zinc-400 font-cinzel">
+        <a href="/" class="hover:underline transition-all duration-300">Home</a>
+        <span>/</span>
+        <a href="/blog" class="hover:underline transition-all duration-300"
+          >Blog</a
+        >
+        <span>/</span>
+        <span class="text-white font-cinzel">PAGE 1</span>
+      </div>
+         <h1
+        class="text-4xl sm:text-5xl lg:text-6xl font-extrabold font-cinzel text-white leading-tight transition-colors duration-500"
+      >
+        My Blog
+      </h1>
+      {/* Menyerahkan data yang sudah diproses ke komponen BlogManager */}
+      <BlogManager allPosts={postsWithLikes} pageData={pageData} client:load />
     </div>
-
-    <BlogManager allPosts={page.data} pageData={page} client:load />
+      
   </div>
-</div>
+  <FooterSection client:load />
+</DefaultLayout>

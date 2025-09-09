@@ -9,7 +9,7 @@
   /* Properti Kustom CSS, Fonts (Variables) */
   /* Tema Terang: Alliance (Default) */
   :root {
-    --background-color: #0f1c39;
+    --background-color: #0f172ae6;
     --text-color: #f1ece8;
     --text-bg-color: #e3f2fd;
     --primary-button-bg: #ff8000;
@@ -38,7 +38,7 @@
   }
   /* Tema Gelap: Horde */
   .dark {
-    --background-color: #080707f9;
+    --background-color: #0a0a09d6;
     --text-color: #f6f1f2;
     --text-bg-color: #e3f2fd;
     --primary-button-bg: #ed0000;
@@ -66,7 +66,6 @@
     --nav-link-text: #261919;
     --nav-link-border: #d20e0e;
     --nav-link-shadow: #d20e0e;
-
   }
   /* Font Faces */
   @font-face {
@@ -87,35 +86,42 @@
     font-weight: 700;
     font-style: normal;
   }
-  /* Gaya Body & Latar Belakang */
   body {
     background-image: url("/assets/images/BG/blue-bg.jpg");
+    background-color: var(--background-color);
     color: var(--text-color);
     transition:
       background-color 0.5s ease-in-out,
       color 0.5s ease-in-out;
-    background-size: contain;
+    background-size: cover;
     background-position: center;
-    background-repeat: repeat;
-    position: relative;
+    background-repeat: no-repeat; /* Sebaiknya gunakan no-repeat agar gambar tidak berulang */
+    background-attachment: fixed; /* Ini adalah properti untuk efek parallax */
     z-index: 1;
     min-height: 100vh;
-    transition: background-position 0.8s ease-out;
+    transition:
+      background-color 0.5s ease-in-out,
+      color 0.5s ease-in-out;
   }
   .dark body {
     background-image: url("/assets/images/BG/dark-bg.jpg");
+    background-color: var(--background-color);
   }
   .blog-pages-background:after,
   body:not(.home-page):after {
     content: "";
-    position: relative;
-    top: 0;
-    left: 0;
+
+    background-attachment: fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
     height: 100vh;
     background-image: url("/assets/images/BG/blue-bg.jpg");
+    color: var(--text-color);
     background-color: var(--background-color);
-    background-size: contain;
+    transition:
+      background-color 0.5s ease-in-out,
+      color 0.5s ease-in-out;
     z-index: -1;
   }
   .dark body.blog-pages-background {
@@ -510,7 +516,6 @@
     /* Bottom */ 0px -4px 4px #ff007b;
 }
 
-
 /* Animasi putar */
 @keyframes homelabsRotateBorder {
   0% {
@@ -523,36 +528,42 @@
 
 /* Dalam file global.css */
 .gradient-border-container {
-    position: relative;
-    z-index: 1; /* Pastikan konten utama di atas */
-    padding: 2px; /* Memberi ruang untuk pseudo-element */
-    border-radius: 1rem; /* Sesuaikan dengan rounded-xl */
-    overflow: hidden;
+  position: relative;
+  z-index: 1; /* Pastikan konten utama di atas */
+  padding: 2px; /* Memberi ruang untuk pseudo-element */
+  border-radius: 1rem; /* Sesuaikan dengan rounded-xl */
+  overflow: hidden;
 }
 
 .gradient-border-container::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 1rem;
-    padding: 2px;
-    background: linear-gradient(
-        to top right, 
-        var(--nav-link-from), 
-        var(--nav-link-via), 
-        var(--nav-link-to)
-    );
-    z-index: -1;
-    /* Efek animasi opsional */
-    background-size: 200% 200%;
-    animation: gradient-animation 5s ease infinite;
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 1rem;
+  padding: 2px;
+  background: linear-gradient(
+    to top right,
+    var(--nav-link-from),
+    var(--nav-link-via),
+    var(--nav-link-to)
+  );
+  z-index: -1;
+  /* Efek animasi opsional */
+  background-size: 200% 200%;
+  animation: gradient-animation 5s ease infinite;
 }
 
 @keyframes gradient-animation {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }

@@ -49,7 +49,7 @@ export const HeaderSection = () => {
       const savedTheme = localStorage.getItem("theme");
       const htmlElement = document.documentElement;
       const prefersDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       ).matches;
       if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
         htmlElement.classList.add("dark");

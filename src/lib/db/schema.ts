@@ -7,5 +7,3 @@ export const PostLikes = sqliteTable("PostLikes", {
   likes: integer("likes").default(0),
   ipAddress: text("ip_address"), // ✅ Pastikan baris ini ada
 });
-
-

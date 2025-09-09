@@ -9,7 +9,9 @@ author:
   title: Admin
   image: /assets/images/Blog/Proxmox-TB-1.png
 ---
+
 # Add Thunderbolts Network Proxmox
+
 ## 🔧 1. Load Kernel Modules
 
 Beberapa kernel module perlu dimuat saat boot untuk mendukung koneksi Thunderbolt, terutama `thunderbolt` dan `thunderbolt-net`. Meskipun bisa saja bekerja tanpa `thunderbolt-net`, modul TB ini memiliki perilaku khusus sehingga **wajib di mount** di semua node.
@@ -30,11 +32,11 @@ thunderbolt thunderbolt-net
 
 Simpan dengan:
 
-*   Tekan `CTRL + X`
-*   Tekan `Y`
-*   Tekan `Enter`
+- Tekan `CTRL + X`
+- Tekan `Y`
+- Tekan `Enter`
 
-* * *
+---
 
 ## 🌐 2. Rename Interface Thunderbolt
 
@@ -52,7 +54,7 @@ udevadm monitor
 Colok kabel Thunderbolt untuk melihat output berupa path seperti:
 
 ```sh
-0000:00:0d.2 0000:00:0d.3 
+0000:00:0d.2 0000:00:0d.3
 ```
 
 2.  Buat file link pertama:
@@ -88,9 +90,10 @@ Isi file:
 Name=en06
 
 ```
+
 ![TB3](/assets/images/Blog/Proxmox-TB-2.png)
 
-* * *
+---
 
 ## 🔁 3. Pastikan Interface Aktif Saat Boot & Kabel Dicolok
 
@@ -98,7 +101,7 @@ Karena Thunderbolt kadang tidak otomatis aktif saat boot atau saat kabel dicolok
 
 ### Langkah-langkah:
 
-*   Buat rule udev:
+- Buat rule udev:
 
 ```sh
 nano /etc/udev/rules.d/10-tb-en.rules
@@ -109,10 +112,10 @@ Isi:
 
 ```sh
 ACTION=="move", SUBSYSTEM=="net", KERNEL=="en05", RUN+="/usr/local/bin/pve-en05.sh"
-ACTION=="move", SUBSYSTEM=="net", KERNEL=="en06", RUN+="/usr/local/bin/pve-en06.sh" 
+ACTION=="move", SUBSYSTEM=="net", KERNEL=="en06", RUN+="/usr/local/bin/pve-en06.sh"
 ```
 
-*   Buat skrip untuk en05:
+- Buat skrip untuk en05:
 
 `nano /usr/local/bin/pve-en05.sh`
 
@@ -135,10 +138,10 @@ for i in {1..10}; do
     }
     echo "$(date): Attempt $i failed, retrying in 3 seconds..." >> "$LOGFILE"
     sleep 3
-done 
+done
 ```
 
-*   Buat skrip untuk en06:
+- Buat skrip untuk en06:
 
 ```sh
 nano /usr/local/bin/pve-en06.sh
@@ -149,14 +152,14 @@ Isi sama dengan di atas, ganti:
 
 `IF="en06"` 
 
-*   Jadikan executable:
+- Jadikan executable:
 
 ```sh
 chmod +x /usr/local/bin/*.sh
 
 ```
 
-* * *
+---
 
 ## 🧠 4. Regenerasi Initramfs
 
@@ -165,7 +168,7 @@ update-initramfs -u -k all
 
 ```
 
-* * *
+---
 
 ## 🔁 5. Alternatif: Gunakan systemd Service
 
@@ -200,7 +203,7 @@ Aktifkan service:
 systemctl daemon-reexec systemctl enable thunderbolt-up systemctl start thunderbolt-up
 ```
 
-* * *
+---
 
 ## 🛠️ 6. Instalasi `tbtools`
 
@@ -218,12 +221,12 @@ cargo install --path .
 
 ```
 
-* * *
+---
 
 ## ✅ Penutup
 
 Konfigurasi ini akan memastikan bahwa koneksi Thunderbolt Anda:
 
-*   Memiliki nama antarmuka tetap (`en05`, `en06`)
-*   Aktif otomatis saat boot atau kabel dicolok
-*   Stabil digunakan untuk bridge di Proxmox (mis. `vmbr1`)
+- Memiliki nama antarmuka tetap (`en05`, `en06`)
+- Aktif otomatis saat boot atau kabel dicolok
+- Stabil digunakan untuk bridge di Proxmox (mis. `vmbr1`)

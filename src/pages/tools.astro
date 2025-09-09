@@ -28,7 +28,7 @@ import MacAddressLookup from "../components/MacAddressLookUp";
       </div>
 
       <p
-        class="text-sm font-light font-cinzel text-center transition-colors duration-500"
+        class="text-xl text-center font-light font-cinzel "
         style={{ color: "var(--text-color)" }}
       >
         A collection of tools created to simplify your tasks and development.
@@ -37,7 +37,10 @@ import MacAddressLookup from "../components/MacAddressLookUp";
       <section class="space-y-16">
         <div
           id="subnet-calculator"
-          class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg tool-card-style animate-fade-in-up"
+          class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg animate-slide-in-left tool-card-style animate-fade-in-up"
+           style={{
+            backgroundColor: "var(--pages-bg)",
+          }}
         >
           <div class="flex flex-col sm:flex-row items-start gap-6">
             <div class="space-y-4">
@@ -66,14 +69,14 @@ import MacAddressLookup from "../components/MacAddressLookUp";
                   style={{ color: "var(--text-color)" }}
                 >
                   <li>
-                    Masukkan **IP Address** yang valid, misalnya `192.168.1.1`.
+                    Masukkan IP Address yang valid, misalnya `192.168.1.1`.
                   </li>
                   <li>
-                    Pilih **CIDR** (Classless Inter-Domain Routing) yang sesuai
+                    Pilih CIDR (Classless Inter-Domain Routing) yang sesuai
                     untuk subnet Anda.
                   </li>
                   <li>
-                    Klik tombol **"Calculate"** untuk melihat detail jaringan
+                    Klik tombol Calculate untuk melihat detail jaringan
                     seperti Network Address, Broadcast Address, dan jumlah host
                     yang tersedia.
                   </li>
@@ -91,7 +94,10 @@ import MacAddressLookup from "../components/MacAddressLookUp";
 
         <div
           id="bandwidth-converter"
-          class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg tool-card-style animate-fade-in-up"
+          class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg animate-slide-in-right tool-card-style"
+           style={{
+            backgroundColor: "var(--pages-bg)",
+          }}
         >
           <div class="flex flex-col sm:flex-row-reverse items-start gap-6">
             <div class="space-y-4">
@@ -124,11 +130,11 @@ import MacAddressLookup from "../components/MacAddressLookUp";
                     kotak input.
                   </li>
                   <li>
-                    Pilih unit **asal** (misalnya Mbps) dan unit **tujuan**
+                    Pilih unit asal (misalnya Mbps) dan unit tujuan
                     (misalnya MBps) dari menu dropdown.
                   </li>
                   <li>
-                    Klik tombol **"Convert"** untuk melihat hasil konversinya.
+                    Klik tombol Convert untuk melihat hasil konversinya.
                   </li>
                 </ul>
               </div>
@@ -144,7 +150,10 @@ import MacAddressLookup from "../components/MacAddressLookUp";
 
         <div
           id="power-converter"
-          class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg tool-card-style animate-fade-in-up"
+          class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg tool-card-style animate-slide-in-left"
+           style={{
+            backgroundColor: "var(--pages-bg)",
+          }}
         >
           <div class="flex flex-col sm:flex-row items-start gap-6">
             <div class="space-y-4">
@@ -173,18 +182,18 @@ import MacAddressLookup from "../components/MacAddressLookUp";
                   style={{ color: "var(--text-color)" }}
                 >
                   <li>
-                    Masukkan **nilai daya** (Watt atau kVA) pada kolom input.
+                    Masukkan nilai daya (Watt atau kVA) pada kolom input.
                   </li>
                   <li>
-                    Sesuaikan **Power Factor (PF)**. Nilai umum yang sering
+                    Sesuaikan Power Factor (PF). Nilai umum yang sering
                     digunakan adalah 0.8.
                   </li>
                   <li>
-                    Untuk menghitung kapasitas baterai, masukkan **Waktu Operasi
-                    (Runtime)** dalam menit dan **Tegangan Baterai (V)**.
+                    Untuk menghitung kapasitas baterai, masukkan Waktu Operasi
+                    (Runtime) dalam menit dan Tegangan Baterai (V).
                   </li>
                   <li>
-                    Klik tombol **"Calculate"** untuk melihat hasil konversi dan
+                    Klik tombol Calculate untuk melihat hasil konversi dan
                     kapasitas baterai yang dibutuhkan.
                   </li>
                 </ul>
@@ -201,7 +210,10 @@ import MacAddressLookup from "../components/MacAddressLookUp";
 
         <div
           id="raid-calculator"
-          class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg tool-card-style animate-fade-in-up"
+          class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg tool-card-style animate-slide-in-right"
+           style={{
+            backgroundColor: "var(--pages-bg)",
+          }}
         >
           <div class="flex flex-col sm:flex-row-reverse items-start gap-6">
             <div class="space-y-4">
@@ -229,11 +241,11 @@ import MacAddressLookup from "../components/MacAddressLookUp";
                   class="list-disc list-inside text-sm font-cinzel leading-relaxed transition-colors duration-500"
                   style={{ color: "var(--text-color)" }}
                 >
-                  <li>Masukkan **Jumlah Disk** yang ingin Anda gunakan.</li>
-                  <li>Masukkan **Ukuran Disk** dalam Terabyte (TB).</li>
-                  <li>Pilih **Tipe RAID/ZFS** yang sesuai dari dropdown.</li>
+                  <li>Masukkan Jumlah Disk yang ingin Anda gunakan.</li>
+                  <li>Masukkan Ukuran Disk dalam Terabyte (TB).</li>
+                  <li>Pilih Tipe RAID/ZFS yang sesuai dari dropdown.</li>
                   <li>
-                    Klik tombol **"Hitung Kapasitas"** untuk melihat hasilnya.
+                    Klik tombol "Hitung Kapasitas" untuk melihat hasilnya.
                   </li>
                 </ul>
               </div>
@@ -250,6 +262,9 @@ import MacAddressLookup from "../components/MacAddressLookUp";
         <div
           id="mac-address-lookup"
           class="p-8 space-y-8 tool-card backdrop-blur-sm border border-zinc-700 rounded-lg tool-card-style animate-fade-in-up"
+           style={{
+            backgroundColor: "var(--pages-bg)",
+          }}
         >
           <div class="flex flex-col sm:flex-row items-start gap-6">
             <div class="space-y-4">
@@ -278,10 +293,10 @@ import MacAddressLookup from "../components/MacAddressLookUp";
                   style={{ color: "var(--text-color)" }}
                 >
                   <li>
-                    Masukkan **alamat MAC** yang valid ke dalam kotak input.
+                    Masukkan alamat MAC yang valid ke dalam kotak input.
                   </li>
                   <li>
-                    Klik tombol **"Cari Produsen"** untuk melihat hasilnya.
+                    Klik tombol "Cari Produsen" untuk melihat hasilnya.
                   </li>
                 </ul>
               </div>

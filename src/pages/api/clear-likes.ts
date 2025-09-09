@@ -12,7 +12,7 @@ export const POST: APIRoute = async () => {
       JSON.stringify({
         message: "Database cleared successfully.",
       }),
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Failed to clear database:", error);

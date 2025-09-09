@@ -184,7 +184,6 @@ Biar kamu bisa lihat commit yang ada di remote sebelum memutuskan mau rebase ata
 
 Kalau mau hapus file mulai dari commit berikutnya saja:
 
-
 ```cmake
 git rm path/ke/file.txt
 git commit -m "Hapus file.txt"

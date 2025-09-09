@@ -9,7 +9,9 @@ author:
 pubDate: 2025-08-29T15:08:54.209Z
 image: /assets/images/Blog/pihole6.jpg
 ---
+
 # Pihole + Nebula-Sync
+
 Panduan Instalasi dan Sinkronisasi Pi-hole DNS dengan Nebula Sync
 
 ## Topologi Jaringan
@@ -17,12 +19,12 @@ Panduan Instalasi dan Sinkronisasi Pi-hole DNS dengan Nebula Sync
 ![Topologi](/assets/images/Blog/pihole_nebula.png)
 
 > Catatan:
-> 
-> *   DNS-01 dan DNS-02 menjalankan Pi-hole native (tidak dibahas rinci di sini).
-> *   DNS-03 menggunakan Docker (Raspberry Pi + OpenMediaVault dengan jaringan macvlan).
-> *   Sinkronisasi konfigurasi dan daftar blokir dilakukan dengan **nebula-sync** dari DNS-01 ke DNS-02 dan DNS-03.
+>
+> - DNS-01 dan DNS-02 menjalankan Pi-hole native (tidak dibahas rinci di sini).
+> - DNS-03 menggunakan Docker (Raspberry Pi + OpenMediaVault dengan jaringan macvlan).
+> - Sinkronisasi konfigurasi dan daftar blokir dilakukan dengan **nebula-sync** dari DNS-01 ke DNS-02 dan DNS-03.
 
-* * *
+---
 
 ## Konfigurasi Docker Compose (DNS-03)
 
@@ -73,7 +75,7 @@ networks:
 
 ```
 
-* * *
+---
 
 ## File Environment .env untuk DNS-03
 
@@ -107,46 +109,49 @@ SYNC_GRAVITY_CLIENT_BY_GROUP=false
 
 > Ganti PASSWORD dengan token API Pi-hole masing-masing server.
 
-* * *
+---
 
 ## Langkah Instalasi Singkat (untuk DNS-03)
 
 1.  **Siapkan jaringan macvlan di Docker host** (hanya perlu dilakukan sekali):
-    
+
     ```bash
     docker network create -d macvlan \
       --subnet=192.168.48.0/24 \
       --gateway=192.168.48.1 \
       -o parent=eth0 macvlan
     ```
+
 2.  **Buat folder untuk konfigurasi**:
-    
+
     ```bash
     mkdir -p /Appdata/piholev6/etc/pihole
     mkdir -p /Appdata/piholev6/etc/dnsmasq.d
     ```
+
 3.  **Simpan file docker-compose.yml dan .env di /Appdata/Pihole/**.
 4.  **Jalankan layanan**:
-    
+
     ```bash
     cd /Appdata/Pihole
     docker compose up -d
     ```
 
-* * *
+---
 
 ## Verifikasi
 
-*   Akses antarmuka web DNS-03: http://192.168.48.12
-*   Cek log nebula-sync:
-    
-    ```bash
-    docker logs nebula-sync
-    ```
-*   Cek curl API:
-    
-    ```sh
-    curl http://192.168.48.12/api.php
-    ```
+- Akses antarmuka web DNS-03: http://192.168.48.12
+- Cek log nebula-sync:
+
+  ```bash
+  docker logs nebula-sync
+  ```
+
+- Cek curl API:
+
+  ```sh
+  curl http://192.168.48.12/api.php
+  ```
 
 Jika semuanya berhasil, DNS-03 akan tersinkronisasi dengan DNS-01 dan DNS-02 melalui nebula-sync setiap 15 menit.

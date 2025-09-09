@@ -10,7 +10,8 @@ author:
   image: /assets/images/Logo/font-logo.svg
 slug: dotfiles-automation-install
 ---
-# Dotfiles 
+
+# Dotfiles
 
 Konfigurasi shell interaktif dan terminal environment untuk Linux (Debian/Ubuntu) dan macOS — termasuk `zsh`, `oh-my-zsh`, `powerlevel10k`, plugin, alias, `neofetch`, `nano`, dan `fastfetch`. Dirancang untuk produktivitas dan estetika maksimal.
 
@@ -46,7 +47,6 @@ Dotfiles/
 │   └── iterm2_shell_integration.zsh
 ```
 
-
 ---
 
 ## 🚀 Instalasi Cepat
@@ -75,8 +75,8 @@ bash ~/.dotfiles/Install/01-setup-zsh.sh
 
 ## 💡 Dukungan Sistem
 
-| OS         | Status   | Keterangan                    |
-| ---------- | -------- | ----------------------------- |
+| OS         | Status    | Keterangan                    |
+| ---------- | --------- | ----------------------------- |
 | Debian 11+ | ✅ Stabil | Paket diinstal via APT        |
 | Ubuntu 22+ | ✅ Stabil | eza fallback dari GitHub      |
 | macOS 13+  | ✅ Stabil | Menggunakan Homebrew & iTerm2 |
@@ -110,6 +110,5 @@ Dibuat dan dirawat oleh [New8ie](https://github.com/New8ie).
 Feel free untuk fork dan kirim pull request.
 
 ---
+
 Git [License](https://github.com/New8ie/Dotfiles/blob/main/LICENSE)
-
-
