@@ -86,13 +86,14 @@ const BlogSideBar = ({
             <button
               key={cat}
               onClick={() => handleCategoryClick(cat)}
-              className={`px-4 py-1 rounded-full text-xl font-semibold uppercase transition-all duration-300
-                ${
-                  selectedCategory === cat
-                    ? "bg-yellow-400 text-gray-900 shadow-md dark:bg-yellow-600 dark:text-white"
-                    : "bg-gray-200 text-gray-700 hover:bg-gray-300 dark:bg-zinc-800 dark:text-gray-400 dark:hover:bg-zinc-700"
-                }
-              `}
+              className={`relative px-4 py-1 rounded-full sm:text-base md:text-xs font-semibold uppercase tracking-wide
+  transition-all duration-300 transform
+  ${
+    selectedCategory === cat
+      ? "bg-gradient-to-r from-yellow-400 via-orange-400 to-pink-500 text-white shadow-lg shadow-yellow-400/40 scale-105 border-2 border-yellow-300"
+      : "bg-gray-100 text-gray-700 hover:bg-gradient-to-r hover:from-gray-200 hover:to-gray-300 hover:text-gray-900 dark:bg-zinc-800 dark:text-gray-400 dark:hover:from-zinc-700 dark:hover:to-zinc-600 border border-transparent hover:border-gray-400/30"
+  }
+`}
             >
               {cat}
             </button>

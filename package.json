@@ -9,7 +9,7 @@
     "db:generate": "drizzle-kit generate --config=./src/lib/db/drizzle.config.ts",
     "db:migrate": "drizzle-kit migrate --config=./src/lib/db/drizzle.config.ts",
     "db:reset": "rm -f src/lib/db/local.sqlite && npm run db:migrate",
-    "dev": "astro dev --host --pcort 8080",
+    "dev": "astro dev --host --port 8080",
     "preview": "astro preview",
     "start": "astro dev",
     "format": "prettier --write .",
