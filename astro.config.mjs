@@ -36,7 +36,7 @@ export default defineConfig({
 
   // 👇 tambahkan ini agar hasil build listen ke semua interface
   server: {
-    host: "0.0.0.0",
+    host: "127.0.0.1",
     port: 4321, // bebas, asal konsisten
   },
 

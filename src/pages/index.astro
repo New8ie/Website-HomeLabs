@@ -76,41 +76,49 @@ const animatedText =
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
         >
           {
-            latestPosts.map((post) => (
-              <div class="homelabs-card-container">
-                <a
-                  href={`/blog/${post.slug}`}
-                  class="homelabs-card-link group block w-full h-full"
-                >
-                  <div class="homelabs-card-content">
-                    <div class="homelabs-card-inner">
-                      <div class="w-full h-48 relative overflow-hidden">
-                        <img
-                          src={
-                            post.data.image ||
-                            "https://placehold.co/600x400/18181b/ffffff?text=No+Image"
-                          }
-                          alt={post.data.title}
-                          class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                      <div class="p-6 flex flex-col flex-grow text-white">
-                        <h3 class="text-lg font-extrabold font-cinzel mb-2 group-hover:text-yellow-300 transition-colors">
-                          {post.data.title}
-                        </h3>
-                        <p class="text-sm font-cinzel text-zinc-300 line-clamp-2 flex-grow">
-                          {post.data.description}
-                        </p>
-                        <div class="mt-4 text-xs font-semibold font-cinzel text-yellow-500 uppercase">
-                          Read More &rarr;
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </a>
+  latestPosts.map((post) => (
+    <div class="homelabs-card-container h-full w-full">
+      <a
+        href={`/blog/${post.slug}`}
+        class="homelabs-card-link group block h-full w-full"
+      >
+        <div class="homelabs-card-content h-full">
+          <div class="homelabs-card-inner h-full flex flex-col">
+            
+            <!-- Image -->
+            <div class="w-full h-48 relative overflow-hidden flex-shrink-0">
+              <img
+                src={
+                  post.data.image ||
+                  "https://placehold.co/600x400/18181b/ffffff?text=No+Image"
+                }
+                alt={post.data.title}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-white">
+              <h3 class="text-lg font-extrabold font-cinzel mb-2 group-hover:text-yellow-300 transition-colors line-clamp-2">
+                {post.data.title}
+              </h3>
+
+              <p class="text-sm font-cinzel text-zinc-300 line-clamp-3">
+                {post.data.description}
+              </p>
+
+              <!-- Footer -->
+              <div class="mt-auto pt-4 text-xs font-semibold font-cinzel text-yellow-500 uppercase">
+                Read More &rarr;
               </div>
-            ))
-          }
+            </div>
+
+          </div>
+        </div>
+      </a>
+    </div>
+  ))
+}
         </div>
       </div>
     </section>
@@ -133,35 +141,43 @@ const animatedText =
           class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 justify-items-center"
         >
           {
-            usefulTools.map((tool) => (
-              <div class="homelabs-card-container">
-                <a
-                  href={tool.link}
-                  class="homelabs-card-link group block w-full h-full"
-                >
-                  <div class="homelabs-card-content">
-                    <div class="homelabs-card-inner">
-                      <div class="w-full h-48 relative overflow-hidden">
-                        <img
-                          src={tool.image}
-                          alt={tool.title}
-                          class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
-                        />
-                      </div>
-                      <div class="p-6 flex flex-col flex-grow text-white">
-                        <h3 class="text-lg font-extrabold font-cinzel mb-2 group-hover:text-yellow-300 transition-colors">
-                          {tool.title}
-                        </h3>
-                        <p class="mt-2 text-sm font-cinzel text-zinc-300 line-clamp-3 flex-grow">
-                          {tool.description}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </a>
-              </div>
-            ))
-          }
+  usefulTools.map((tool) => (
+    <div class="homelabs-card-container h-full w-full">
+      <a
+        href={tool.link}
+        class="homelabs-card-link group block h-full w-full"
+      >
+        <div class="homelabs-card-content h-full">
+          <div class="homelabs-card-inner h-full flex flex-col">
+
+            <!-- Image -->
+            <div class="w-full h-48 relative overflow-hidden flex-shrink-0">
+              <img
+                src={tool.image}
+                alt={tool.title}
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+
+            <!-- Content -->
+            <div class="p-6 flex flex-col flex-grow text-white">
+              <h3 class="text-lg font-extrabold font-cinzel mb-2 group-hover:text-yellow-300 transition-colors line-clamp-2">
+                {tool.title}
+              </h3>
+
+              <p class="text-sm font-cinzel text-zinc-300 line-clamp-3">
+                {tool.description}
+              </p>
+
+            </div>
+
+          </div>
+        </div>
+      </a>
+    </div>
+  ))
+}
+
         </div>
 
         <div class="mt-12 text-center">
@@ -206,4 +222,4 @@ const animatedText =
 
   // Jalankan skrip setelah setiap navigasi Astro
   document.addEventListener("astro:page-load", setupScrollAnimation);
-</script>
+</script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 

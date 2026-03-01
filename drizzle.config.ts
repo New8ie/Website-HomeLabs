@@ -3,8 +3,8 @@ import type { Config } from "drizzle-kit";
 export default {
   schema: "./src/lib/db/schema.ts",
   out: "./drizzle",
-  dialect: "sqlite", // ✅ bukan driver
+  dialect: "better-sqlite",
   dbCredentials: {
-    url: "./src/lib/db/local.sqlite",
+    url: "/var/www/Website-HomeLabs/db/local.sqlite",
   },
 } satisfies Config;

@@ -79,12 +79,21 @@ export const HeaderSection = () => {
     <header className="header">
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16 sm:h-20 lg:h-24">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3 justify-center md:justify-start w-full md:w-auto">
             <a href="/">
               <img
                 src="/assets/images/Logo/font-logo.svg"
                 alt="HomeLabs Logo"
-                className="w-32 drop-shadow-glow"
+                className="w-28 sm:w-32 drop-shadow-glow"
+              />
+            </a>
+
+            {/* Logo tambahan */}
+            <a href="/">
+              <img
+                src="/assets/images/Logo/HomeLabs-Logo-120x120.png"
+                alt="Second Logo"
+                className="w-10 sm:w-12"
               />
             </a>
           </div>

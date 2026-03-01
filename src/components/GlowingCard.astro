@@ -1,0 +1,38 @@
+---
+export interface Props {
+  link: string;
+  image: string;
+  title: string;
+  description: string;
+}
+
+const { link, image, title, description } = Astro.props;
+---
+
+<div class="card-container">
+  <a href={link} class="card-link group">
+    <div class="card-content">
+      <div class="card-border"></div>
+
+      <div class="card-inner">
+        <div class="w-full h-48 relative overflow-hidden rounded-t-xl">
+          <img
+            src={image}
+            alt={title}
+            class="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
+          />
+        </div>
+        <div class="p-6 flex flex-col flex-grow">
+          <h3
+            class="text-xl font-extrabold font-cinzel mb-2 text-white group-hover:text-yellow-300 transition-colors duration-300"
+          >
+            {title}
+          </h3>
+          <p class="text-sm font-cinzel text-zinc-300 line-clamp-3 flex-grow">
+            {description}
+          </p>
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
