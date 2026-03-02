@@ -1,14 +1,13 @@
 ---
-title: Samba Server Debian 13
-description: Instalasi dan Konfigurasi Samba Server Debian 13
-pubDate: 2026-03-01T17:42:40.618Z
-author:
-  name: Fachmi
-  title: Admin
-  image: /assets/images/Logo/font-logo.png
-slug: install-astro-docker
-image: /assets/images/Blog/Brands/samba.png
+title: Samba Server di Debian
+description: Instalasi dan Konfigurasi Samba Server di Debian
+pubDate: 2026-03-01
 category: Linux
+author:
+   name: Fachmi
+   title: SysAdmin
+   image: /assets/images/Logo/font-logo.png
+image: /assets/images/Blog/Brands/samba.png
 ---
 # Instalasi dan Konfigurasi Samba Server di Debian
 
